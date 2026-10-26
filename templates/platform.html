@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Harvy Social — Autonomous Public Graph Ingress</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="{{ url_for('static', filename='saas-shell.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='flexsearch.bundle.min.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='data-search.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='harvy.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-root">
+    <header class="site-header">
+      <div class="header-container">
+        <a class="brand" href="/" aria-label="Harvy Social home">
+          <img src="{{ url_for('static', filename='harvy-logo.png') }}" alt="Harvy" class="brand-logo">
+          <span class="brand-tag">AGENTIC / SOCIAL</span>
+        </a>
+        <div class="header-meta">
+          <a href="/research/" class="header-back-link" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none; padding: 0.3rem 0.6rem; border: 1px solid var(--border); background: var(--bg-panel); transition: all 0.15s ease;">LEGAL &amp; MAPS</a>
+          <a href="/" class="header-back-link" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none; padding: 0.3rem 0.6rem; border: 1px solid var(--border); background: var(--bg-panel); transition: all 0.15s ease;">&larr; HARVYBOT.COM</a>
+          <a href="/search/" class="header-back-link">UNIVERSAL SEARCH</a>
+          <a href="/map/" class="header-back-link">MAP</a>
+          <a href="/query/" class="header-back-link">QUERY</a>
+              <div class="status-pill">
+            <span class="status-indicator"></span>
+            <span class="status-text">TIR CLOUD MESH NETWORK</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="hero-block">
+        <div class="section-tag">[*] AUTONOMOUS RECONNAISSANCE ENGINE</div>
+        <h1 class="hero-title">Follow the public trail.</h1>
+        <p class="hero-desc">
+          Automated extraction of public profile nodes, outlink topology discovery, and per-post artifact mapping.
+          Direct cloud API execution with isolated session sandboxing and zero local compute mutation.
+        </p>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-num">[01]</span><span class="spec-label">ANONYMOUS INGRESS</span></div>
+          <div class="spec-item"><span class="spec-num">[02]</span><span class="spec-label">RESIDENTIAL PROXY ROTATION</span></div>
+          <div class="spec-item"><span class="spec-num">[03]</span><span class="spec-label">PER-POST JSON ARTIFACTS</span></div>
+          <div class="spec-item"><span class="spec-num">[04]</span><span class="spec-label">EVIDENCE-BACKED TOPOLOGY</span></div>
+        </div>
+      </section>
+
+      <div class="workspace-grid">
+        <!-- Panel 01: Setup -->
+        <section class="block-panel setup-panel" aria-labelledby="setup-title">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <span class="block-index">[01]</span>
+              <h2 id="setup-title" class="panel-title">Target Specification</h2>
+            </div>
+            <span class="panel-badge-mono">SYS.CONFIG</span>
+          </div>
+          <div class="panel-body">
+            <form id="scrape-form" autocomplete="off">
+              <div class="field-group">
+                <label for="profile-url" class="field-label">TARGET PROFILE URL</label>
+                <input id="profile-url" name="url" type="url" class="mono-input" aria-label="Public profile URL" placeholder="https://www.facebook.com/target.identity/" maxlength="2048" required>
+                <span class="field-hint">Public Facebook profile or registered social URL. Outlinks are traversed automatically.</span>
+              </div>
+
+
+
+              <div class="limits-grid">
+                <div class="field-group">
+                  <label for="max-posts" class="field-label">POST CAP (MAX {{ max_posts }})</label>
+                  <input id="max-posts" type="number" class="mono-input" min="1" max="{{ max_posts }}" value="100" required>
+                </div>
+                <div class="field-group">
+                  <label for="max-linked" class="field-label">LINKED HOPS (MAX {{ max_linked }})</label>
+                  <input id="max-linked" type="number" class="mono-input" min="0" max="{{ max_linked }}" value="20" required>
+                </div>
+              </div>
+
+              <div class="acknowledgement-block">
+                <label class="ack-label" for="consent">
+                  <input id="consent" type="checkbox" class="ack-checkbox" aria-label="I acknowledge authorized, responsible public-data research" required>
+                  <span class="ack-text">I acknowledge authorized, responsible public-data research and certify collection is confined to publicly accessible sources.</span>
+                </label>
+              </div>
+
+              <div id="form-error" class="error-banner" role="alert" hidden></div>
+
+              <button id="start" class="btn-primary" type="submit">
+                <span>INITIALIZE INGRESS</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <div class="form-disclaimer">
+                [*] Public snapshot extraction under current platform presentation. Not a guarantee of historical completeness.
+              </div>
+            </form>
+
+            <details class="wmn-panel">
+              <summary>USERNAME FOOTPRINT DISCOVERY</summary>
+              <p class="field-hint wmn-credit">Checks public GET profile endpoints across selected category services. Harvy verifies endpoint existence only; matching handle does not establish single-operator identity.</p>
+              <form id="username-form" autocomplete="off">
+                <div class="field-group">
+                  <label for="wmn-username" class="field-label">USERNAME TO CHECK</label>
+                  <input id="wmn-username" type="text" class="mono-input" maxlength="64" pattern="[A-Za-z0-9_.-]{1,64}" autocomplete="off" placeholder="example_username" required>
+                </div>
+                <fieldset class="wmn-categories">
+                  <legend class="field-label">SITE CATEGORIES</legend>
+                  <label><input type="checkbox" name="wmn-category" value="social" checked> Social</label>
+                  <label><input type="checkbox" name="wmn-category" value="business" checked> Business</label>
+                  <label><input type="checkbox" name="wmn-category" value="finance" checked> Finance</label>
+                  <label><input type="checkbox" name="wmn-category" value="gaming" checked> Gaming</label>
+                  <label><input type="checkbox" name="wmn-category" value="hobby" checked> Hobby</label>
+                  <label><input type="checkbox" name="wmn-category" value="art" checked> Art</label>
+                  <label><input type="checkbox" name="wmn-category" value="images" checked> Images</label>
+                  <label><input type="checkbox" name="wmn-category" value="video" checked> Video</label>
+                  <label><input type="checkbox" name="wmn-category" value="blog" checked> Blog</label>
+                  <label><input type="checkbox" name="wmn-category" value="news" checked> News</label>
+                  <label><input type="checkbox" name="wmn-category" value="political" checked> Political</label>
+                  <label><input type="checkbox" name="wmn-category" value="dating" checked> Dating</label>
+                  <label><input type="checkbox" name="wmn-category" value="health" checked> Health</label>
+                  <label><input type="checkbox" name="wmn-category" value="archived" checked> Archived</label>
+                  <label><input type="checkbox" name="wmn-category" value="xx NSFW xx" checked> Adult</label>
+                  <label><input type="checkbox" name="wmn-category" value="coding"> Coding</label>
+                  <label><input type="checkbox" name="wmn-category" value="tech"> Tech</label>
+                  <label><input type="checkbox" name="wmn-category" value="shopping"> Shopping</label>
+                  <label><input type="checkbox" name="wmn-category" value="misc"> Misc</label>
+                  <label><input type="checkbox" name="wmn-category" value="music"> Music</label>
+                  <label><input type="checkbox" name="wmn-category" value="search"> Search</label>
+                </fieldset>
+                <div class="acknowledgement-block">
+                  <label class="ack-label" for="wmn-consent">
+                    <input id="wmn-consent" type="checkbox" class="ack-checkbox" required>
+                    <span class="ack-text">I am checking a username I own or am authorized to assess, using public pages only.</span>
+                  </label>
+                </div>
+                <button id="start-username" class="btn-primary" type="submit">RUN USERNAME CHECK →</button>
+              </form>
+            </details>
+          </div>
+        </section>
+
+        <!-- Panel 02: Activity -->
+        <section class="block-panel activity-panel" aria-labelledby="activity-title">
+          <div class="panel-header">
+            <div class="panel-header-left">
+              <span class="block-index">[02]</span>
+              <h2 id="activity-title" class="panel-title">Telemetry &amp; Execution</h2>
+            </div>
+            <span id="state" class="status-badge" data-state="idle">[STANDBY]</span>
+          </div>
+          <div class="panel-body">
+            <!-- Telemetry Figure Stats -->
+            <div class="figures-row">
+              <div class="figure-box">
+                <span class="fig-index">Fig 1.</span>
+                <span id="post-count" class="fig-metric">—</span>
+                <span id="artifact-caption" class="fig-caption">POST ARTIFACTS</span>
+              </div>
+              <div class="figure-box">
+                <span class="fig-index">Fig 2.</span>
+                <span id="file-count" class="fig-metric">—</span>
+                <span class="fig-caption">SAVED FILES</span>
+              </div>
+              <div class="figure-box">
+                <span class="fig-index">Fig 3.</span>
+                <span id="elapsed" class="fig-metric">—</span>
+                <span class="fig-caption">RUNTIME</span>
+              </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state-block">
+              <div class="radar-box">
+                <svg viewBox="0 0 160 160" width="120" height="120" class="radar-svg" aria-hidden="true">
+                  <circle cx="80" cy="80" r="72" fill="none" stroke="#262626" stroke-dasharray="3 3"/>
+                  <circle cx="80" cy="80" r="48" fill="none" stroke="#333333"/>
+                  <circle cx="80" cy="80" r="24" fill="none" stroke="#262626"/>
+                  <line x1="80" y1="8" x2="80" y2="152" stroke="#262626"/>
+                  <line x1="8" y1="80" x2="152" y2="80" stroke="#262626"/>
+                  <circle cx="80" cy="80" r="4" fill="#ffffff"/>
+                  <circle cx="56" cy="60" r="3" fill="#888888"/>
+                  <circle cx="108" cy="50" r="3" fill="#888888"/>
+                  <circle cx="112" cy="104" r="3.5" fill="#ffffff"/>
+                  <circle cx="48" cy="112" r="2.5" fill="#666666"/>
+                  <line x1="80" y1="80" x2="112" y2="104" stroke="#555555" stroke-dasharray="2 2"/>
+                  <line x1="80" y1="80" x2="56" y2="60" stroke="#555555" stroke-dasharray="2 2"/>
+                </svg>
+              </div>
+              <h3 class="empty-heading">Ingress Pipeline Inactive</h3>
+              <p class="empty-sub">Specify a public profile URL on the left to begin automated graph node capture.</p>
+            </div>
+
+            <!-- Status message -->
+            <div class="status-message-row">
+              <span class="prompt-symbol">&gt;</span>
+              <p id="job-message" class="job-message" role="status" aria-live="polite">Awaiting target ingest signal.</p>
+            </div>
+
+            <!-- Terminal Stream -->
+            <pre id="log" class="console-stream" tabindex="0" aria-label="Scraper progress output" hidden></pre>
+
+            <!-- Actions -->
+            <div class="controls-row">
+              <button id="stop" type="button" class="btn-secondary" disabled>[ABORT INGRESS]</button>
+              <button id="download" type="button" class="btn-secondary" disabled>[DOWNLOAD ZIP ARCHIVE ↓]</button>
+            </div>
+
+            <div class="panel-footnote">
+              Keep connection open during ingest. Aborting retains all collected partial evidence.
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel 03: Results -->
+      <section id="results" class="block-panel results-panel" aria-labelledby="results-title" hidden>
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <span class="block-index">[03]</span>
+            <h2 id="results-title" class="panel-title">Extracted Artifacts &amp; Graph Topology</h2>
+          </div>
+          <span class="status-badge" data-state="finished">[PARTIAL CAPTURE]</span>
+        </div>
+        <div class="panel-body">
+          <p class="results-desc">
+            Granular post records, normalized metadata manifests, raw payloads, and discovered outlink graph.
+          </p>
+          <div class="artifact-search" hidden>
+            <label for="data-search-input" class="field-label">SEARCH THIS JOB'S SAVED DATA</label>
+            <input id="data-search-input" class="mono-input" type="search" autocomplete="off" placeholder="Search names, captions, case text, URLs…">
+            <p id="data-search-status" class="field-hint" role="status"></p>
+            <ul id="data-search-results" class="data-search-results"></ul>
+            <p class="field-hint">Search extracted records across the dataset.</p>
+          </div>
+          <ul id="file-list" class="artifact-list"></ul>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-left">
+          <span class="footer-brand">HARVY // SOCIAL</span>
+          <span class="footer-tag">AUTONOMOUS RECONNAISSANCE</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

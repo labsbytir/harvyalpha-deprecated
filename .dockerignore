@@ -1,0 +1,16 @@
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+data/*
+!data/username_targets.json
+!data/whatsmyname-wmn-data.json
+__pycache__
+.git
+*.pyc
+.venv
+.wrangler
+.agents
+.cortexkit
+consent.json
+.pytest_cache

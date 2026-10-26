@@ -1,0 +1,91 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "harvy",
+  "workers_dev": true,
+  "main": "src/worker.py",
+  "compatibility_date": "2026-10-25",
+  "compatibility_flags": [
+    "python_workers",
+    "disable_python_external_sdk"
+  ],
+  "routes": [
+    {
+      "pattern": "harvybot.com/*",
+      "zone_name": "harvybot.com"
+    },
+    {
+      "pattern": "www.harvybot.com/*",
+      "zone_name": "harvybot.com"
+    }
+  ],
+  "assets": {
+    "directory": "./static",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "BASIN_PIPELINE": "harvy_pipeline",
+    "BASIN_STREAM": "harvy",
+    "BASIN_SINK": "harvy_sink",
+    "BASIN_BUCKET": "harvy",
+    "BASIN_CATALOG_TABLE": "default.flex",
+    "BETTER_AUTH_ENABLED": "false",
+    "OPS_BRIDGE_URL": "http://judy-bridge.harvybot.com/healthz"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "HARVY_KV",
+      "id": "984cda58d8934ec9a0a33f9c39323f08"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "HARVY_D1",
+      "database_name": "harvy",
+      "database_id": "17fc049e-b8b6-42c2-8fdc-4cc4bf0834a9"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "HARVY_BUCKET",
+      "bucket_name": "harvy"
+    },
+    {
+      "binding": "HARVY_MAP_DATA",
+      "bucket_name": "harvy-map-data"
+    },
+    {
+      "binding": "HARVY_LOGS",
+      "bucket_name": "harvy-logs"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "HARVY_QUEUE",
+        "queue": "harvy"
+      },
+      {
+        "binding": "HARVY_TELEGRAM_QUEUE",
+        "queue": "harvy-telegram"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "harvy",
+        "max_batch_size": 10,
+        "max_batch_timeout": 30
+      }
+    ]
+  },
+  "services": [
+    {
+      "binding": "HARVY_AUTH",
+      "service": "harvy-auth"
+    },
+    {
+      "binding": "HARVY_WORKFLOWS",
+      "service": "harvy-workflows"
+    }
+  ]
+}

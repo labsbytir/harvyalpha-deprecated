@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Harvy Query — Saved Analytics &amp; Allowlisted Metric Catalog</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="/static/saas-shell.js" defer></script>
+  <script src="/static/query-app.js" defer></script>
+</head>
+<body class="qn-layout">
+  <header class="qn-top-bar">
+    <a href="/" class="qn-brand">
+      <img src="/static/harvy-logo.png" alt="Harvy" class="qn-brand-logo">
+      <span>HARVY // QUERY</span>
+    </a>
+    <nav class="qn-nav">
+      <a href="/search/" class="qn-nav-link">SEARCH</a>
+      <a href="/query/" class="qn-nav-link active">QUERY</a>
+      <a href="/nodes/" class="qn-nav-link">NODES</a>
+      <a href="/map/" class="qn-nav-link">MAP</a>
+      <a href="/platform/" class="qn-nav-link">INGEST</a>
+    </nav>
+  </header>
+
+  <main class="qn-container">
+    <h1 class="qn-header-title">Curated Query Dashboard</h1>
+    <p class="qn-header-desc">Execute safe, allowlisted metric queries against shared ontology entities and private environment overlays. Parameterized and scope-enforced server-side.</p>
+
+    <div id="query-app">
+      <noscript>
+        <div class="qn-card">The query dashboard builder requires JavaScript.</div>
+      </noscript>
+    </div>
+  </main>
+</body>
+</html>

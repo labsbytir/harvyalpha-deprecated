@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {"id": "https://www.facebook.com/example.user", "platform": "facebook", "label": "example.user"},
+    {"id": "https://threads.net/@example_user", "platform": "threads", "label": "example_user"},
+    {"id": "https://x.com/example_user", "platform": "x", "label": "example_user"}
+  ],
+  "edges": [
+    {
+      "source": "https://www.facebook.com/example.user",
+      "target": "https://threads.net/@example_user",
+      "relation": "bio_links_to",
+      "provenance": {"field": "bio", "confidence": "explicit_link"}
+    },
+    {
+      "source": "https://www.facebook.com/example.user",
+      "target": "https://x.com/example_user",
+      "relation": "bio_links_to",
+      "provenance": {"field": "links", "confidence": "explicit_link"}
+    }
+  ]
+}

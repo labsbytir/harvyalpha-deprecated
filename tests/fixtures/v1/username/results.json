@@ -1,0 +1,19 @@
+{
+  "username": "example_user",
+  "checked_count": 120,
+  "duration_seconds": 4.25,
+  "matches": [
+    {
+      "name": "GitHub",
+      "category": "tech",
+      "url": "https://github.com/example_user",
+      "status": "found"
+    },
+    {
+      "name": "Reddit",
+      "category": "social",
+      "url": "https://www.reddit.com/user/example_user",
+      "status": "found"
+    }
+  ]
+}

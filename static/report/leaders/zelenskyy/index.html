@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Harvy — Public Record</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="/static/auth-client.js?v=1" defer></script>
+  <script src="/static/auth-modal.js?v=1" defer></script>
+  <script defer src="/static/dossier.js?v=2"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+<body>
+  <main class="container" id="dossier" data-report-json="./report.json" aria-live="polite">
+    <a class="nav-back" href="/search/">← BACK TO SEARCH</a>
+    <p class="oc-muted">Loading public record…</p>
+  </main>
+</body>
+</html>

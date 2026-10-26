@@ -1,0 +1,262 @@
+{
+  "target": {
+    "name": "Emmanuel Macron",
+    "title": "President of France",
+    "primary_surface": "YouTube Official (@EmmanuelMacron)",
+    "surfaces": [
+      "YouTube Official Channel",
+      "Élysée Addresses"
+    ]
+  },
+  "telemetry": {
+    "generated_at": "2026-10-25T10:36:16.919254+00:00",
+    "source": "spider_unlimited_residential_proxy",
+    "posts_captured": 15,
+    "aggregate_reactions": null,
+    "aggregate_shares": null,
+    "aggregate_comments": null,
+    "unique_outlinks": 15
+  },
+  "posts": [
+    {
+      "id": "3hpf6WtYjfY",
+      "url": "https://www.youtube.com/shorts/3hpf6WtYjfY",
+      "type": "Élysée Public Address",
+      "text": "Nous agissons pour protéger nos compatriotes des conséquences de la crise au Moyen-Orient.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-24T21:01:01+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/3hpf6WtYjfY"
+      ]
+    },
+    {
+      "id": "5QCDhKCQxh8",
+      "url": "https://www.youtube.com/shorts/5QCDhKCQxh8",
+      "type": "Élysée Public Address",
+      "text": "Willkommen!\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-08T13:16:57+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/5QCDhKCQxh8"
+      ]
+    },
+    {
+      "id": "5iyWmbKCwNg",
+      "url": "https://www.youtube.com/watch?v=5iyWmbKCwNg",
+      "type": "Élysée Public Address",
+      "text": "Adresse aux Français.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-18T18:17:15+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=5iyWmbKCwNg"
+      ]
+    },
+    {
+      "id": "86Ekp9zi6AA",
+      "url": "https://www.youtube.com/shorts/86Ekp9zi6AA",
+      "type": "Élysée Public Address",
+      "text": "Jamais nous ne devons confondre nos compatriotes qui ont manifesté avec ceux qui ont détruit.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-18T20:00:38+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/86Ekp9zi6AA"
+      ]
+    },
+    {
+      "id": "8LPw91A8X8I",
+      "url": "https://www.youtube.com/shorts/8LPw91A8X8I",
+      "type": "Élysée Public Address",
+      "text": "¡Gracias, España, por recibirnos con tanta cercanía!\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-30T19:15:17+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/8LPw91A8X8I"
+      ]
+    },
+    {
+      "id": "9rI9_5dO6DI",
+      "url": "https://www.youtube.com/shorts/9rI9_5dO6DI",
+      "type": "Élysée Public Address",
+      "text": "Ceux qui ont cherché à faire tomber la République auront à en répondre.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-18T19:47:05+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/9rI9_5dO6DI"
+      ]
+    },
+    {
+      "id": "Gfk1zqlku14",
+      "url": "https://www.youtube.com/shorts/Gfk1zqlku14",
+      "type": "Élysée Public Address",
+      "text": "Plus que jamais nous avons besoin de nos Nations unies.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-23T20:14:02+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/Gfk1zqlku14"
+      ]
+    },
+    {
+      "id": "TCEi3zei6tY",
+      "url": "https://www.youtube.com/shorts/TCEi3zei6tY",
+      "type": "Élysée Public Address",
+      "text": "Un message d’espérance depuis Metz où bat le cœur millénaire de l’Europe.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-28T21:58:17+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/TCEi3zei6tY"
+      ]
+    },
+    {
+      "id": "UxXRiFxbndY",
+      "url": "https://www.youtube.com/watch?v=UxXRiFxbndY",
+      "type": "Élysée Public Address",
+      "text": "En direct au 20h de TF1 et France 2.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-24T18:57:16+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=UxXRiFxbndY"
+      ]
+    },
+    {
+      "id": "bbNmzBJlXFY",
+      "url": "https://www.youtube.com/shorts/bbNmzBJlXFY",
+      "type": "Élysée Public Address",
+      "text": "Notre dissuasion nucléaire nous protège et continuera à nous protéger.\n\nÀ bord de la frégate multi-missions Auvergne, j'ai assisté au premier tir du nouveau missile balistique M51.3 depuis le sous-marin nucléaire lanceur d'engins Le Vigilant. Très peu de nations disposent d'un tel savoir-faire. Félicitations à tous les acteurs de cette réussite exceptionnelle : DGA, CEA...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-06T10:47:58+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/bbNmzBJlXFY"
+      ]
+    },
+    {
+      "id": "ejKwQTHlyQw",
+      "url": "https://www.youtube.com/shorts/ejKwQTHlyQw",
+      "type": "Élysée Public Address",
+      "text": "L’écoute et le dialogue ne signifient ni la faiblesse ni l’impunité.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-18T20:15:39+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/ejKwQTHlyQw"
+      ]
+    },
+    {
+      "id": "ks-pI5x5wJ0",
+      "url": "https://www.youtube.com/watch?v=ks-pI5x5wJ0",
+      "type": "Élysée Public Address",
+      "text": "À la tribune de l’Assemblée générale des Nations unies.\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-22T18:58:06+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=ks-pI5x5wJ0"
+      ]
+    },
+    {
+      "id": "oP69PppCNB4",
+      "url": "https://www.youtube.com/shorts/oP69PppCNB4",
+      "type": "Élysée Public Address",
+      "text": "Très Saint-Père, que ces quelques jours vous permettent de rencontrer la France dans toute sa vérité\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-25T14:31:20+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/oP69PppCNB4"
+      ]
+    },
+    {
+      "id": "rEu7JD0sTWk",
+      "url": "https://www.youtube.com/shorts/rEu7JD0sTWk",
+      "type": "Élysée Public Address",
+      "text": "Faites du sport ! 🇫🇷\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-14T07:44:14+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/rEu7JD0sTWk"
+      ]
+    },
+    {
+      "id": "w9RqF10t28I",
+      "url": "https://www.youtube.com/shorts/w9RqF10t28I",
+      "type": "Élysée Public Address",
+      "text": "Merci Saint-Pierre-et-Miquelon !\n\n...",
+      "author": "Emmanuel Macron",
+      "handle": "@EmmanuelMacron",
+      "surface": "YouTube Official",
+      "created_at": "2026-09-21T17:00:58+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/w9RqF10t28I"
+      ]
+    }
+  ]
+}

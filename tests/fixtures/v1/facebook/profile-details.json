@@ -1,0 +1,15 @@
+{
+  "platform": "facebook",
+  "url": "https://www.facebook.com/example.user",
+  "name": "Example User",
+  "bio": "Open source investigator & researcher. https://threads.net/@example_user",
+  "links": [
+    "https://threads.net/@example_user",
+    "https://x.com/example_user"
+  ],
+  "about": {
+    "work": ["Research Lab"],
+    "education": ["State University"],
+    "places_lived": ["Austin, TX"]
+  }
+}

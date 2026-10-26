@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Harvy — Map</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="{{ url_for('static', filename='saas-shell.js') }}" defer></script>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
+  <style>
+    .map-page { max-width: 1400px; padding: 1.5rem 1.5rem 3rem; }
+    .map-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+    .map-title { font-size: 1.4rem; font-weight: 700; color: #ffffff; margin: 0 0 .25rem; }
+    .map-subtitle { font-family: var(--font-mono); font-size: .78rem; color: #888888; margin: 0; }
+    .map-viewport {
+      width: 100%;
+      height: 72vh;
+      min-height: 520px;
+      border: 1px solid #222222;
+      border-radius: 4px;
+      background: #080808;
+      position: relative;
+    }
+    #map { width: 100%; height: 100%; }
+    .map-overlay-panel {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 10;
+      background: rgba(10, 10, 10, 0.92);
+      border: 1px solid #282828;
+      border-radius: 3px;
+      padding: .85rem 1rem;
+      max-width: 340px;
+      backdrop-filter: blur(8px);
+    }
+    .map-overlay-title { font-family: var(--font-mono); font-size: .75rem; font-weight: 700; color: #ffffff; letter-spacing: .08em; margin: 0 0 .35rem; }
+    .map-overlay-desc { font-size: .75rem; color: #aaaaaa; line-height: 1.45; margin: 0 0 .65rem; }
+    .map-badge-mono { font-family: var(--font-mono); font-size: .68rem; color: #81c995; background: #0e1e12; border: 1px solid #1a3c22; padding: .18rem .45rem; border-radius: 2px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="app-root">
+    <header class="site-header">
+      <div class="header-container">
+        <a class="brand" href="/" aria-label="Harvy home">
+          <img src="{{ url_for('static', filename='harvy-logo.png') }}" alt="Harvy" class="brand-logo">
+          <span class="brand-tag">GEOSPATIAL / MAP</span>
+        </a>
+        <nav class="header-meta" aria-label="Harvy workspaces">
+          <a href="/search/" class="header-back-link">SEARCH</a>
+          <a href="/platform/" class="header-back-link">SOCIAL</a>
+          <a href="/research/" class="header-back-link">RESEARCH</a>
+          <a href="/query/" class="header-back-link">QUERY</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content map-page">
+      <div class="map-header-row">
+        <div>
+          <h1 class="map-title">Geospatial Intelligence Map</h1>
+          <p class="map-subtitle">PMTILES VECTOR PIPELINE // R2 STORAGE</p>
+        </div>
+        <span class="map-badge-mono">TILES: R2 / HARVY-MAP-DATA</span>
+      </div>
+
+      <div class="map-viewport">
+        <div class="map-overlay-panel">
+          <div class="map-overlay-title">[01] VECTOR BASEMAP</div>
+          <p class="map-overlay-desc">Rendered with Protomaps vector styling matching Harvy dark aesthetic. Serverless tile range-requests from Cloudflare R2.</p>
+          <span class="map-badge-mono">STATUS: LIVE</span>
+        </div>
+        <div id="map"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol('pmtiles', protocol.tile);
+
+    // Styled dark theme matching Harvy aesthetic
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: {
+        version: 8,
+        glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
+        sources: {
+          protomaps: {
+            type: 'vector',
+            url: 'pmtiles://https://build.protomaps.com/20240422.pmtiles'
+          }
+        },
+        layers: [
+          { id: 'background', type: 'background', paint: { 'background-color': '#080808' } },
+          { id: 'water', type: 'fill', source: 'protomaps', 'source-layer': 'water', paint: { 'fill-color': '#0e1419' } },
+          { id: 'landuse', type: 'fill', source: 'protomaps', 'source-layer': 'landuse', paint: { 'fill-color': '#0c0c0c' } },
+          { id: 'roads', type: 'line', source: 'protomaps', 'source-layer': 'roads', paint: { 'line-color': '#1a1a1a', 'line-width': 1 } },
+          { id: 'boundaries', type: 'line', source: 'protomaps', 'source-layer': 'boundaries', paint: { 'line-color': '#2e2e2e', 'line-dasharray': [2, 2] } }
+        ]
+      },
+      center: [-98.5795, 39.8283],
+      zoom: 3.8
+    });
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+  </script>
+</body>
+</html>

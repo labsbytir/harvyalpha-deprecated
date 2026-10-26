@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["shared/**/*.ts", "supervisor/src/**/*.ts", "judyrecords/src/**/*.ts", "truthsocial/src/**/*.ts", "sam-gov/src/**/*.ts", "projector/src/**/*.ts"]
+}

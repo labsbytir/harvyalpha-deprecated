@@ -1,0 +1,7 @@
+.venv/
+.agents/
+data/
+untruth/
+__pycache__/
+*.pyc
+.git/

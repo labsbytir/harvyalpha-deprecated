@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "none",
+    "strict": true,
+    "lib": ["ES2022", "DOM"],
+    "outFile": "static/dossier.js",
+    "skipLibCheck": true
+  },
+  "files": ["templates/dossier.ts"]
+}

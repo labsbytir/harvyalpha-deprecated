@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Harvy Nodes — Graph Visualization &amp; Forensic Topology</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="/static/saas-shell.js" defer></script>
+  <script src="/static/nodes.js" defer></script>
+</head>
+<body class="qn-layout">
+  <header class="qn-top-bar">
+    <a href="/" class="qn-brand">
+      <img src="/static/harvy-logo.png" alt="Harvy" class="qn-brand-logo">
+      <span>HARVY // NODES</span>
+    </a>
+    <nav class="qn-nav">
+      <a href="/search/" class="qn-nav-link">SEARCH</a>
+      <a href="/query/" class="qn-nav-link">QUERY</a>
+      <a href="/nodes/" class="qn-nav-link active">NODES</a>
+      <a href="/map/" class="qn-nav-link">MAP</a>
+      <a href="/platform/" class="qn-nav-link">INGEST</a>
+    </nav>
+  </header>
+
+  <main class="qn-container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div>
+        <h1 class="qn-header-title">Entity Graph Topology &amp; Provenance</h1>
+        <p class="qn-header-desc" style="margin-bottom:0">Interactive force-directed graph of canonical objects and evidence-backed links. Click any node to inspect observation provenance and raw R2 evidence pointers.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span id="env-badge" class="qn-tag">Scope: shared</span>
+        <span id="count-badge" class="qn-tag">0 nodes</span>
+        <button type="button" id="toggle-view-btn" class="qn-btn qn-btn-outline" style="font-size:12px;padding:6px 12px">View Accessible Table</button>
+      </div>
+    </div>
+
+    <!-- Canvas Graph View -->
+    <div id="canvas-wrap" class="qn-graph-wrap">
+      <canvas id="nodes-canvas"></canvas>
+      <div id="nodes-sidebar" class="qn-graph-sidebar"></div>
+    </div>
+
+    <!-- Accessible Table View (Fallback) -->
+    <div id="table-wrap" style="display:none;margin-top:20px;">
+      <div class="qn-card" style="margin-bottom:20px;">
+        <div class="qn-card-title">CANONICAL OBJECTS (ACCESSIBLE VIEW)</div>
+        <table class="qn-table">
+          <thead>
+            <tr>
+              <th>OBJECT URN</th>
+              <th>TYPE</th>
+              <th>NAME</th>
+              <th>CANONICAL URL</th>
+            </tr>
+          </thead>
+          <tbody id="nodes-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="qn-card">
+        <div class="qn-card-title">RELATIONSHIPS &amp; PROVENANCE (ACCESSIBLE VIEW)</div>
+        <table class="qn-table">
+          <thead>
+            <tr>
+              <th>SOURCE</th>
+              <th>TYPE</th>
+              <th>TARGET</th>
+              <th>CONFIDENCE</th>
+              <th>EVIDENCE ID</th>
+            </tr>
+          </thead>
+          <tbody id="links-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

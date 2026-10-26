@@ -1,0 +1,358 @@
+{
+  "target": {
+    "name": "Xi Jinping",
+    "title": "President of the People's Republic of China",
+    "primary_surface": "Xinhua Xi's Time Wire (english.news.cn)",
+    "surfaces": [
+      "Xinhua News Agency",
+      "State Communiqués"
+    ]
+  },
+  "telemetry": {
+    "generated_at": "2026-10-25T10:36:16.921562+00:00",
+    "source": "spider_unlimited_residential_proxy",
+    "posts_captured": 21,
+    "aggregate_reactions": null,
+    "aggregate_shares": null,
+    "aggregate_comments": null,
+    "unique_outlinks": 21
+  },
+  "posts": [
+    {
+      "id": "22e4778526644072827de431afa75e46",
+      "url": "https://english.news.cn/20260925/22e4778526644072827de431afa75e46/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi attends state dinner held by Trump",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260925/22e4778526644072827de431afa75e46/c.html"
+      ]
+    },
+    {
+      "id": "2442ea2e7c714a3e858068968425004d",
+      "url": "https://english.news.cn/20260930/2442ea2e7c714a3e858068968425004d/c.html",
+      "type": "State Wire Communiqué",
+      "text": "We take immense pride in the extraordinary achievements of New China and have full confidence in the bright prospects of Chinese modernization.",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260930/2442ea2e7c714a3e858068968425004d/c.html"
+      ]
+    },
+    {
+      "id": "2bf32912e4b74bcabe0bd462606acc1c",
+      "url": "https://english.news.cn/20260210/2bf32912e4b74bcabe0bd462606acc1c/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xinhua Headlines: Xi visits people in Beijing ahead of Spring Festival, extends greetings to all Chinese",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260210/2bf32912e4b74bcabe0bd462606acc1c/c.html"
+      ]
+    },
+    {
+      "id": "2c26835d5d1d4e8caf83ac04f782a2d5",
+      "url": "https://english.news.cn/20260624/2c26835d5d1d4e8caf83ac04f782a2d5/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi calls for solid measures to modernize agriculture, rural areas",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260624/2c26835d5d1d4e8caf83ac04f782a2d5/c.html"
+      ]
+    },
+    {
+      "id": "3a2b138ae2fd4180b1a673daa36b7ac6",
+      "url": "https://english.news.cn/20260715/3a2b138ae2fd4180b1a673daa36b7ac6/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi Focus: Xi stresses high-quality urban renewal in Shanghai inspection trip",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260715/3a2b138ae2fd4180b1a673daa36b7ac6/c.html"
+      ]
+    },
+    {
+      "id": "3b7c1e9490de47ff97a2a3603a91c83c",
+      "url": "https://english.news.cn/20261013/3b7c1e9490de47ff97a2a3603a91c83c/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi Focus: Xi calls for decisive progress in Healthy China advancement",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261013/3b7c1e9490de47ff97a2a3603a91c83c/c.html"
+      ]
+    },
+    {
+      "id": "41826557f6634874bc00a6ea4a527403",
+      "url": "https://english.news.cn/20260924/41826557f6634874bc00a6ea4a527403/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi holds small-group exchanges with Trump",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260924/41826557f6634874bc00a6ea4a527403/c.html"
+      ]
+    },
+    {
+      "id": "4575df57372b4e39a91d2c8d1458726c",
+      "url": "https://english.news.cn/20261022/4575df57372b4e39a91d2c8d1458726c/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi calls for new achievements on new Long March",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261022/4575df57372b4e39a91d2c8d1458726c/c.html"
+      ]
+    },
+    {
+      "id": "652141037b91480fb001d41dc5f28830",
+      "url": "https://english.news.cn/20261023/652141037b91480fb001d41dc5f28830/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi sends message to 2026 Global Governance Forum (Xiongan)",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261023/652141037b91480fb001d41dc5f28830/c.html"
+      ]
+    },
+    {
+      "id": "6a47192944214bb689359cb52a308fbc",
+      "url": "https://english.news.cn/20260925/6a47192944214bb689359cb52a308fbc/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi, Peng Liyuan visit U.S. National Archives with Trump and his wife",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260925/6a47192944214bb689359cb52a308fbc/c.html"
+      ]
+    },
+    {
+      "id": "6bd3d595e3ce4feb9a810a681ef8365c",
+      "url": "https://english.news.cn/20260924/6bd3d595e3ce4feb9a810a681ef8365c/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi lands in U.S. for state visit, greeted by Trump at airport",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260924/6bd3d595e3ce4feb9a810a681ef8365c/c.html"
+      ]
+    },
+    {
+      "id": "79343aab5ed54da5834a3e72965841c2",
+      "url": "https://english.news.cn/20261017/79343aab5ed54da5834a3e72965841c2/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xiplomacy: Xi's decades-long commitment to poverty reduction",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261017/79343aab5ed54da5834a3e72965841c2/c.html"
+      ]
+    },
+    {
+      "id": "7e4f185bc67847238f4b766d4d84f1d2",
+      "url": "https://english.news.cn/20260915/7e4f185bc67847238f4b766d4d84f1d2/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi Story: Making canals channels for connectivity, prosperity, better life",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260915/7e4f185bc67847238f4b766d4d84f1d2/c.html"
+      ]
+    },
+    {
+      "id": "892e77ab65b54496851c88cd957f49eb",
+      "url": "https://english.news.cn/20261016/892e77ab65b54496851c88cd957f49eb/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi stresses prioritizing ecological conservation, pursuing green development",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261016/892e77ab65b54496851c88cd957f49eb/c.html"
+      ]
+    },
+    {
+      "id": "95c5d12f5bb94aaa964caaa80086c2ca",
+      "url": "https://english.news.cn/20260924/95c5d12f5bb94aaa964caaa80086c2ca/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi attends welcome ceremony held by Trump",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260924/95c5d12f5bb94aaa964caaa80086c2ca/c.html"
+      ]
+    },
+    {
+      "id": "a045f1a465a041e3b6dbc076781caf33",
+      "url": "https://english.news.cn/20260813/a045f1a465a041e3b6dbc076781caf33/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi Story: The rain, the caves and the quest to preserve Mogao Grottoes",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260813/a045f1a465a041e3b6dbc076781caf33/c.html"
+      ]
+    },
+    {
+      "id": "a9433159a203430686ca11e34890fc6a",
+      "url": "https://english.news.cn/20260926/a9433159a203430686ca11e34890fc6a/c.html",
+      "type": "State Wire Communiqué",
+      "text": "China, U.S. agree on constructive strategic stability based on respect, fairness and reciprocity",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260926/a9433159a203430686ca11e34890fc6a/c.html"
+      ]
+    },
+    {
+      "id": "bff4a167ce714d25a92cde65adc05151",
+      "url": "https://english.news.cn/20260324/bff4a167ce714d25a92cde65adc05151/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi urges efforts to build Xiong'an New Area into innovation hub, model of high-quality development",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20260324/bff4a167ce714d25a92cde65adc05151/c.html"
+      ]
+    },
+    {
+      "id": "c341b0c4fa614cf48fbcbb69a580ed9b",
+      "url": "https://english.news.cn/20261023/c341b0c4fa614cf48fbcbb69a580ed9b/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xiplomacy: Reading Xi's vision for global governance through metaphors",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261023/c341b0c4fa614cf48fbcbb69a580ed9b/c.html"
+      ]
+    },
+    {
+      "id": "ccd544f9a7504a2c908356ec3e3a0fb0",
+      "url": "https://english.news.cn/20261025/ccd544f9a7504a2c908356ec3e3a0fb0/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xi exchanges congratulations with Belgium's King Philippe over 55th anniversary of ties",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261025/ccd544f9a7504a2c908356ec3e3a0fb0/c.html"
+      ]
+    },
+    {
+      "id": "fd63cdfb7db94f758cddbdab5f3d5f8e",
+      "url": "https://english.news.cn/20261024/fd63cdfb7db94f758cddbdab5f3d5f8e/c.html",
+      "type": "State Wire Communiqué",
+      "text": "Xiplomacy: Xi's remarks on upholding authority, role of UN",
+      "author": "Xi Jinping",
+      "handle": "english.news.cn",
+      "surface": "Xinhua News Agency",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://english.news.cn/20261024/fd63cdfb7db94f758cddbdab5f3d5f8e/c.html"
+      ]
+    }
+  ]
+}

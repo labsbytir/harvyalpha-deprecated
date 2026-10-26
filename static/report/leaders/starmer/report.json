@@ -1,0 +1,342 @@
+{
+  "target": {
+    "name": "Keir Starmer",
+    "title": "Prime Minister of the United Kingdom",
+    "primary_surface": "10 Downing Street (GOV.UK)",
+    "surfaces": [
+      "GOV.UK Official",
+      "Prime Minister Communiqués"
+    ]
+  },
+  "telemetry": {
+    "generated_at": "2026-10-25T10:36:16.915597+00:00",
+    "source": "spider_unlimited_residential_proxy",
+    "posts_captured": 20,
+    "aggregate_reactions": null,
+    "aggregate_shares": null,
+    "aggregate_comments": null,
+    "unique_outlinks": 20
+  },
+  "posts": [
+    {
+      "id": "starmer_001",
+      "url": "https://www.gov.uk/government/news/pm-call-with-president-kast-of-chile-23-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM call with President Kast of Chile: 23 October 2026\n\nThe Prime Minister spoke to the President of Chile, Jose Antonio Kast, today.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-23T18:42:26Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-call-with-president-kast-of-chile-23-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_002",
+      "url": "https://www.gov.uk/government/news/pm-call-with-president-trump-of-the-united-states-23-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM call with President Trump of the United States: 23 October 2026\n\nThe Prime Minister spoke to the President of the United States of America Donald Trump today.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-23T18:36:49Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-call-with-president-trump-of-the-united-states-23-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_003",
+      "url": "https://www.gov.uk/government/news/uk-oman-joint-statement-on-omani-state-visit",
+      "type": "Prime Minister Statement",
+      "text": "UK-Oman joint statement on Omani State Visit\n\nA joint statement between the UK and Oman following the Sultan of Oman's State Visit to the UK.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-23T15:05:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/uk-oman-joint-statement-on-omani-state-visit"
+      ]
+    },
+    {
+      "id": "starmer_004",
+      "url": "https://www.gov.uk/government/news/appointment-of-the-suffragan-bishop-of-jarrow-23-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "Appointment of the Suffragan Bishop of Jarrow: 23 October 2026\n\nThe King has approved the nomination of the Reverend Dr Jitesh Krisnakant Patel, MA, MPhys, PhD, to the Suffragan See of Jarrow, in the Diocese of Durham.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-23T09:00:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/appointment-of-the-suffragan-bishop-of-jarrow-23-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_005",
+      "url": "https://www.gov.uk/government/news/military-planes-and-helicopters-to-fight-wildfires-from-the-sky",
+      "type": "Prime Minister Statement",
+      "text": "Military planes and helicopters to fight wildfires from the sky\n\nMilitary planes and helicopters will take to the skies to fight wildfires for the first time, as we prepare for future extreme weather driven by climate change.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-22T21:30:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/military-planes-and-helicopters-to-fight-wildfires-from-the-sky"
+      ]
+    },
+    {
+      "id": "starmer_006",
+      "url": "https://www.gov.uk/government/news/pm-puts-communities-first-in-government-investment-rules-shake-up",
+      "type": "Prime Minister Statement",
+      "text": "PM puts communities first in government investment rules shake up\n\nPartnership with local leaders shows No10 North in action putting power back into communities",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-22T15:34:37Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-puts-communities-first-in-government-investment-rules-shake-up"
+      ]
+    },
+    {
+      "id": "starmer_007",
+      "url": "https://www.gov.uk/government/news/pm-call-with-president-stubb-of-finland-21-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM call with President Stubb of Finland: 21 October 2026\n\nThe Prime Minister spoke to the President of Finland, Alexander Stubb, last night.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-22T07:05:31Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-call-with-president-stubb-of-finland-21-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_008",
+      "url": "https://www.gov.uk/government/news/pm-meeting-with-the-sultan-of-oman-21-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM meeting with the Sultan of Oman: 21 October 2026\n\nThis afternoon the Prime Minister welcomed the Sultan of Oman to Downing Street.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-21T17:36:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-meeting-with-the-sultan-of-oman-21-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_009",
+      "url": "https://www.gov.uk/government/news/pm-call-with-prime-minister-tusk-of-poland-21-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM call with Prime Minister Tusk of Poland: 21 October 2026\n\nThe Prime Minister spoke to the Prime Minister of Poland Donald Tusk this morning.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-21T12:17:09Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-call-with-prime-minister-tusk-of-poland-21-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_010",
+      "url": "https://www.gov.uk/government/news/readout-of-the-civil-society-council-15-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "Readout of the Civil Society Council: 15 October 2026\n\nOn Thursday 15 October, the Civil Society Council met at the King’s Trust in Manchester.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-19T16:38:26Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/readout-of-the-civil-society-council-15-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_011",
+      "url": "https://www.gov.uk/government/news/share-the-journey-not-the-noise-government-launches-measures-to-prevent-noise-and-antisocial-behaviour-on-transport",
+      "type": "Prime Minister Statement",
+      "text": "Share the journey, not the noise: government launches measures to prevent noise and antisocial behaviour on transport\n\nTackling nuisance behaviour on buses and trains will help people feel safer and more comfortable.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-18T23:01:07Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/share-the-journey-not-the-noise-government-launches-measures-to-prevent-noise-and-antisocial-behaviour-on-transport"
+      ]
+    },
+    {
+      "id": "starmer_012",
+      "url": "https://www.gov.uk/government/speeches/pm-speech-in-scotland-16-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM speech in Scotland: 16 October 2026\n\nPrime Minister Andy Burnham delivered a speech in Scotland today.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-16T15:59:24Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/speeches/pm-speech-in-scotland-16-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_013",
+      "url": "https://www.gov.uk/government/news/prime-minister-makes-offer-to-holyrood-to-work-together-to-empower-scottish-regions",
+      "type": "Prime Minister Statement",
+      "text": "Prime Minister makes offer to Holyrood to work together to empower Scottish regions\n\nIn a speech today, the Prime Minister will invite Scotland's First Minister to work with him on the common good of pushing more power out of both Westminster and Holyrood, unlocking jobs and opportunity in every region.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-15T21:30:01Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/prime-minister-makes-offer-to-holyrood-to-work-together-to-empower-scottish-regions"
+      ]
+    },
+    {
+      "id": "starmer_014",
+      "url": "https://www.gov.uk/government/speeches/pm-remarks-at-the-kings-trust-centre-15-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM remarks at the King’s Trust Centre: 15 October 2026\n\nPrime Minister Andy Burnham's remarks at the King’s Trust Centre in Manchester today.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-15T15:42:07Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/speeches/pm-remarks-at-the-kings-trust-centre-15-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_015",
+      "url": "https://www.gov.uk/government/news/appointment-of-lord-lieutenant-of-county-tyrone-15-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "Appointment of Lord-Lieutenant of County Tyrone: 15 October 2026\n\nThe King has been pleased to appoint Mr William James Baxter QPM DL as His Majesty’s Lord-Lieutenant of County Tyrone.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-15T09:00:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/appointment-of-lord-lieutenant-of-county-tyrone-15-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_016",
+      "url": "https://www.gov.uk/government/news/great-british-railways-takes-shape-as-hq-and-apprenticeship-scheme-confirmed",
+      "type": "Prime Minister Statement",
+      "text": "Great British Railways takes shape as HQ and apprenticeship scheme confirmed\n\nNew headquarters in Derby will employ up to 450 staff and open up apprenticeships for up to 600 young people.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-14T23:01:02Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/great-british-railways-takes-shape-as-hq-and-apprenticeship-scheme-confirmed"
+      ]
+    },
+    {
+      "id": "starmer_017",
+      "url": "https://www.gov.uk/government/news/pm-meeting-with-president-zelenskyy-of-ukraine-14-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "PM meeting with President Zelenskyy of Ukraine: 14 October 2026\n\nThe Prime Minister welcomed President Volodymyr Zelenskyy of Ukraine to Downing Street this afternoon.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-14T18:43:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/pm-meeting-with-president-zelenskyy-of-ukraine-14-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_018",
+      "url": "https://www.gov.uk/government/news/brain-cancer-patients-to-see-faster-development-of-new-treatments",
+      "type": "Prime Minister Statement",
+      "text": "Brain cancer patients to see faster development of new treatments\n\nPrime Minister and Health Secretary met campaigner Archie Goodburn, following his emotional plea on BBC Breakfast.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-14T15:43:04Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/brain-cancer-patients-to-see-faster-development-of-new-treatments"
+      ]
+    },
+    {
+      "id": "starmer_019",
+      "url": "https://www.gov.uk/government/news/appointment-of-regius-professorship-of-medicine-in-the-university-of-oxford-14-october-2026",
+      "type": "Prime Minister Statement",
+      "text": "Appointment of Regius Professorship of Medicine in the University of Oxford: 14 October 2026\n\nThe King has approved the following appointment.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-14T15:01:02Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/appointment-of-regius-professorship-of-medicine-in-the-university-of-oxford-14-october-2026"
+      ]
+    },
+    {
+      "id": "starmer_020",
+      "url": "https://www.gov.uk/government/news/president-zelenskyy-to-visit-downing-street-as-the-uk-doubles-down-on-support-for-ukraine-and-calls-on-partners-to-follow-suit",
+      "type": "Prime Minister Statement",
+      "text": "President Zelenskyy to visit Downing Street as the UK doubles down on support for Ukraine and calls on partners to follow suit\n\nPresident Zelenskyy will arrive in the UK this morning as the UK calls on international partners to step up sanctions on Russia and increase pressure on Putin to respect the United States' calls for an energy ceasefire.",
+      "author": "Keir Starmer / 10 Downing Street",
+      "handle": "10DowningStreet",
+      "surface": "GOV.UK",
+      "created_at": "2026-10-13T21:30:00Z",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.gov.uk/government/news/president-zelenskyy-to-visit-downing-street-as-the-uk-doubles-down-on-support-for-ukraine-and-calls-on-partners-to-follow-suit"
+      ]
+    }
+  ]
+}

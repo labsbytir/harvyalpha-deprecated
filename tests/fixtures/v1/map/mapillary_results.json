@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "id": "990011223344",
+      "geometry": {"type": "Point", "coordinates": [-97.7431, 30.2672]},
+      "captured_at": 1718000000000,
+      "is_pano": false
+    }
+  ]
+}

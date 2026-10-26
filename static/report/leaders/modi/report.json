@@ -1,0 +1,262 @@
+{
+  "target": {
+    "name": "Narendra Modi",
+    "title": "Prime Minister of India",
+    "primary_surface": "YouTube Official (@NarendraModi)",
+    "surfaces": [
+      "YouTube Official Channel",
+      "Public Addresses"
+    ]
+  },
+  "telemetry": {
+    "generated_at": "2026-10-25T10:36:16.917150+00:00",
+    "source": "spider_unlimited_residential_proxy",
+    "posts_captured": 15,
+    "aggregate_reactions": null,
+    "aggregate_shares": null,
+    "aggregate_comments": null,
+    "unique_outlinks": 15
+  },
+  "posts": [
+    {
+      "id": "6jxBkicUGHo",
+      "url": "https://www.youtube.com/watch?v=6jxBkicUGHo",
+      "type": "Official Public Address",
+      "text": "PM Modi Live | Mann Ki Baat 139th Episode Live Broadcast\n\nPM Modi Live: In this month’s Mann Ki Baat, PM Modi recalled the programme’s 12-year journey since its launch on Vijayadashami in 2014. He spoke about organic farming, water conservation, swadeshi products, khadi sales and tele-consultations, reflected on his recent visit to Chennai and paid homage ...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-25T06:25:46+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=6jxBkicUGHo"
+      ]
+    },
+    {
+      "id": "9JLbqwycAL4",
+      "url": "https://www.youtube.com/watch?v=9JLbqwycAL4",
+      "type": "Official Public Address",
+      "text": "How India's cultural roots are inspiring Viksit Bharat\n\nPM Modi addressed the Chinmaya Amrit Mahotsav Global Sammelan, acknowledging Swami Chinmayananda’s enduring works in education, cultural preservation and national awakening. He reflected on the National Education Policy’s emphasis on Indian knowledge traditions, the revival of India’s cultural landm...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-24T11:30:01+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=9JLbqwycAL4"
+      ]
+    },
+    {
+      "id": "9tOgdCeOC54",
+      "url": "https://www.youtube.com/watch?v=9tOgdCeOC54",
+      "type": "Official Public Address",
+      "text": "The 1993 meeting with Pujya Swami Chinmayananda Ji that PM Modi still remembers\n\nPM Modi inaugurated the Chinmaya Amrit Mahotsav Global Sammelan at Bharat Mandapam in New Delhi, recalling his emotional meeting with Pujya Gurudev Swami Chinmayananda in 1993. He reflected on Gurudev’s vision of nurturing youth to build a strong and capable India, highlighting how youth empowerment...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-24T07:30:06+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=9tOgdCeOC54"
+      ]
+    },
+    {
+      "id": "B5URQrIjg8M",
+      "url": "https://www.youtube.com/watch?v=B5URQrIjg8M",
+      "type": "Official Public Address",
+      "text": "Wings Over Ganges: PM Modi witnesses Indian Air Force Day Aerial Display in Varanasi\n\nPM Modi Live: During his visit to Varanasi, Uttar Pradesh, Prime Minister Narendra Modi witnessed the Wings Over Ganges: Indian Air Force Day Aerial Display 2026, organised to commemorate the 94th anniversary of the Indian Air Force. #pmmodi #narendramodi #varanasi To Subscribe PM Narendra Modi's Yo...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-25T08:57:11+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=B5URQrIjg8M"
+      ]
+    },
+    {
+      "id": "CsdvKa_3HsU",
+      "url": "https://www.youtube.com/watch?v=CsdvKa_3HsU",
+      "type": "Official Public Address",
+      "text": "How Swami Chinmayananda Ji connected spirituality with nation-building\n\nPM Modi addressed the Chinmaya Amrit Mahotsav Global Sammelan, reflecting on Pujya Gurudev Swami Chinmayananda’s vision of connecting spiritual growth with national progress. He noted Gurudev’s efforts to take the wisdom of the Vedas, Upanishads and Bhagavad Gita to the masses, inspiring young India...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-24T09:30:39+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=CsdvKa_3HsU"
+      ]
+    },
+    {
+      "id": "FzIP8Hrr2JM",
+      "url": "https://www.youtube.com/watch?v=FzIP8Hrr2JM",
+      "type": "Official Public Address",
+      "text": "LIVE: This is how Kashi welcomed PM Modi!\n\nPM Modi Live: Prime Minister Narendra Modi was accorded a warm welcome upon his arrival in Varanasi. #pmmodi #narendramodi #varanasi To Subscribe PM Narendra Modi's YouTube Channel click now at https://goo.gl/8qsb5E and stay updated🔔 To Follow PM Narendra Modi's WhatsApp Channel, click now at https:...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-25T07:50:56+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=FzIP8Hrr2JM"
+      ]
+    },
+    {
+      "id": "TsFmc7Oj-8U",
+      "url": "https://www.youtube.com/watch?v=TsFmc7Oj-8U",
+      "type": "Official Public Address",
+      "text": "India’s progress is always bigger than any politics and it just shows!\n\nPM Modi heavily criticised the Congress at the NDTV World Summit, for what he described as attempts to undermine India’s achievements and damage the country’s image. He also said such politics hurts genuine democratic critics whose voices are important for strengthening governance and democracy. #na...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T15:30:22+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=TsFmc7Oj-8U"
+      ]
+    },
+    {
+      "id": "_ArDL96RdZU",
+      "url": "https://www.youtube.com/shorts/_ArDL96RdZU",
+      "type": "Official Public Address",
+      "text": "Varanasi takes to the skies! PM Modi witnesses a stunning aerial spectacle!\n\nPM Modi witnesses a stunning aerial display in Varanasi, as aircrafts soar across the skies, painting the tricolour in a magnificent display of India's pride and prowess. #kashi #pmmodi #narendramodi To Subscribe PM Narendra Modi's YouTube Channel click now at https://goo.gl/8qsb5E and stay updated🔔...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-25T10:00:15+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/_ArDL96RdZU"
+      ]
+    },
+    {
+      "id": "dNHESkuFSuU",
+      "url": "https://www.youtube.com/watch?v=dNHESkuFSuU",
+      "type": "Official Public Address",
+      "text": "LIVE: PM Modi inaugurates key RBI facilities in Bhubaneswar\n\nPM Modi Live: Prime Minister Narendra Modi inaugurated the Reserve Bank of India’s newly established Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha. #pmmodi #narendramodi #rbi To Subscribe PM Narendra Modi's YouTube Channel click now at https://goo.gl/8qsb5E and stay updated...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-24T09:13:07+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=dNHESkuFSuU"
+      ]
+    },
+    {
+      "id": "fKn03aREZS8",
+      "url": "https://www.youtube.com/watch?v=fKn03aREZS8",
+      "type": "Official Public Address",
+      "text": "India is doing what it never did before! 🤔\n\nAt the NDTV World Summit, PM Modi acknowledged the many milestones India has achieved for the first time across technology, energy, infrastructure and sports. From the Fast Breeder Reactor and hydrogen trains to record sporting achievements, he said India’s progress reflects the impact of Reform, Pe...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T11:30:25+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=fKn03aREZS8"
+      ]
+    },
+    {
+      "id": "hTEFVL6UhwY",
+      "url": "https://www.youtube.com/shorts/hTEFVL6UhwY",
+      "type": "Official Public Address",
+      "text": "33 years later, PM Modi meets Pujya Chinmayananda Ji through a holobot!\n\nPM Modi addressed the Chinmaya Amrit Mahotsav Global Sammelan, recalling his 1993 meeting with Pujya Gurudev Swami Chinmayananda and the profound impact of his guidance. Through an emotional interaction with Gurudev’s holobot, he reflected on their shared vision of empowering India’s youth, reviving...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T10:52:43+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/hTEFVL6UhwY"
+      ]
+    },
+    {
+      "id": "iJ5nFzcIPlA",
+      "url": "https://www.youtube.com/watch?v=iJ5nFzcIPlA",
+      "type": "Official Public Address",
+      "text": "LIVE : PM Modi inaugurates a new garment manufacturing facility in Varanasi\n\nPM Modi Live: Prime Minister Narendra Modi inaugurated Arvind Limited’s new garment manufacturing facility in Varanasi, Uttar Pradesh. The facility marks an important step towards strengthening India’s textile and apparel manufacturing ecosystem and promoting industrial growth in the region. #pmmodi...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-25T06:45:15+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=iJ5nFzcIPlA"
+      ]
+    },
+    {
+      "id": "jUBpC4vtMJE",
+      "url": "https://www.youtube.com/watch?v=jUBpC4vtMJE",
+      "type": "Official Public Address",
+      "text": "From ‘Back Office’ to ‘Brain Office’ - what’s the hype?\n\nAt the NDTV World Summit, PM Modi noted India’s transformation from the world’s “Back Office” to a global “Brain Office.” From AI, cloud and semiconductor design to research, engineering and product development, India’s talent is increasingly driving innovation and creating solutions for the world. ...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T13:30:33+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/watch?v=jUBpC4vtMJE"
+      ]
+    },
+    {
+      "id": "kUPwWMui0yQ",
+      "url": "https://www.youtube.com/shorts/kUPwWMui0yQ",
+      "type": "Official Public Address",
+      "text": "A candid moment filled with bhakti and smiles\n\nIn a candid and heartwarming interaction, young children sing “Kabhi Ram Banke, Kabhi Shyam Banke” for PM Modi, filling the moment with music, smiles and warmth. Their innocent voices and heartfelt rendition make for a memorable glimpse of this special interaction. #pmmodi #narendramodi #ChinmayaAmr...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T14:52:28+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/kUPwWMui0yQ"
+      ]
+    },
+    {
+      "id": "sobh344N56Q",
+      "url": "https://www.youtube.com/shorts/sobh344N56Q",
+      "type": "Official Public Address",
+      "text": "Congress launches its leader more than ISRO launches rockets; PM Modi at #ndtv #summit | #shorts\n\nAddressing the NDTV world summit in New Delhi, Prime Minister Narendra Modi hit out at Congress for damaging India’s global image and said how the grand old party is making records of failed attempts in launching their leader Rahul Gandhi. #pmmodi #congress #isro To Subscribe PM Narendra Modi's YouT...",
+      "author": "Narendra Modi",
+      "handle": "@NarendraModi",
+      "surface": "YouTube Official",
+      "created_at": "2026-10-23T10:05:20+00:00",
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "https://www.youtube.com/shorts/sobh344N56Q"
+      ]
+    }
+  ]
+}

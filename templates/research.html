@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HarvyBot — Legal &amp; Geospatial Research</title>
+  <link rel="stylesheet" href="/static/stylesheet.css">
+  <script src="{{ url_for('static', filename='saas-shell.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='flexsearch.bundle.min.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='data-search.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='research.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-root">
+    <header class="site-header">
+      <div class="header-container">
+        <a class="brand" href="/" aria-label="HarvyBot home">
+          <img src="{{ url_for('static', filename='harvy-logo.png') }}" alt="Harvy" class="brand-logo">
+          <span class="brand-tag">RESEARCH / EVIDENCE</span>
+        </a>
+        <div class="header-meta">
+          <a href="/search/" class="header-back-link">UNIVERSAL SEARCH</a>
+          <a href="/map/" class="header-back-link">MAP</a>
+          <a href="/query/" class="header-back-link">QUERY</a>
+          <a href="/platform/" class="header-back-link">&larr; SOCIAL INGEST</a>
+          <a href="/" class="header-back-link">HARVYBOT.COM</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="hero-block">
+        <div class="section-tag">[*] LEGAL &amp; GEOSPATIAL RESEARCH</div>
+        <h1 class="hero-title">Search cases. Inspect places.</h1>
+        <p class="hero-desc">Harvy brings public case records, public-record leads, and location context into one research workspace. Results are unverified candidates, not identity findings or legal conclusions.</p>
+        <div class="spec-grid">
+          <div class="spec-item"><span class="spec-num">[01]</span><span class="spec-label">CASE INTELLIGENCE</span></div>
+          <div class="spec-item"><span class="spec-num">[02]</span><span class="spec-label">PUBLIC RECORD LEADS</span></div>
+          <div class="spec-item"><span class="spec-num">[03]</span><span class="spec-label">LOCATION CONTEXT</span></div>
+          <div class="spec-item"><span class="spec-num">[04]</span><span class="spec-label">HARVY EVIDENCE ARCHIVE</span></div>
+        </div>
+      </section>
+
+
+
+      <div class="research-grid">
+        <section class="block-panel" aria-labelledby="legal-title">
+          <div class="panel-header">
+            <div class="panel-header-left"><span class="block-index">[01]</span><h2 id="legal-title" class="panel-title">Case &amp; Arrest Search</h2></div>
+            <span class="panel-badge-mono">PUBLIC RECORD SOURCES</span>
+          </div>
+          <div class="panel-body">
+            <form id="legal-form">
+              <div class="field-group">
+                <label for="legal-query" class="field-label">CASE / PARTY SEARCH TERMS</label>
+                <input id="legal-query" class="mono-input" type="text" maxlength="200" placeholder="case name, citation, or search terms" required>
+              </div>
+              <div class="limits-grid">
+                <div class="field-group"><label for="first-name" class="field-label">FIRST NAME</label><input id="first-name" class="mono-input" maxlength="80" autocomplete="off"></div>
+                <div class="field-group"><label for="last-name" class="field-label">LAST NAME</label><input id="last-name" class="mono-input" maxlength="80" autocomplete="off"></div>
+                <div class="field-group"><label for="arrest-state" class="field-label">STATE</label>
+                  <select id="arrest-state" class="mono-input">
+                    <option value="">Select state</option>
+                    <option value="AL">Alabama</option><option value="AR">Arkansas</option><option value="AZ">Arizona</option><option value="CA">California</option><option value="CO">Colorado</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="SC">South Carolina</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VA">Virginia</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+                  </select>
+                </div>
+              </div>
+
+              <fieldset class="source-checks">
+                <legend class="field-label">HARVY RESEARCH MODULES</legend>
+                <label><input type="checkbox" name="source" value="courtlistener" checked> Case Decisions</label>
+                <label><input type="checkbox" name="source" value="case_law" checked> Legal Opinions</label>
+                <label><input type="checkbox" name="source" value="judyrecords" checked> Public Case Records</label>
+                <label><input type="checkbox" name="source" value="arrests_org" checked> Public Record Leads</label>
+                <label><input type="checkbox" name="source" value="docket_alarm"> Docket Search</label>
+                <label><input type="checkbox" name="source" value="court_record"> Court Directory</label>
+                <label><input type="checkbox" name="source" value="google_scholar"> Academic Citations</label>
+              </fieldset>
+              <div class="acknowledgement-block">
+                <label class="ack-label" for="legal-consent">
+                  <input id="legal-consent" type="checkbox" class="ack-checkbox" required>
+                  <span class="ack-text">I acknowledge this is public-source research; names can match different people. I will verify records with the originating court and not treat an arrest entry as proof of guilt.</span>
+                </label>
+              </div>
+              <button id="legal-start" class="btn-primary" type="submit">RUN LEGAL SEARCH →</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="block-panel" aria-labelledby="map-title">
+          <div class="panel-header">
+            <div class="panel-header-left"><span class="block-index">[02]</span><h2 id="map-title" class="panel-title">Street Imagery Lookup</h2></div>
+            <span class="panel-badge-mono">HARVY LOCATION MESH</span>
+          </div>
+          <div class="panel-body">
+            <form id="map-form">
+              <div class="limits-grid">
+                <div class="field-group"><label for="latitude" class="field-label">LATITUDE</label><input id="latitude" class="mono-input" type="number" min="-90" max="90" step="any" placeholder="37.7749" required></div>
+                <div class="field-group"><label for="longitude" class="field-label">LONGITUDE</label><input id="longitude" class="mono-input" type="number" min="-180" max="180" step="any" placeholder="-122.4194" required></div>
+              </div>
+              <p class="field-hint">Up to 10 public street-image records within 50 m. Creator identifiers are not collected.</p>
+              <div class="acknowledgement-block">
+                <label class="ack-label" for="map-consent"><input id="map-consent" type="checkbox" class="ack-checkbox" required><span class="ack-text">I am authorized to research this public location and will not use imagery to track a person.</span></label>
+              </div>
+              <button id="map-start" class="btn-primary" type="submit">LOOK UP IMAGERY →</button>
+            </form>
+
+            <div class="map-links">
+              <div class="section-tag">[HARVY MAP WORKSPACE]</div>
+              <a href="/map/">Open Harvy Map &amp; Imagery Workspace →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="block-panel research-activity" aria-labelledby="research-activity-title">
+        <div class="panel-header"><div class="panel-header-left"><span class="block-index">[03]</span><h2 id="research-activity-title" class="panel-title">Research Results &amp; Archive</h2></div><span id="research-state" class="status-badge" data-state="idle">[STANDBY]</span></div>
+        <div class="panel-body">
+          <p id="research-message" class="job-message">No research job running.</p>
+          <pre id="research-log" class="console-stream" hidden></pre>
+          <div class="artifact-search" hidden>
+            <label for="data-search-input" class="field-label">SEARCH THIS JOB'S SAVED DATA</label>
+            <input id="data-search-input" class="mono-input" type="search" autocomplete="off" placeholder="Search case names, parties, charges, locations…">
+            <p id="data-search-status" class="field-hint" role="status"></p>
+            <ul id="data-search-results" class="data-search-results"></ul>
+          <p class="field-hint">Search results are limited to the authorized research workspace.</p>
+          </div>
+          <div class="controls-row"><button id="research-stop" class="btn-secondary" type="button" disabled>[STOP]</button><button id="research-download" class="btn-secondary" type="button" disabled>[DOWNLOAD JSON ARCHIVE ↓]</button></div>
+          <ul id="research-files" class="artifact-list"></ul>
+        </div>
+      </section>
+
+      <footer class="site-footer"><div class="footer-left"><span class="footer-brand">HARVY // RESEARCH</span><span class="footer-tag">PUBLIC-SOURCE INTELLIGENCE</span></div></footer>
+    </main>
+  </div>
+</body>
+</html>

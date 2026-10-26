@@ -1,0 +1,342 @@
+{
+  "target": {
+    "name": "Vladimir Putin",
+    "title": "President of the Russian Federation",
+    "primary_surface": "President of Russia (kremlin.ru)",
+    "surfaces": [
+      "Kremlin Official Events",
+      "Presidential Communiqués"
+    ]
+  },
+  "telemetry": {
+    "generated_at": "2026-10-25T10:36:16.920511+00:00",
+    "source": "spider_unlimited_residential_proxy",
+    "posts_captured": 20,
+    "aggregate_reactions": null,
+    "aggregate_shares": null,
+    "aggregate_comments": null,
+    "unique_outlinks": 20
+  },
+  "posts": [
+    {
+      "id": "81034",
+      "url": "http://en.kremlin.ru/events/president/news/81034",
+      "type": "Kremlin Official Communiqué",
+      "text": "Meeting with Minister of Sport Mikhail Degtyarev October 20, 2026, 13:10 2026-10-20 Team of the Official Website of the President of Russia The Kremlin, Moscow",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81034"
+      ]
+    },
+    {
+      "id": "81039",
+      "url": "http://en.kremlin.ru/events/president/news/81039",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to participants, guests, and organisers of the 14th Russia – Country of Sports International Sports Forum October 21, 2026, 09:00 2026-10-20 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81039"
+      ]
+    },
+    {
+      "id": "81041",
+      "url": "http://en.kremlin.ru/events/president/news/81041",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to participants and guests of the 16th Golden Belt Martial Arts National Awards Ceremony October 19, 2026, 19:00 2026-10-20 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81041"
+      ]
+    },
+    {
+      "id": "81044",
+      "url": "http://en.kremlin.ru/events/president/news/81044",
+      "type": "Kremlin Official Communiqué",
+      "text": "Meeting with US President’s Special Envoy Steve Witkoff October 21, 2026, 12:25 2026-10-22 Team of the Official Website of the President of Russia St Petersburg",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81044"
+      ]
+    },
+    {
+      "id": "81045",
+      "url": "http://en.kremlin.ru/events/president/news/81045",
+      "type": "Kremlin Official Communiqué",
+      "text": "Conversation with Premier of the State Council of the People’s Republic of China Li Qiang October 21, 2026, 15:45 2026-10-21 Team of the Official Website of the President of Russia St Petersburg",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81045"
+      ]
+    },
+    {
+      "id": "81046",
+      "url": "http://en.kremlin.ru/events/president/news/81046",
+      "type": "Kremlin Official Communiqué",
+      "text": "Commentary by Presidential Aide Yury Ushakov following Vladimir Putin’s meeting with US President’s Special Envoy Steve Witkoff October 21, 2026, 16:25 2026-10-21 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81046"
+      ]
+    },
+    {
+      "id": "81049",
+      "url": "http://en.kremlin.ru/events/president/news/81049",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to participants in the 21st Return to Life awards ceremony, presented by the Russian Paralympic Committee October 21, 2026, 15:00 2026-10-21 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81049"
+      ]
+    },
+    {
+      "id": "81050",
+      "url": "http://en.kremlin.ru/events/president/news/81050",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings on the opening of the fifth Russian Winemaking Forum October 21, 2026, 14:00 2026-10-21 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81050"
+      ]
+    },
+    {
+      "id": "81063",
+      "url": "http://en.kremlin.ru/events/president/news/81063",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings on the opening of the 19th Verona Eurasian Economic Forum October 22, 2026, 10:30 2026-10-22 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81063"
+      ]
+    },
+    {
+      "id": "81064",
+      "url": "http://en.kremlin.ru/events/president/news/81064",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to the 12th Religion and Peace International Forum October 22, 2026, 11:10 2026-10-22 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81064"
+      ]
+    },
+    {
+      "id": "81066",
+      "url": "http://en.kremlin.ru/events/president/news/81066",
+      "type": "Kremlin Official Communiqué",
+      "text": "Ceremony to present the banner of the Federal Customs Service October 22, 2026, 14:40 2026-10-22 Team of the Official Website of the President of Russia The Kremlin, Moscow",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81066"
+      ]
+    },
+    {
+      "id": "81068",
+      "url": "http://en.kremlin.ru/events/president/news/81068",
+      "type": "Kremlin Official Communiqué",
+      "text": "Meeting with Konstantin Shestakov October 22, 2026, 18:30 2026-10-22 Team of the Official Website of the President of Russia The Kremlin, Moscow",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81068"
+      ]
+    },
+    {
+      "id": "81069",
+      "url": "http://en.kremlin.ru/events/president/news/81069",
+      "type": "Kremlin Official Communiqué",
+      "text": "Konstantin Shestakov appointed Acting Governor of Primorye Territory October 22, 2026, 18:45 2026-10-22 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81069"
+      ]
+    },
+    {
+      "id": "81070",
+      "url": "http://en.kremlin.ru/events/president/news/81070",
+      "type": "Kremlin Official Communiqué",
+      "text": "Gala evening of the Russian Union of Theatre Workers October 22, 2026, 20:30 2026-10-23 Team of the Official Website of the President of Russia Moscow",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81070"
+      ]
+    },
+    {
+      "id": "81071",
+      "url": "http://en.kremlin.ru/events/president/news/81071",
+      "type": "Kremlin Official Communiqué",
+      "text": "Answers to questions from Pavel Zarubin October 22, 2026, 21:25 2026-10-23 Team of the Official Website of the President of Russia Moscow",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81071"
+      ]
+    },
+    {
+      "id": "81073",
+      "url": "http://en.kremlin.ru/events/president/news/81073",
+      "type": "Kremlin Official Communiqué",
+      "text": "Address to participants and guests of the Russia – Country of Sports International Sports Forum October 23, 2026, 12:30 2026-10-23 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81073"
+      ]
+    },
+    {
+      "id": "81074",
+      "url": "http://en.kremlin.ru/events/president/news/81074",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to participants, organisers and guests of the 2nd International Scientific and Practical Conference October 23, 2026, 10:00 2026-10-23 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81074"
+      ]
+    },
+    {
+      "id": "81075",
+      "url": "http://en.kremlin.ru/events/president/news/81075",
+      "type": "Kremlin Official Communiqué",
+      "text": "Meeting with members of the Security Council October 23, 2026, 13:30 2026-10-23 Team of the Official Website of the President of Russia Novo-Ogaryovo, Moscow Region",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81075"
+      ]
+    },
+    {
+      "id": "81079",
+      "url": "http://en.kremlin.ru/events/president/news/81079",
+      "type": "Kremlin Official Communiqué",
+      "text": "Humanitarian operation in the town of Alyoshki, Kherson Region October 23, 2026, 18:10 2026-10-23 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81079"
+      ]
+    },
+    {
+      "id": "81083",
+      "url": "http://en.kremlin.ru/events/president/news/81083",
+      "type": "Kremlin Official Communiqué",
+      "text": "Greetings to President of Kazakhstan Kassym-Jomart Tokayev on Republic Day October 25, 2026, 09:00 2026-10-24 Team of the Official Website of the President of Russia",
+      "author": "Vladimir Putin",
+      "handle": "kremlin.ru",
+      "surface": "President of Russia Official",
+      "created_at": null,
+      "reactions": null,
+      "shares": null,
+      "comments": null,
+      "outlinks": [
+        "http://en.kremlin.ru/events/president/news/81083"
+      ]
+    }
+  ]
+}

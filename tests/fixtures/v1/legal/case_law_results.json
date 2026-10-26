@@ -1,0 +1,14 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 123456,
+      "name": "Sample v. Enterprise Corp.",
+      "decision_date": "2023-11-20",
+      "court": {"name": "Texas Supreme Court"},
+      "url": "https://api.case.law/v1/cases/123456/"
+    }
+  ]
+}

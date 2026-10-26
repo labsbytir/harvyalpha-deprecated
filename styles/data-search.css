@@ -1,0 +1,49 @@
+.artifact-search {
+  border: 1px solid var(--border);
+  background: #050505;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.artifact-search input {
+  width: 100%;
+  margin: 0.45rem 0;
+}
+
+.data-search-results {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  max-height: 28rem;
+  overflow-y: auto;
+}
+
+.data-search-result {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  background: #080808;
+  padding: 0.7rem;
+}
+
+.data-search-result strong {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.data-search-result span,
+.data-search-result a {
+  color: var(--text-muted);
+  font: 0.68rem var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.data-search-result p {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+}

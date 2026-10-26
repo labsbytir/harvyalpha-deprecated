@@ -1,0 +1,1 @@
+"""Harvy Shared Ontology module."""

@@ -1,0 +1,15 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 894321,
+      "case_name": "State v. Sample",
+      "court": "Travis County District Court",
+      "docket_number": "D-1-GN-24-001234",
+      "date_filed": "2024-03-15",
+      "absolute_url": "/opinion/894321/state-v-sample/"
+    }
+  ]
+}
