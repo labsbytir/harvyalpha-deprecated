@@ -1,7 +1,7 @@
 # Harvy
 
 <p align="center">
-  <img src="static/harvy-logo.png" alt="Harvy" width="400">
+  <img src="static/harvy-github-banner.png" alt="Harvy" width="800">
 </p>
 
 <p align="center"><strong>Public-source research, evidence collection, and searchable case intelligence.</strong></p>
