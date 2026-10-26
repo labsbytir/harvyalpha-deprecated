@@ -21,4 +21,5 @@ auth/migrations/
 consent.json
 *.sqlite3
 .pytest_cache/
+_site/
 static/report/**/posts/

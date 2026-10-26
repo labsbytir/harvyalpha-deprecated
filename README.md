@@ -19,6 +19,10 @@
   <a href="https://buymeacoffee.com/tirlabs"><img alt="Buy Me a Coffee" height="40" src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black"></a>
 </p>
 
+<p align="center"><a href="https://labsbytir.github.io/harvy/">Visit the project site ↗</a></p>
+
+<p align="center"><a href="https://labsbytir.github.io/harvy/">Visit the project site ↗</a></p>
+
 Harvy brings public-source collection, source evidence, and research workflows into one workspace. It preserves provenance and collection limits so observations can be reviewed in context rather than treated as verified identity claims.
 
 ## What it does

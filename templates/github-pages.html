@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Harvy is a public-source research workspace focused on evidence, provenance, and searchable case intelligence.">
+    <meta name="theme-color" content="#080a0d">
+    <title>Harvy — Evidence first. Context always.</title>
+    <link rel="icon" href="./harvy-logo.png" type="image/png">
+    <link rel="stylesheet" href="./site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav-wrap" aria-label="Main navigation">
+        <a class="wordmark" href="#top" aria-label="Harvy home">HARVY<span>.</span></a>
+        <div class="nav-links">
+          <a href="#platform">Platform</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#changelog">Changelog</a>
+          <a class="nav-cta" href="https://github.com/labsbytir/harvy">View repository <span aria-hidden="true">↗</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <img class="hero-banner" src="./harvy-github-banner.png" alt="Harvy wordmark with illustrated portrait">
+        <p class="eyebrow"><span class="status-dot"></span> Public-source research platform</p>
+        <h1>Evidence first.<br><span>Context always.</span></h1>
+        <p class="hero-copy">Harvy brings public-source collection, source evidence, and research workflows into one workspace—so observations stay reviewable, attributed, and grounded in their limitations.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/labsbytir/harvy">Explore the repository <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="https://discord.gg/zcSM5Qy3tm">Join the community</a>
+          <a class="button button-coffee" href="https://buymeacoffee.com/tirlabs">Support Harvy</a>
+        </div>
+        <p class="hero-note">Built for source-grounded research. A name match is never a verified identity claim.</p>
+      </section>
+
+      <section class="section" id="platform">
+        <div class="section-heading">
+          <p class="eyebrow">The platform</p>
+          <h2>Turn scattered public sources into reviewable evidence.</h2>
+          <p>Harvy connects collection, provenance, search, and reporting without hiding where information came from or what remains unknown.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-number">01</span>
+            <h3>Traceable collection</h3>
+            <p>Keep source URLs, timestamps, collection methods, and known gaps alongside each observation.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <h3>Search and dossiers</h3>
+            <p>Find collected evidence through research, query, and dossier interfaces built around the source record.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <h3>Layered storage</h3>
+            <p>Use R2 for source artifacts and D1 for operational indexes; historical analytics are being wired through Basin.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="roadmap-section" id="roadmap">
+        <div class="section-heading">
+          <p class="eyebrow">What’s next</p>
+          <h2>A roadmap with the status made clear.</h2>
+          <p>Items marked in development are scaffolds or local implementations—not claims of a live deployment.</p>
+        </div>
+        <div class="roadmap-list">
+          <article class="roadmap-item">
+            <span class="roadmap-state state-live">In use</span>
+            <div><h3>Research and evidence workflows</h3><p>Python-based collection, source artifacts, operational indexes, and search/dossier interfaces.</p></div>
+          </article>
+          <article class="roadmap-item">
+            <span class="roadmap-state state-build">In development</span>
+            <div><h3>Platform v2 orchestration</h3><p>Separate supervisor, connector queues, durable workflows, event projection, public progress, and dataset manifests. The v2 workers are not deployed.</p></div>
+          </article>
+          <article class="roadmap-item">
+            <span class="roadmap-state state-gated">Built, gated</span>
+            <div><h3>Source-specific connectors</h3><p>SAM.gov API and a broad source catalog are present in the v2 scaffold. SAM.gov remains disabled pending its API key and a verified sample run; catalog candidates are not active feeds.</p></div>
+          </article>
+          <article class="roadmap-item">
+            <span class="roadmap-state state-next">Planned</span>
+            <div><h3>Validated portal and bulk adapters</h3><p>Build reusable portal, directory, CMS, and feed adapters one source at a time, with access, licensing, schema, rate, and coverage checks before activation.</p></div>
+          </article>
+          <article class="roadmap-item">
+            <span class="roadmap-state state-next">Planned</span>
+            <div><h3>Large, resumable imports</h3><p>Add bounded partition processing for bulk files and documents after storage, checkpoints, and reconciliation gates are ready.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section changelog-section" id="changelog">
+        <div class="section-heading changelog-heading">
+          <div><p class="eyebrow">Changelog</p><h2>Recent development</h2></div>
+          <p>No tagged releases yet. This list reflects committed repository history, not a release schedule.</p>
+        </div>
+        <ol id="commit-list" class="commit-list" aria-live="polite">
+          <li class="commit-empty"><a href="https://github.com/labsbytir/harvy/commits/main">View the full commit history ↗</a></li>
+        </ol>
+        <noscript><p class="changelog-note">Enable JavaScript to see recent commit entries, or <a href="https://github.com/labsbytir/harvy/commits/main">browse the full history</a>.</p></noscript>
+      </section>
+
+      <section class="closing-cta">
+        <p class="eyebrow">Follow the work</p>
+        <h2>Build with evidence, not assumptions.</h2>
+        <p>Explore the code, follow the roadmap, and help shape the next connector.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/labsbytir/harvy">Visit Harvy on GitHub <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="https://discord.gg/zcSM5Qy3tm">Join Discord</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="wordmark" href="#top">HARVY<span>.</span></a>
+      <p>Public sources. Clear provenance. Honest limitations.</p>
+      <div><a href="https://github.com/labsbytir/harvy/blob/main/README.md">README</a><a href="https://github.com/labsbytir/harvy/blob/main/CHANGELOG.md">Release notes</a></div>
+      <small>No project-wide license is declared yet. Source visibility does not grant reuse rights.</small>
+    </footer>
+
+    <script>
+      fetch("./changelog.json").then((response) => {
+        if (!response.ok) throw new Error("changelog unavailable");
+        return response.json();
+      }).then((entries) => {
+        const list = document.getElementById("commit-list");
+        if (!Array.isArray(entries) || entries.length === 0) return;
+        list.replaceChildren();
+        for (const entry of entries) {
+          const item = document.createElement("li");
+          const date = document.createElement("time");
+          date.dateTime = entry.date;
+          date.textContent = entry.date;
+          const link = document.createElement("a");
+          link.href = entry.url;
+          link.textContent = entry.subject;
+          const hash = document.createElement("span");
+          hash.className = "commit-hash";
+          hash.textContent = entry.short_sha;
+          item.append(date, link, hash);
+          list.append(item);
+        }
+      }).catch(() => {});
+    </script>
+  </body>
+</html>
