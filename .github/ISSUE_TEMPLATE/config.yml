@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Harvy project site
+    url: https://labsbytir.github.io/harvy/
+    about: Read the current project pitch, roadmap, and changelog before opening an issue.

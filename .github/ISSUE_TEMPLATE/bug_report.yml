@@ -1,0 +1,61 @@
+name: Bug report
+description: Report reproducible failures in the app, a connector, a workflow, or the project site.
+title: "[bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include API keys, cookies, tokens, private records, or unredacted personal data. Provide a synthetic or redacted example.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - V1 Worker
+        - V1 connector or scraper
+        - Platform v2
+        - Data quality or storage
+        - Query / analytics
+        - GitHub Pages / documentation
+        - Build or CI
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: Include a commit SHA, release tag, or state that this is the current main branch.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: Numbered steps using synthetic data where possible.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected and actual behavior
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Add error messages, run IDs, fixture names, or artifact paths. Do not paste source records or credentials.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed secrets, cookies, and personal/source-record data from this report.
+          required: true
+        - label: I checked that this is not already reported.
+          required: true

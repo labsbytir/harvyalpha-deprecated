@@ -1,0 +1,79 @@
+name: Connector intake or implementation
+description: Track a current connector's verification or a proposed source adapter.
+title: "[connector]: "
+labels: [connector, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A catalog entry is not an active connector or authorization to collect. Never include secret values, cookies, private records, or unredacted personal data in an issue.
+  - type: input
+    id: connector_id
+    attributes:
+      label: Connector or source ID
+      placeholder: e.g. sam-gov or stream.ckan-generic
+    validations:
+      required: true
+  - type: dropdown
+    id: lifecycle
+    attributes:
+      label: Current state
+      options:
+        - Current V1 adapter
+        - Platform v2 code (not deployed)
+        - Catalog-only candidate
+        - New source proposal
+    validations:
+      required: true
+  - type: input
+    id: source_reference
+    attributes:
+      label: Canonical source/specification reference
+      description: Link an official API or source specification where available.
+    validations:
+      required: true
+  - type: dropdown
+    id: acquisition
+    attributes:
+      label: Acquisition method
+      options:
+        - First-party API
+        - Spider Unlimited web collection
+        - Bounded bulk file / manifest
+        - RSS, Atom, ICS, or structured page data
+        - Manual upload / operator-provided data
+        - Not determined
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Collection scope and limitations
+      description: Specify entities, fields, date windows, pagination/size caps, known gaps, and what must not be collected.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: review
+    attributes:
+      label: Access, terms, and privacy review
+      description: Record the source's access method, license/terms review, data sensitivity, and any capability gate. List secret names only, never values.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Normalized contract and provenance
+      description: Define stable source IDs, timestamps, attribution, completeness/limitations, deduplication, and R2/D1/Basin destinations if applicable.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Fixtures, tests, and activation gates
+      description: Include parser/unit tests, a bounded authorized sample, idempotency, failure/retry behavior, and the checks required before enabling/deploying.
+      render: markdown
+    validations:
+      required: true

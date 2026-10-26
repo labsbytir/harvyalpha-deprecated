@@ -1,0 +1,38 @@
+name: Analytics or dashboard evaluation
+description: Evaluate an analytics interface, query, or dashboard capability against Harvy's current query stack.
+title: "[analytics]: "
+labels: [analytics, testing, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Compare proposed capabilities with the existing `/query/` implementation before adding dependencies or replacing components. Keep queries allowlisted and data scope authorized.
+  - type: input
+    id: reference
+    attributes:
+      label: Demo, reference, or product
+      placeholder: https://try.drizzle-cube.dev/
+    validations:
+      required: true
+  - type: textarea
+    id: capability
+    attributes:
+      label: Capability to evaluate
+      description: Describe the user workflow and current gap, not just the component name.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Comparison with current Harvy query UI
+      description: Include current `drizzle-cube` version, query catalog/allowlist behavior, accessibility, license, and migration cost.
+      render: markdown
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: Test plan and acceptance criteria
+      description: Include representative synthetic datasets, performance/accessibility checks, tenant/privacy boundaries, and a decision (adopt, adapt, defer, or reject).
+      render: markdown
+    validations:
+      required: true

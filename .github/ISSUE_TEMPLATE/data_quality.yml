@@ -1,0 +1,51 @@
+name: Data quality or cleansing
+description: Report or plan validation, normalization, deduplication, or provenance improvements.
+title: "[data-quality]: "
+labels: [data-quality, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use synthetic or redacted examples only. Keep the original source evidence and provenance; do not turn an uncertain match into a verified identity claim.
+  - type: input
+    id: source_run
+    attributes:
+      label: Connector and run/artifact reference
+      description: Include a source ID, run ID, schema version, or non-sensitive R2 artifact path.
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: Quality issue
+      options:
+        - Duplicate records
+        - Missing or malformed fields
+        - Incorrect normalization
+        - Conflicting observations
+        - Stale data / timestamps
+        - Attribution or completeness gap
+        - Privacy or retention concern
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Redacted example and expected result
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: rules
+    attributes:
+      label: Proposed cleansing and evidence rules
+      description: Define stable keys, source precedence, conflict handling, null semantics, retention, and how uncertain matches remain uncertain.
+      render: markdown
+  - type: textarea
+    id: tests
+    attributes:
+      label: Regression tests and acceptance criteria
+      render: markdown
+    validations:
+      required: true

@@ -1,0 +1,55 @@
+name: Data-mining campaign
+description: Plan a bounded, authorized discovery or ingestion run with provenance and stop conditions.
+title: "[data-mining]: "
+labels: [data-mining, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form tracks a plan; it does not authorize a live run. Do not include credentials or raw personal/source records.
+  - type: input
+    id: sources
+    attributes:
+      label: Approved source IDs
+      description: List connector IDs and source references, not credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Research objective and scope
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: bounds
+    attributes:
+      label: Collection bounds and stop conditions
+      description: Specify seed/query, time range, maximum pages/records/bytes, rate limits, retry limits, and conditions to stop.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: authorization
+    attributes:
+      label: Access and policy checks
+      description: Note public/API access, authorization, terms/license review, privacy scope, and any provider capability gate. Secret names only.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Outputs and provenance
+      description: Define raw artifact path, normalized schema, source URLs/timestamps, completeness metrics, deduplication keys, and expected D1/R2/Basin outputs.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Verification plan
+      description: Fixtures, bounded sample, counts/checksums, error handling, and how results will be reviewed before expanding the run.
+      render: markdown
+    validations:
+      required: true

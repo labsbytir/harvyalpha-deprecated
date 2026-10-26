@@ -1,0 +1,64 @@
+name: Feature or roadmap request
+description: Propose a feature, expansion, or roadmap milestone with measurable acceptance criteria.
+title: "[feature]: "
+labels: [enhancement, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the user need and observable outcome. Separate current implementation from proposed behavior; do not promise deployment or provider capability before verification.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Collection / discovery
+        - Connector
+        - Data quality / ontology
+        - Search / dossier
+        - Query / analytics
+        - Authentication / privacy
+        - Operations / deployment
+        - Documentation / GitHub Pages
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target
+      options:
+        - V1 production
+        - Platform v2 (not deployed)
+        - Shared data model
+        - GitHub Pages / repository process
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and evidence
+      description: Who needs this, and what verified gap does it address?
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome and scope
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and tests
+      description: Include fixtures, error handling, accessibility, and measurable completion criteria where relevant.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, gates, and non-goals
+      description: Note secrets by name only, source permissions/terms, migration or deployment approvals, and items explicitly out of scope.
+      render: markdown
