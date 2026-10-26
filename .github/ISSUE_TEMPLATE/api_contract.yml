@@ -1,0 +1,70 @@
+name: API contract or endpoint
+description: Propose or implement a versioned Harvy API surface with explicit auth, data, and test boundaries.
+title: "[api]: "
+labels: [api, roadmap]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, cookies, private source records, or unredacted personal data. Use synthetic request/response examples.
+  - type: dropdown
+    id: api_surface
+    attributes:
+      label: API surface
+      options:
+        - V1 Worker public API
+        - Platform v2 supervisor API
+        - Connector Worker service API
+        - Data ingestion / data mining API
+        - Data quality / cleansing API
+        - Query / analytics API
+        - Dataset release / manifest API
+        - Public progress API
+        - Authentication / tenant-scoping API
+    validations:
+      required: true
+  - type: input
+    id: consumers
+    attributes:
+      label: Intended consumers
+      description: Browser UI, Worker, connector, CLI, or external client.
+    validations:
+      required: true
+  - type: textarea
+    id: endpoints
+    attributes:
+      label: Proposed endpoints and version
+      description: List method, path, version, and whether the route already exists.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: auth_scope
+    attributes:
+      label: Authentication and authorization scope
+      description: Define public/private access, capability tokens, environment/tenant boundaries, and secret names only.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: schemas
+    attributes:
+      label: Request, response, and error schemas
+      description: Use synthetic examples. Include validation, error codes, pagination, idempotency, and source provenance where relevant.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Limits, caching, and data handling
+      description: Define rate/size bounds, cache policy by authorization scope, retention, provenance, and completeness limitations.
+      render: markdown
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Contract tests and acceptance criteria
+      description: Include OpenAPI/docs, fixtures, auth/tenant tests, backward-compatibility rules, and deployment gates.
+      render: markdown
+    validations:
+      required: true
