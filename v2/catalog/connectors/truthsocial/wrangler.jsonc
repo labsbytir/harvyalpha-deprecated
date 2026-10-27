@@ -1,0 +1,18 @@
+{
+  // Keep disabled until the account plan's Spider Unlimited support for this domain is verified.
+  "$schema": "../../../../node_modules/wrangler/config-schema.json",
+  "name": "harvy-truthsocial",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-26",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "secrets_store_secrets": [
+    { "binding": "SPIDER_API_KEY", "store_id": "a47356e8f71f432e8fc18ee717af2d64", "secret_name": "SPIDER_API_KEY" },
+    { "binding": "WEBSHARE_PROXY_URL", "store_id": "a47356e8f71f432e8fc18ee717af2d64", "secret_name": "WEBSHARE_PROXY_URL" }
+  ],
+  "r2_buckets": [
+    { "binding": "V2_RAW_BUCKET", "bucket_name": "harvy-raw" },
+    { "binding": "V2_ARTIFACTS_BUCKET", "bucket_name": "harvy-artifacts" },
+    { "binding": "V2_BUCKET", "bucket_name": "harvy-artifacts" }
+  ]
+}
