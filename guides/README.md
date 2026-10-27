@@ -17,3 +17,5 @@ This directory is the source of truth for operator, developer, API, and support 
 - [Basin operations and schema](../health/BASIN.md)
 
 Mirror these guides into the Obsidian vault with `npm run sync:vault-guides`. The repository files are canonical; the vault copies provide notebook navigation and backlinks.
+
+Repository documentation lives in `notebooks/` and mirrors into the harvy-docs repository with `npm run sync:harvy-docs`; the repository files are canonical.

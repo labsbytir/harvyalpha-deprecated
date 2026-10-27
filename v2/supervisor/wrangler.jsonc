@@ -1,0 +1,55 @@
+{
+  // Replace placeholder resource IDs and review the target Worker before any non-dry-run deploy.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "harvy-supervisor-datasourcename",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-26",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true, "traces": { "enabled": true } },
+  "vars": { "V2_ACCOUNT_ID": "9061d93166998cf39e011a52b369b812" },
+  "cache": { "enabled": true },
+  "exports": {
+    "default": { "type": "worker", "cache": { "enabled": false } },
+    "PublicProgress": { "type": "worker", "cache": { "enabled": true } },
+    "PlatformV2RunWorkflow": { "type": "workflow", "name": "harvy-v2-runs" }
+  },
+  "d1_databases": [
+    {
+      "binding": "V2_DB",
+      "database_name": "harvy-platform-v2",
+      "database_id": "2fb9f8e4-ca31-4cd0-95b4-b084429816f2",
+      "migrations_dir": "../migrations"
+    }
+  ],
+  "kv_namespaces": [
+    { "binding": "V2_CONFIG", "id": "00000000000000000000000000000002" }
+  ],
+  "r2_buckets": [
+    { "binding": "V2_RAW_BUCKET", "bucket_name": "harvy-raw" },
+    { "binding": "V2_ARTIFACTS_BUCKET", "bucket_name": "harvy-artifacts" },
+    { "binding": "V2_BUCKET", "bucket_name": "harvy-artifacts" }
+  ],
+  "k2": [
+    { "binding": "V2_EVENTS", "stream": "e8073c59caed4ee193cd995aa457b21a" }
+  ],
+  "queues": {
+    "producers": [
+      { "binding": "V2_WORK_QUEUE", "queue": "harvy-v2-work" }
+    ],
+    "consumers": [
+      { "queue": "harvy-v2-work", "max_batch_size": 2, "max_batch_timeout": 5, "max_retries": 8, "dead_letter_queue": "harvy-v2-work-dlq" }
+    ]
+  },
+  "dispatch_namespaces": [
+    { "binding": "V2_CONNECTORS", "namespace": "harvy-v2-connectors" }
+  ],
+  "workflows": [
+    {
+      "name": "harvy-v2-runs",
+      "binding": "V2_RUN_WORKFLOW",
+      "class_name": "PlatformV2RunWorkflow",
+      "default_retention": { "success_retention": "3 days", "error_retention": "7 days" }
+    }
+  ]
+}

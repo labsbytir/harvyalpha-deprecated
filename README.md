@@ -21,8 +21,6 @@
 
 <p align="center"><a href="https://labsbytir.github.io/harvy/">Visit the project site ↗</a></p>
 
-<p align="center"><a href="https://labsbytir.github.io/harvy/">Visit the project site ↗</a></p>
-
 Harvy brings public-source collection, source evidence, and research workflows into one workspace. It preserves provenance and collection limits so observations can be reviewed in context rather than treated as verified identity claims.
 
 ## What it does
@@ -51,7 +49,7 @@ npm run typecheck:platform-v2
 npm run test:platform-v2
 ```
 
-Template source lives in `templates/`, CSS source in `styles/`, scraper adapters in `scrape/`, and generated Worker assets in `static/`.
+Template source lives in `templates/`, CSS source in `styles/`, scraper adapters in `scrape/`, and generated Worker assets in `static/`. Repository documentation lives in `notebooks/` and mirrors into the [harvy-docs](https://github.com/labsbytir/harvy-docs) repository with `npm run sync:harvy-docs`.
 
 ## Deployment
 

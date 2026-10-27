@@ -17,8 +17,11 @@ for source in SOURCES:
         "../health/BASIN.md",
         "file:///Users/pen/Documents/harvy/health/BASIN.md",
     ).replace(
-        "../planning/harvy-shared-ontology-query-nodes.md",
-        "file:///Users/pen/Documents/harvy/planning/harvy-shared-ontology-query-nodes.md",
+        "../planning/PLAN.md",
+        "file:///Users/pen/Documents/Notes/harvy/Planning/PLAN.md",
+    ).replace(
+        "../platform-v2/",
+        "file:///Users/pen/Documents/harvy/platform-v2/",
     )
     marker = f"<!-- Synced from {source.relative_to(ROOT).as_posix()}; edit the repository source and rerun npm run sync:vault-guides. -->\n\n"
     (DEST / source.name).write_text(marker + text)

@@ -5,26 +5,34 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 
-DIRS = ["scrape", "proxy", "ontology"]
+MODULE_MAP = {
+    "scrape": ROOT / "scrape",
+    "proxy": ROOT / "v2" / "proxy",
+    "ontology": ROOT / "v2" / "ontology",
+}
 FILES = ["email_shield.py"]
 
 ok = True
-for name in DIRS:
+for name, target in MODULE_MAP.items():
     link = SRC / name
-    target = ROOT / name
     if not link.is_symlink():
-        print(f"MISSING DIR SYMLINK: {link}")
-        ok = False
-        continue
-    resolved = (link.parent / os.readlink(link)).resolve()
-    if resolved != target.resolve():
-        print(f"WRONG TARGET: {link} -> {resolved} (expected {target})")
-        ok = False
-    elif not target.is_dir():
-        print(f"MISSING SOURCE DIR: {target}")
-        ok = False
+        if link.exists():
+            link.unlink()
+        rel_target = os.path.relpath(target, SRC)
+        os.symlink(rel_target, link)
+        print(f"created symlink: {name} -> {rel_target}")
     else:
-        print(f"ok: {name}/")
+        resolved = (link.parent / os.readlink(link)).resolve()
+        if resolved != target.resolve():
+            link.unlink()
+            rel_target = os.path.relpath(target, SRC)
+            os.symlink(rel_target, link)
+            print(f"updated symlink: {name} -> {rel_target}")
+        elif not target.is_dir():
+            print(f"MISSING SOURCE DIR: {target}")
+            ok = False
+        else:
+            print(f"ok: {name}/")
 
 for name in FILES:
     link = SRC / name

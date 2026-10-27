@@ -6,7 +6,16 @@
 
 ## Part 1: Comprehensive Planning Audit & Contradictions
 
-This audit resolves conflicting proposals across earlier planning documents, verified against the actual codebase implementation and project constraints.
+This audit was consolidated on 2026-10-25. The codebase has changed since that snapshot; the dated corrections below supersede earlier claims when they conflict. Implementation, deployment, and capability verification remain separate statuses.
+
+### Current status refresh — 2026-10-26
+
+- **V1 remains production:** `src/worker.py`, root `wrangler.jsonc`, `scrape/`, `templates/`, and `static/` are the current app/runtime paths.
+- **Platform v2 is additive and not deployed:** `platform-v2/` contains the supervisor, JudyRecords/Truth Social/SAM.gov connector code, projector, source catalog, queue/workflow contracts, and release manifests. Its remote resource IDs remain placeholders.
+- **Dispatch design correction (2026-10-26, local only):** older v2 notes described one service binding and one Queue per connector; `platform-v2/supervisor/wrangler.jsonc` now declares one `V2_CONNECTORS` dispatch namespace and one `harvy-v2-work` Queue with DLQ. The supervisor's D1 registry (`platform-v2/migrations/0003_v2_connectors.sql`) gates new runs. This resolves the earlier `guides/ARCHITECTURE.md` claim that Workers for Platforms was deferred for customer code: operator-owned connectors also need runtime dispatch. Entitlement, dispatch-namespace Secrets Store bindings, migrations and delivery remain unverified, so this is implementation design, not deployed capability. See `guides/PLATFORM_V2_CONNECTORS.md`.
+- **Connector status:** SAM.gov is implemented but disabled pending `SAM_GOV_API_KEY` and a verified sample query. Truth Social remains capability-gated. Imported directory, CMS, portal, social, bulk, and stream entries are catalog-only, not active feeds.
+- **Validation:** GitHub CI passed 147 Python tests and TypeScript checks at commit `242b658`; no live v2 collection run, remote migration, or v2 deployment was performed.
+- **Pages:** the public GitHub Pages site is live at `https://labsbytir.github.io/harvy/` and shows a roadmap plus recent commit history.
 
 ### 1. Telegram Ingestion Architecture: Dedicated Queue vs Local CLI vs Workflows
 - **Contradiction:**
@@ -14,21 +23,14 @@ This audit resolves conflicting proposals across earlier planning documents, ver
   - `telegram-vps-wiring.md` proposed the VPS polling this queue via REST and writing directly to D1, R2, and K2.
   - BUT `harvy-workflow-orchestration.md` and Rule #497/#504 state that Cloudflare Workflows and K2 will handle orchestration, while existing `HARVY_QUEUE` remains intact.
   - AND `telegram-history-scrape.md` explicitly bounded Telegram ingestion as a local authorized Telethon CLI tool (`data/telegram/@handle/`), ruling out cloud queue/ontology/R2 pipelines to avoid Telegram account bans and ToS violations.
-- **Codebase Verification:**
-  - `wrangler.jsonc` has no `harvy-telegram` queue.
-  - `scrape/telegram.py` exists as a local CLI. Neither Telethon nor VPS daemon scripts exist in `requirements.txt` or `pyproject.toml`.
-- **Resolution:**
-  - Telegram history mining remains a **local authorized CLI** (`scrape/telegram.py`) dumping to local storage (`data/telegram/`). No dedicated Cloudflare queue or unvetted remote VPS poll daemon will be created until authorized.
+- **Historical verification (2026-10-25):** the earlier audit saw only the local Telethon CLI and no dedicated queue.
+- **Current codebase verification (2026-10-26):** `requirements.txt:3` includes Telethon; `wrangler.jsonc:62-71` declares the `harvy-telegram` producer queue; `scripts/telegram_refresh.py:55-95` can enqueue; and `scripts/telegram_consumer.py:34-42,211-244` pulls from the Queue REST API and writes R2/D1 data. The systemd unit `scripts/telegram-consumer@.service:11` targets missing `scripts/telegram_consumer_loop.py`, and Wrangler has no `harvy-telegram` consumer binding.
+- **Current resolution:** both local CLI and queue/VPS code paths exist, but end-to-end/continuous operation is not verified. Do not call it local-only or deployed; keep activation blocked until the service entrypoint, queue contract, credentials, and storage/ack path are reconciled and authorized.
 
 ### 2. VPS Scraper Connectivity vs Cloudflare Security Policy
-- **Contradiction:**
-  - `judyrecords-continuous-mining.md` and `telegram-vps-wiring.md` proposed exposing HTTP scraper endpoints on VPS and having VPS communicate back to D1 REST and R2 S3 endpoints.
-  - BUT Project Rule #507 explicitly mandates: *"Use Cloudflare service bindings for internal Worker-to-runner communication (never expose public endpoints)."*
-  - AND `scripts/judyrecords_scraper_service.py` runs an unauthenticated Flask server on `0.0.0.0:8787`.
-- **Codebase Verification:**
-  - Exposing plain HTTP endpoints on public IPs violates Rule #507.
-- **Resolution:**
-  - All inter-service communication must use Cloudflare Service Bindings or Cloudflare Access/mTLS with HMAC authentication tokens. No naked HTTP ports.
+- **Contradiction:** earlier proposals described a VPS HTTP bridge and treated the checked-in Flask bridge as unauthenticated.
+- **Current codebase verification:** `scripts/judyrecords_scraper_service.py:20-23` compares `Authorization: Bearer …` against `JUDY_SCRAPER_TOKEN` with `hmac.compare_digest`. The checked-in module does not specify a listener host/port, so the prior claim that it binds `0.0.0.0:8787` is not verified from this file.
+- **Resolution:** retain the token check and use service bindings for Worker-to-Worker calls. Verify the actual VPS listener/firewall configuration before claiming the bridge is publicly exposed or safely isolated.
 
 ### 3. Spider Unlimited vs Metered/PAYG Endpoints
 - **Contradiction:**
@@ -37,7 +39,7 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 - **Codebase Verification:**
   - `scrape/client.py` correctly enforces `/unlimited/*` endpoints and blocks accidental PAYG usage.
 - **Resolution:**
-  - All collectors (social, legal, arrest) must exclusively use Spider Unlimited and Webshare residential proxy (`WEBSHARE_PROXY_URL`).
+  - Use Spider Unlimited and `WEBSHARE_PROXY_URL` by default for web-page collection. Documented first-party APIs such as SAM.gov may be called directly with their own scoped credential and pagination limits. Never fall back to Spider PAYG without explicit authorization.
 
 ### 4. Better Auth Migration vs Active Production Auth
 - **Contradiction:**
@@ -45,18 +47,18 @@ This audit resolves conflicting proposals across earlier planning documents, ver
   - BUT `src/worker.py` currently powers all session and passkey verification in production with `BETTER_AUTH_ENABLED = False`.
   - Migrations `0005_better_auth.sql` and `0006_auth_privacy_consents.sql` have not been executed on remote D1 (Memory #451).
 - **Codebase Verification:**
-  - All 135 unit tests in `tests/` pass using the legacy auth contract in `src/worker.py`. The passkey account takeover vulnerability was fixed directly in `src/worker.py`.
+  - The legacy auth contract remains in `src/worker.py`; Better Auth remains disabled. The latest GitHub CI run passed 147 Python tests plus TypeScript/auth checks at commit `242b658`; remote migration/cutover status still requires separate verification.
 - **Resolution:**
   - Better Auth remains staged in `auth/` behind the `HARVY_AUTH` service binding with `BETTER_AUTH_ENABLED=false`. Full cutover will occur only after explicit user confirmation, remote D1 migration, and user passkey re-enrollment.
 
-### 5. Scraping V2 (TypeScript Worker) vs Production Python Collectors
+### 5. `scrape/v2/` Experiment vs Platform v2
 - **Contradiction:**
   - `scraping-v2-roadmap.md` suggested moving scrapers to a TypeScript Worker pipeline in `scrape/v2/`.
   - BUT `AGENTS.md` and Memory #480 state: *"Keep the existing per-network social adapters and court/arrest research collectors working during V2 migration. `scrape/v2/` is experimental, not a production replacement."*
 - **Codebase Verification:**
   - The live, battle-tested scrapers are in `scrape/` (Python), tested via `tests/test_x_scraper.py`, `tests/test_scrape_protocol.py`, etc.
 - **Resolution:**
-  - `scrape/v2/` removed from repo on 2026-10-26; it was experimental and never a production replacement. Production collection continues on Python modular adapters with Spider transport.
+  - `scrape/v2/` was removed; it is not the same project as the separate `platform-v2/` supervisor/connector scaffold. Production collection remains on the Python adapters. Platform v2 source exists but is not deployed.
 
 ### 6. BI Dashboard Implementation: drizzle-cube vs Custom React MUI
 - **Contradiction:**
@@ -74,11 +76,19 @@ This audit resolves conflicting proposals across earlier planning documents, ver
   - `scrape/profiles.py` parsed Mastodon/Truth Social statuses, but lacked a registered adapter module.
   - `scrape/protocol.py` returned raw `truthsocial.com` instead of normalized network `truthsocial`.
 - **Codebase Verification:**
-  - `untruth/truth_social.py` deleted; `scrape/profiles.py` had no `adapter_for("truthsocial")`.
-  - `tests/test_social_profiles.py` tests Mastodon/Truth Social node extraction, but no adapter or protocol envelope was wired.
+  - V1 `scrape/truthsocial.py` is registered by `scrape/profiles.py:333-348` and has local parser/protocol tests.
+  - A separate TypeScript connector exists in `platform-v2/truthsocial/`; its supervisor registry keeps it disabled until Spider Unlimited social-domain capability is verified.
 - **Resolution:**
-  - Implement modular adapter `scrape/truthsocial.py` using strict Spider Unlimited (`/unlimited/scrape`) and Webshare proxy (`WEBSHARE_PROXY_URL`).
-  - Wire into `adapter_for()` in `scrape/profiles.py` and normalize in `scrape/protocol.py`. Store raw payloads in R2 and index observations in D1.
+  - Mark the V1 adapter implementation complete; do not equate code presence with live capability. Keep the v2 connector disabled until capability, source access, and privacy checks pass. Preserve source attribution and public-only limitations.
+
+### 8. Storage Tiering: Single Overloaded Bucket vs Separated R2 & Basin Lakehouse
+- **Contradiction:**
+  - Early v2 scaffold and `health/BASIN.md:11` allowed pointing Basin Catalog at an arbitrary bucket or sharing a single bucket (`harvy-platform-v2`) for raw crawl dumps, parsed records, release manifests, and the Basin Iceberg sink.
+  - BUT Apache Iceberg catalogs require strict snapshot and file-level integrity. Applying S3 lifecycle expiration (TTL) to purge raw scrape dumps in a shared bucket corrupts Iceberg table metadata by deleting underlying Parquet files.
+- **Codebase Verification:**
+  - `platform-v2/projector/src/index.ts:82,97` forwards events to `V2_BASIN_STREAM` while connectors write raw JSON to `V2_BUCKET`. In the root `wrangler.jsonc:48-60`, separate buckets (`harvy`, `harvy-map-data`, `harvy-logs`) already exist for v1.
+- **Resolution:**
+  - Enforce the 3-tier storage architecture: `harvy-raw` (ephemeral scrape payloads, TTL 60–90d), `harvy-artifacts` (normalized records, release manifests, permanent), and `harvy-warehouse` (managed exclusively by Basin Pipelines & Catalog; queried via Basin SQL; no direct Worker R2 writes, no manual S3 TTL).
 
 ---
 
@@ -87,18 +97,19 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 ### Module 1: Core Platform & Shared Ontology
 - **Canonical Deterministic URNs**: Objects use `urn:harvy:<type>:<source>:<native_id>`. Objects are shared canonical entities, not account-owned.
 - **Multi-Tenant Scoping**: `effective_dataset = shared UNION current_environment`. Private annotations, links, and dashboards are strictly partitioned by `environment_id`.
-- **Storage Tiering**:
-  - **D1**: Operational indexing, object registry, links (`harvy_objects`, `harvy_observations`, `harvy_links`), and saved dashboards.
-  - **R2**: Authoritative immutable raw scrape payloads and exports.
-  - **Basin SQL (Iceberg)**: Analytical archive, historical observations over time, heavy aggregations (>30 days).
+- **Storage Tiering (3-Tier Standard)**:
+  - **D1**: Operational indexing, object registry, links (`harvy_objects`, `harvy_observations`, `harvy_links`), connector registration, and saved dashboards.
+  - **R2 Raw Lake (`harvy-raw` / `harvy-v2-raw`)**: Ephemeral raw crawl captures, spider bodies, API JSON dumps. Direct key-value `put`/`get`. Safe for S3 lifecycle expiration (TTL 60–90 days).
+  - **R2 Artifact Store (`harvy-artifacts` / `harvy-v2-artifacts`)**: Immutable normalized entities, dossiers, and release manifests (`manifest.json`). Long-term retention, served to user downloads.
+  - **Basin Warehouse (`harvy-warehouse` / `harvy-v2-warehouse`)**: Managed exclusively by Basin Pipelines and Basin Catalog. Stores Apache Iceberg metadata snapshots and columnar Parquet tables. Ingested via streaming `send()`, queried via distributed Basin SQL. Never apply S3 TTL.
 - **Nodes & Graph Visualizer**: WebGL graph visualization (`/nodes/`) with accessibility fallback, bounded to 2 hops / 100 nodes.
 - **Query BI**: Curated server-side metric queries compiled to D1 (operational) or Basin SQL (historical).
 
 ### Module 2: Data Collection & Continuous Ingestion
 - **Modular Adapters**: Dedicated extractors for Facebook, Instagram, Threads, X, Truth Social, and Web Discovery.
 - **Legal & Public Records**: CourtListener, Case.law, JudyRecords, Arrests.org, and Docket Alarm via `scrape/research.py`.
-- **JudyRecords Workflow**: Cloudflare Workflow `harvy_schedules` triggers 14-day continuous mining, leasing jobs and streaming updates into R2 and D1.
-- **Telegram History Mining**: Local authorized Telethon CLI (`scrape/telegram.py`) checkpointing into `data/telegram/`.
+- **JudyRecords Workflow**: V1 `src/worker.py` routes authenticated `/api/workflows` calls through the `HARVY_WORKFLOWS` service binding. The bound workflow source is not in this repository; verify its remote schedule/run status before treating continuous mining as active.
+- **Telegram History Mining**: the authorized Telethon CLI and a separate v1 Queue/VPS path both exist. The Queue consumer systemd unit points to a missing module, so continuous operation is unverified and remains blocked pending reconciliation.
 - **Transport Constraints**: Strict usage of Spider Unlimited (`/unlimited/*`) and Webshare residential proxy (`WEBSHARE_PROXY_URL`). Never fall back to PAYG without authorization.
 
 ### Module 3: Authentication & Multi-Tenancy (Better Auth Staged)
@@ -108,9 +119,23 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 - **Cutover Readiness**: Requires remote D1 migrations 0005/0006, secret provisioning (`BETTER_AUTH_SECRET`, OAuth credentials), and user passkey re-enrollment.
 
 ### Module 4: Workflow Orchestration & Caching
-- **Cloudflare Workflows**: Unified `POST /api/workflows` authenticated envelope for durable execution.
-- **Queue Preservation**: Existing `HARVY_QUEUE` remains active for social profile jobs; no breaking queue changes.
+- **Cloudflare Workflows**: V1 `POST /api/workflows` routes through the configured service binding; the executor implementation is outside this repository.
+- **Queue Preservation**: root `wrangler.jsonc` declares the `HARVY_QUEUE` binding and the worker sends jobs to it; remote queue/consumer health must be verified before claiming active operation.
 - **Edge Caching Target**: 75%+ cache hit rate on eligible public endpoints (`/static/*`, `/api/search`, `/api/nodes`, `/api/query/catalog`) using Cloudflare Workers Cache API, partitioned by environment.
+
+### Module 5: Central Connector Secrets (Cloudflare Secrets Store MVP)
+- **Central storage**: Store provider credentials once in the account-level Cloudflare Secrets Store, not as duplicated per-Worker secrets or source-code values.
+- **Worker access**: Each connector gets a minimal `secrets_store_secrets` binding in its Wrangler configuration and reads the value with `await env.<binding>.get()`. The binding is configuration, not a copy of the credential.
+- **Scope**: Attach secret bindings only to approved Workers (`workers` scope alone is not per-Worker access control); keep credentials in the connector that makes the external request. Do not proxy provider credentials through the supervisor.
+- **MVP**: Start with `SPIDER_API_KEY` and `WEBSHARE_PROXY_URL` for the v2 JudyRecords connector. Add other provider secrets only when a connector is approved.
+- **Rotation**: Rotate the account-level secret in Secrets Store; redeploy only if Cloudflare requires binding metadata refresh. Never place secret values in Git, Wrangler vars, notebooks, logs, or plans.
+- **Boundary**: Cloudflare One Access, Tunnel, and mTLS secure access to applications and networks; they do not automatically inject API credentials into Workers and are not required for this secrets MVP.
+
+### Module 6: Documentation Site Deployment (Quartz 5 + Cloudflare Pages)
+- **Docs Builder**: Quartz 5 with Blackbird dark theme (`@quartz-themes/core`), hosted at [labsbytir/harvy-docs](https://github.com/labsbytir/harvy-docs).
+- **Deployment**: Native Cloudflare Pages Git connection (`harvy-docs`), serving custom domain `developers.harvybot.com`.
+- **Sync Workflow**: `.github/workflows/deploy-docs.yml` triggers on documentation changes in `guides/` and `health/BASIN.md`, synchronizing content into `harvy-docs`.
+- **Interactive Features**: Giscus discussion-backed comments on documentation pages, dynamic GitHub repository statistics, commit history tracker, and Harvy overview embed.
 
 ---
 
@@ -119,8 +144,39 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 - [x] Consolidate all 11 planning documents into `planning/PLAN.md`.
 - [x] Audit contradictions between plans and codebase implementation.
 - [x] Clean static asset redundancy and remove duplicate nested files.
-- [x] Reorganize test suite into `tests/` with 100% passing tests (135/135 green).
-- [ ] Implement Truth Social modular adapter in `scrape/truthsocial.py` with strict Spider Unlimited + Webshare proxy.
+- [x] Reorganize test suite into `tests/`; the latest CI run passed 147 Python tests (commit `242b658`).
+- [x] Implement and register the V1 Truth Social adapter in `scrape/truthsocial.py`; keep v2 activation gated on provider capability verification.
+- [x] Add the Platform v2 connector catalog and SAM.gov API connector scaffold; SAM.gov remains disabled pending a secret and bounded sample verification.
+- [x] Publish the GitHub Pages project pitch, roadmap, and recent-commit changelog.
+- [x] Deploy Quartz 5 docs site with Blackbird theme and Giscus to Cloudflare Pages at developers.harvybot.com connected to labsbytir/harvy-docs; add documentation sync GitHub Action.
 - [ ] Maintain cache hit rate monitoring (>75%) for public endpoints.
 - [ ] Await user authorization before remote D1 migrations or live Better Auth cutover.
-- [ ] Connect Telegram continuous mining only upon VPS credential provisioning.
+- [ ] Reconcile the Telegram Queue consumer and systemd entrypoint; verify a safe end-to-end run before enabling continuous processing.
+- [x] Add the JudyRecords v2 Secrets Store bindings and secret lookup; account provisioning, store ID replacement, and deployment remain pending.
+- [ ] Create account-level Secrets Store entries and bind them only to approved v2 connectors; verify secret scope and rotation before deployment.
+
+---
+
+## Part 4: Documentation Mirror and Cloudflare Deployment Plan (2026-10-26)
+
+**Documentation rule (Harvy-docs):** repository documentation lives in `notebooks/` and is mirrored into the `harvy-docs` repository with `npm run sync:harvy-docs` (`scripts/sync_docs_repo.py`, shared with `.github/workflows/deploy-docs.yml`; target `HARVY_DOCS_REPO` or `--dest`, default `/Users/pen/Documents/harvy-docs`). Repository files are canonical and the mirror is regenerated, never edited in place.
+
+### Deployment plan (execute once the code is pushed)
+
+1. **Pre-push gate** on the deploy commit: `npm run build:templates`, `python3 -m unittest discover tests`, `npm run typecheck:platform-v2`, `npm run test:platform-v2`. The last recorded CI pass (147 tests) is at `242b658`, which predates the pending work — re-verify on the new commit.
+2. **Commit and push** the pending tree (29 files: storage-tier standardization, dispatch-based v2 supervisor, JudyRecords bulk runner). Push and deploy require explicit user authorization.
+3. **Docs publish themselves on push:** pushing `harvy` main with `guides/**`, `health/BASIN.md` or `notebooks/**` changes runs `.github/workflows/deploy-docs.yml`, which syncs `content/` into `labsbytir/harvy-docs` and pushes it; that push is configured to trigger the Cloudflare Pages build of the Quartz docs site (the Pages project for `developers.harvybot.com` is recorded complete in the task log but is not verified here). Locally, `npm run sync:harvy-docs` (same `scripts/sync_docs_repo.py`) refreshes the mirror without pushing.
+4. **Secrets** on the production Worker must already exist and stay out of source, logs, and screenshots: `SPIDER_API_KEY`, `WEBSHARE_PROXY_URL`, `HARVY_ACCESS_TOKEN`, plus the optional research/newsletter keys listed in `guides/HOSTING.md`.
+5. **Dry-run both bundles** (`guides/HOSTING.md`), then `npm run deploy`: it builds templates, deploys the staged auth Worker (`BETTER_AUTH_ENABLED` stays `false`), and deploys the Python Worker `src/worker.py` on the `harvybot.com/*` routes.
+6. **Post-deploy verification:** `GET /health`, smoke `/`, `/platform/`, `/research/`, `/static/*`; measure the cache hit rate on eligible public endpoints and hold the >=75% target (Module 4) without caching private data; scan Worker logs for secret leakage.
+7. **Platform v2 is out of scope** for this deployment: its Wrangler configs still carry placeholder resource IDs and unverified entitlements (`guides/PLATFORM_V2_CONNECTORS.md`, `notebooks/platform-v2-first-five.md`). Provisioning, migrations 0001-0003, Secrets Store bindings, and the first bounded run remain on the task list.
+
+### Contradiction audit for this plan (verified in the codebase 2026-10-26)
+
+- `README.md:22` and `README.md:24` duplicated the project-site link; the duplicate is removed with this change.
+- Two docs-sync scripts existed: `scripts/sync_docs_repo.py` (wired into `deploy-docs.yml`, copies `guides/` + `health/BASIN.md` into the Quartz `content/` tree) and `scripts/sync_harvy_docs.py` (notebooks mirror into top-level `notebooks/`). They are reconciled into `scripts/sync_docs_repo.py`, which now also copies `notebooks/` to `content/notebooks/`; the redundant script is removed.
+- `deploy-docs.yml` did not trigger on `notebooks/**`, so notebook edits never reached the docs site; the paths filter now includes it. Quartz renders `content/` only, so a top-level `notebooks/` mirror would never have been published.
+- `guides/HOSTING.md:1-3,43-47` describes a Flask/gunicorn service deployment while `README.md:35` and `wrangler.jsonc:5` (`main: src/worker.py`, routes at `wrangler.jsonc:11-18`) make the Cloudflare Worker the hosted app. Both paths exist (`web_app.py` and `src/worker.py`); this plan deploys the Worker path only.
+- Part 1 section 8 and Module 1 set the 3-tier bucket names `harvy-raw` / `harvy-artifacts` / `harvy-warehouse`, but root `wrangler.jsonc:48-60` still binds `harvy`, `harvy-map-data`, `harvy-logs`. The standardization work changed guidance, not deployed bucket names; this plan does not rename buckets — data migration is a separate, reviewed step.
+- The status refresh above cites CI at `242b658`; that is stale for the pending tree, so treat validation as unverified until step 1 passes; the local suite at this reconciliation reports 160 tests passing.
+- `wrangler.jsonc:62-71` declares the `harvy-telegram` producer queue with no consumer binding, matching the unresolved status in Part 1 section 1; continuous Telegram ingestion stays disabled.

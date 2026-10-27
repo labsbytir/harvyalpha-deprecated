@@ -11,14 +11,18 @@ The active repository root is `/Users/pen/Documents/harvy`.
 - `proxy/`: the shared `WEBSHARE_PROXY_URL` lookup/validation helper for local environment and Worker secret bindings
 - `health/`: Basin storage, schema, backfill, and operations docs
 - `migrations/`: D1 migrations
+- `platform-v2/`: additive supervisor and connector scaffold; separate resources, not deployed with V1
 
 ## Local checks
 
 ```sh
-uv sync --frozen
-npm install
+npm ci
+python3 -m pip install -e . -r requirements.txt
 npm run build:templates
-.venv/bin/python3 -m unittest discover -s . -p 'test_*.py'
+python3 -m unittest discover tests
+npm run typecheck:platform-v2
+npm run test:platform-v2
+python3 scripts/build_github_pages.py --output _site
 npx wrangler deploy --dry-run
 ```
 
@@ -38,4 +42,8 @@ Use Wrangler secrets for Worker credentials. Never commit `.env`, `.dev.vars`, `
 
 The project notebook lives at `/Users/pen/Documents/Notes/harvy`. After editing a file in `guides/` or `health/BASIN.md`, run `npm run sync:vault-guides` to refresh the copies in its `Guides/` folder. Repository files remain canonical.
 
-Better Auth is implemented as a staged TypeScript Worker behind the Python Worker service binding. It remains disabled by default; keep legacy auth available until provider configuration, D1 migration, and end-to-end tests are complete. See [Better Auth operations](AUTH.md) and [the migration plan](../planning/better-auth-migration.md).
+## Documentation deployment
+
+Documentation is authored in `guides/` and `health/BASIN.md`. Changes pushed to `main` trigger `.github/workflows/deploy-docs.yml`, which syncs documentation into [labsbytir/harvy-docs](https://github.com/labsbytir/harvy-docs). Cloudflare Pages builds the site using Quartz 5 and the Blackbird theme via native GitHub integration, deploying to `https://developers.harvybot.com`.
+
+Better Auth is implemented as a staged TypeScript Worker behind the Python Worker service binding. It remains disabled by default; keep legacy auth available until provider configuration, D1 migration, and end-to-end tests are complete. See [Better Auth operations](AUTH.md) and the consolidated plan in `planning/PLAN.md`.

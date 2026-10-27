@@ -51,6 +51,14 @@
       "bucket_name": "harvy"
     },
     {
+      "binding": "HARVY_RAW_BUCKET",
+      "bucket_name": "harvy-raw"
+    },
+    {
+      "binding": "HARVY_ARTIFACTS_BUCKET",
+      "bucket_name": "harvy-artifacts"
+    },
+    {
       "binding": "HARVY_MAP_DATA",
       "bucket_name": "harvy-map-data"
     },

@@ -11,3 +11,27 @@ The next v2 slice adds lifecycle K2 events, K2 projectors to the universal Basin
 `platform-v2/catalog/connector-scopes.json` is a disabled-by-default inventory generated with `python3 scripts/import_platform_v2_source_catalog.py '<local checkout>/Ingestion/Stream Catalog'` from the referenced Civontology Stream Catalog checkout plus the user-provided 53 directory/CMS/social scopes. The import contains 99 `STR_` notes and 11 `REF_` notes; it preserves catalog disposition separately from implementation status and copies no upstream code. The upstream crosswalk claims 106 imported definitions at `AA_Stream Map.md` line 3, while its disposition headings total 117 (20 + 22 + 64 + 11, lines 13, 28, 56, 125); the Stream Index lists 95 Proposed implementations and no Working streams (lines 19–28). Reconcile these counts before treating the catalog as complete. The entries are catalog candidates, not live connectors.
 
 The executable SAM.gov v2 API connector lives in `platform-v2/sam-gov/`. It requires `SAM_GOV_API_KEY` on `harvy-sam-gov`, mandatory posted-date bounds (at most one year), at most 100 API records per page and 25 pages per run, plus explicit capability verification. API keys are added only to outbound requests and redacted from captured response JSON. The referenced OpenTIR SAM scraper is AGPL-3.0 and was inspected only as a reference; none of its code or its browser/proxy/storage stack was copied. The Civic Scraper package was not added. Data-portal directories are catalog discovery sources, not permission to crawl or ingest every linked dataset.
+
+
+## Central connector credentials
+
+The v2 JudyRecords Worker uses Cloudflare account-level Secrets Store bindings for `SPIDER_API_KEY` and `WEBSHARE_PROXY_URL`; secret values are stored once and read with `await binding.get()`. Replace the Secrets Store ID placeholder in `platform-v2/judyrecords/wrangler.jsonc` and bind only after account secrets are created. This is separate from Cloudflare One network access controls; no deployment or account changes are included here.
+
+## Dispatch-based connector onboarding (2026-10-26 local update)
+
+The checked-in supervisor now uses a single `V2_CONNECTORS` dispatch namespace binding and a shared `harvy-v2-work` Queue instead of three static service bindings and connector-specific queues. D1 migration `0003_v2_connectors.sql` creates the registration gate; `PUT /v2/connectors/<id>` requires explicit booleans and can enable a connector only after capability verification and matching internal `/health` identity. `POST /v2/runs` checks the registration before starting a Workflow. The supervisor owns Queue claims, retries, K2 publication and run finalization; each connector exposes an authenticated `/v2/process` that writes R2 and returns its artifact path. The account-level secret values remain in Secrets Store and are attached only to the Workers that need them. The v2 source and templates are local scaffold, not deployed or entitled account resources.
+
+Prior claims above about per-provider v2 queues and provisioning three Queue/DLQ pairs describe the **older scaffold**, not the current routing config. `guides/ARCHITECTURE.md` previously said Workers for Platforms was deferred pending customer code; that conflicted with operator-owned plug-in connectors. `platform-v2/supervisor/wrangler.jsonc` now uses `dispatch_namespaces` for this specific purpose. See `guides/PLATFORM_V2_CONNECTORS.md` for detailed security, migration and account prerequisites. Neither the Workers for Platforms subscription nor Secrets Store-on-dispatch-Worker compatibility has been verified in the account; do not mark them complete.
+
+## Storage standardization: R2 Direct vs. Basin Iceberg lakehouse
+
+Earlier scaffolding routed all v2 raw crawl dumps, parsed records, and manifests into a single `V2_BUCKET` (`harvy-platform-v2`), and `health/BASIN.md` suggested pointing Basin Catalog at "bucket of your choice". This creates a serious architectural risk: applying standard S3 lifecycle rules (e.g. expiring raw HTML/JSON scrapes after 60 days) to a shared bucket deletes underlying Parquet data files or metadata snapshots referenced by the Apache Iceberg catalog, permanently breaking Basin SQL queries.
+
+The standardized architecture establishes three isolated storage tiers:
+1. `harvy-v2-raw`: Ephemeral raw scrape captures and API dumps. Direct key-value `put`/`get`. Safe for S3 lifecycle expiration (TTL 60–90 days).
+2. `harvy-v2-artifacts`: Normalized entities, dossier snapshots, and immutable release manifests (`manifest.json`). Long-term retention, served to user downloads.
+3. `harvy-v2-warehouse`: Basin Catalog / Apache Iceberg Lakehouse. Managed exclusively by Basin Pipelines and Catalog; Workers stream events via `env.V2_BASIN_STREAM.send()`, and queries execute via Basin SQL. Direct Worker R2 writes and manual S3 TTL rules are prohibited on this bucket.
+
+## LLM-triggered bounded JudyRecords runs
+
+`scripts/start_judyrecords_bulk.py` builds and posts a validated Platform v2 JudyRecords run to `POST /v2/runs`. It reads `V2_SUPERVISOR_URL` and `V2_SUPERVISOR_TOKEN` from the environment and never accepts secrets as arguments. This is only a client: collection remains disabled until the v2 supervisor/connector are deployed, the JudyRecords connector is registered with `capability_verified` and `enabled`, and a bounded sample run is verified.
