@@ -2,7 +2,7 @@ from pathlib import Path
 import sqlite3
 import unittest
 
-from scripts.backfill_ontology import backfill_database
+from v2.scripts.backfill_ontology import backfill_database
 
 
 class TestBackfill(unittest.TestCase):

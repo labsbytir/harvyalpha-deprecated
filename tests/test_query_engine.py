@@ -2,8 +2,8 @@ import sqlite3
 from pathlib import Path
 import unittest
 
-from ontology.contracts import make_link_record, make_observation_record, make_profile_object
-from ontology.query_engine import CATALOG, compile_metric_query, get_query_catalog, get_cube_meta
+from v2.ontology.contracts import make_link_record, make_observation_record, make_profile_object
+from v2.ontology.query_engine import CATALOG, compile_metric_query, get_query_catalog, get_cube_meta
 
 
 class TestQueryEngine(unittest.TestCase):

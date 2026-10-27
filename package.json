@@ -18,7 +18,7 @@
     "sync:harvy-docs": "python3 scripts/sync_docs_repo.py",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -t v -p angular",
     "prepare": "husky",
-    "sync:worker-modules": "python3 scripts/sync_worker_modules.py"
+    "sync:worker-modules": "python3 v2/scripts/sync_worker_modules.py"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261025.1",

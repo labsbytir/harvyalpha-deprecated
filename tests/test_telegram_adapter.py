@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scrape.telegram import (
+from v1.scrape.telegram import (
     atomic_write_json,
     extract_entities,
     extract_poll,

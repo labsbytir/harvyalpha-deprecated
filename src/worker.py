@@ -24,10 +24,10 @@ except ImportError:
             self.headers = headers or {}
         async def text(self):
             return self.body if isinstance(self.body, str) else str(self.body)
-from scrape.protocol import make_job, make_result, validate_job
-from proxy.config import get_proxy
+from v1.scrape.protocol import make_job, make_result, validate_job
+from v2.proxy.config import get_proxy
 from email_shield import mask_email, mask_emails_in_text, extract_emails
-from ontology.contracts import (
+from v2.ontology.contracts import (
     DEFAULT_ENVIRONMENT,
     build_scope_filter,
     make_link_record,
@@ -35,7 +35,7 @@ from ontology.contracts import (
     make_observation_record,
     make_profile_object,
 )
-from ontology.query_engine import compile_metric_query, get_query_catalog, get_cube_meta
+from v2.ontology.query_engine import compile_metric_query, get_query_catalog, get_cube_meta
 
 
 SPIDER_ENDPOINT = "https://api.spider.cloud/unlimited/scrape"

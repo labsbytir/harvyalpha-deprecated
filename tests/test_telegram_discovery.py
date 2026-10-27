@@ -1,5 +1,5 @@
 import unittest
-from scrape.telegram import extract_telegram_links
+from v1.scrape.telegram import extract_telegram_links
 
 
 class TestTelegramDiscovery(unittest.TestCase):

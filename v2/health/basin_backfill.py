@@ -5,8 +5,8 @@ import os
 from pathlib import Path
 import sys
 
-from health.basin_storage import upload_files
-from proxy.config import get_proxy
+from v2.health.basin_storage import upload_files
+from v2.proxy.config import get_proxy
 
 
 def main():

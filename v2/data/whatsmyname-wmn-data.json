@@ -5170,7 +5170,7 @@
     },
     {
       "name": "Mod DB",
-      "uri_check": "https://www.moddb.com/html/scripts/autocomplete.php?a=username&q={account}",
+      "uri_check": "https://www.moddb.com/html/v2/scripts/autocomplete.php?a=username&q={account}",
       "uri_pretty": "https://www.moddb.com/members/{account}",
       "e_code": 200,
       "e_string": "\"available\":false",

@@ -2,4 +2,4 @@ flask>=3.0
 gunicorn>=23.0
 telethon>=1.36
 # Optional: local NSFW prescan on VPS (NudeNet v3 ONNX, no network calls)
-# nudenet>=3.4.2
+nudenet>=3.4.2

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-from search.client import SearchClient
-from search.forms import discover_search_forms
+from v2.catalog.connectors.adapters.search.client import SearchClient
+from v2.catalog.connectors.adapters.search.forms import discover_search_forms
 
 
 class SearchFrameworkTests(unittest.TestCase):
@@ -47,7 +47,7 @@ class SearchFrameworkTests(unittest.TestCase):
             Response("https://example.test/", '<form action="/find"><input name="q"></form>'),
             Response("https://example.test/find?q=records", '<a href="/case">Case record</a>'),
         ])
-        with patch("search.client.urlopen", side_effect=lambda *args, **kwargs: next(responses)):
+        with patch("v2.catalog.connectors.adapters.search.client.urlopen", side_effect=lambda *args, **kwargs: next(responses)):
             result = SearchClient().search("https://example.test/", "records")
         self.assertEqual(result.results[0].url, "https://example.test/case")
 

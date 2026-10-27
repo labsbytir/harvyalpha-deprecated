@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from health.basin_storage import _batches, artifact_events, validate_ingest_url
+from v2.health.basin_storage import _batches, artifact_events, validate_ingest_url
 
 
 class BasinStorageTests(unittest.TestCase):
@@ -25,7 +25,7 @@ class BasinStorageTests(unittest.TestCase):
 
     def test_large_json_artifact_is_chunked_without_losing_text(self):
         text = json.dumps({"content": "a-é-🙂-" * 20})
-        with tempfile.TemporaryDirectory() as tmp, patch("health.basin_storage.CHUNK_BYTES", 17), patch("health.basin_storage.INLINE_JSON_BYTES", 20):
+        with tempfile.TemporaryDirectory() as tmp, patch("v2.health.basin_storage.CHUNK_BYTES", 17), patch("v2.health.basin_storage.INLINE_JSON_BYTES", 20):
             path = Path(tmp) / "raw.json"
             path.write_text(text)
             events = list(artifact_events(path, "raw.json", "job1", "profile", "example.com"))

@@ -21,7 +21,7 @@ R2 and Basin serve distinct storage layers and use separate buckets:
 - **Basin Warehouse (`harvy-ql`)**: Managed exclusively by Basin Pipelines and Basin Catalog (`9061d93166998cf39e011a52b369b812_harvy-ql`). Stores Apache Iceberg metadata snapshots and columnar Parquet files queryable via Basin SQL.
 - **Rule**: Never apply arbitrary S3 lifecycle/TTL rules to the Basin warehouse bucket (`harvy-ql`). Iceberg tables manage their own snapshot compaction (1h interval, 128MB compaction enabled); manual object deletion corrupts the Iceberg table metadata.
 
-The R2 Account API token is entered only into the Basin setup flow; do not put it in `wrangler.jsonc` or the browser. Basin Pipelines has a 5 MB maximum ingestion request. `health/basin_storage.py` batches below 5 MB and splits oversized JSON artifacts into ordered text chunks. Cloudflare documents 50 GB/month of included SQL transforms and Iceberg sink delivery on Workers Paid; R2 storage/catalog charges also apply. Initial records may take 3–7 minutes to become queryable.
+The R2 Account API token is entered only into the Basin setup flow; do not put it in `wrangler.jsonc` or the browser. Basin Pipelines has a 5 MB maximum ingestion request. `v2/health/basin_storage.py` batches below 5 MB and splits oversized JSON artifacts into ordered text chunks. Cloudflare documents 50 GB/month of included SQL transforms and Iceberg sink delivery on Workers Paid; R2 storage/catalog charges also apply. Initial records may take 3–7 minutes to become queryable.
 
 ## 2. Configure Harvy
 

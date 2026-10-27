@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock
 import unittest
 import urllib.request
 
-from health.harvy_logger import format_log_record, HarvyLogHandler, HarvyLogger
+from v2.health.harvy_logger import format_log_record, HarvyLogHandler, HarvyLogger
 
 
 class TestHarvyLogging(unittest.TestCase):

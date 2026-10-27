@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import sqlite3
 from typing import Any, Dict, Optional, Set
-from ontology.contracts import DEFAULT_ENVIRONMENT, build_scope_filter
+from v2.ontology.contracts import DEFAULT_ENVIRONMENT, build_scope_filter
 
 DEFAULT_NODE_LIMIT = 50
 MAX_NODE_LIMIT = 200

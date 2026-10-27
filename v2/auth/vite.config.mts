@@ -7,7 +7,7 @@ export default defineConfig({
   root: authRoot,
   publicDir: fileURLToPath(new URL("./public", import.meta.url)),
   build: {
-    outDir: fileURLToPath(new URL("../static", import.meta.url)),
+    outDir: fileURLToPath(new URL("../../static", import.meta.url)),
     emptyOutDir: false,
     lib: {
       entry: fileURLToPath(new URL("./client.ts", import.meta.url)),

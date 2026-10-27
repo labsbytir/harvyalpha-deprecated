@@ -3,7 +3,7 @@ import os
 import unittest
 from unittest.mock import MagicMock, patch
 
-from scrape.judyrecords import (
+from v1.scrape.judyrecords import (
     build_algorithmic_query,
     extract_candidate_terms,
     parse_case_page,
@@ -112,7 +112,7 @@ class JudyRecordsScraperTests(unittest.TestCase):
             make_cm(SAMPLE_CASE_HTML.encode()),
         ]
 
-        with patch("scrape.judyrecords.create_opener", return_value=mock_opener), \
+        with patch("v1.scrape.judyrecords.create_opener", return_value=mock_opener), \
              patch("time.sleep", return_value=None):
             result = search_judyrecords("breach of contract", max_records=1, proxy_url="http://test-proxy:8080")
             self.assertEqual(result["status"], "ok")

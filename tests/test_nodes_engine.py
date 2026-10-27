@@ -2,8 +2,8 @@ import sqlite3
 from pathlib import Path
 import unittest
 
-from ontology.contracts import make_link_record, make_observation_record, make_profile_object
-from ontology.nodes_engine import get_object_provenance, query_scoped_graph
+from v2.ontology.contracts import make_link_record, make_observation_record, make_profile_object
+from v2.ontology.nodes_engine import get_object_provenance, query_scoped_graph
 
 
 class TestNodesEngine(unittest.TestCase):

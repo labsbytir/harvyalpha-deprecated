@@ -101,7 +101,7 @@ function projectAnalytics(env: Env, event: PlatformV2Event): void {
 	const count = Number(event.payload.record_count ?? event.payload.discovered_count ?? 1);
 	const elapsed = Number(event.payload.duration_ms ?? 0);
 	env.V2_ANALYTICS.writeDataPoint({
-		blobs: [event.event_type, event.connector, event.environment_id, "platform-v2"],
+		blobs: [event.event_type, event.connector, event.environment_id, "v2"],
 		doubles: [Number.isFinite(count) ? count : 1, Number.isFinite(elapsed) ? elapsed : 0],
 		indexes: [event.event_id],
 	});

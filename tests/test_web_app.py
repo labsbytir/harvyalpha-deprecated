@@ -186,7 +186,7 @@ class WebsiteTests(unittest.TestCase):
             response = self.client.post("/api/username-jobs", headers=self.headers(), json=body)
         self.assertEqual(response.status_code, 202)
         command = launch.call_args.args[0]
-        self.assertIn("scrape.username", command)
+        self.assertIn("v1.scrape.username", command)
         self.assertNotIn("sk-private-test-key", " ".join(command))
         self.assertEqual(response.json["kind"], "username")
 

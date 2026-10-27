@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from scrape.facebook_scroll import diagnostic, options
+from v1.scrape.facebook_scroll import diagnostic, options
 
 
 class CloudScrollTests(unittest.TestCase):

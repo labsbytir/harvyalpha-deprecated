@@ -7,5 +7,5 @@
     "outFile": "static/dossier.js",
     "skipLibCheck": true
   },
-  "files": ["templates/dossier.ts"]
+  "files": ["pages/dossier.ts"]
 }

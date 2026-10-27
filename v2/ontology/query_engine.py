@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Tuple
-from ontology.contracts import build_scope_filter
+from v2.ontology.contracts import build_scope_filter
 
 CATALOG: Dict[str, Any] = {
     "metrics": {

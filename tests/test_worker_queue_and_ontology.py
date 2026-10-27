@@ -5,7 +5,7 @@ import time
 import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from scrape.protocol import make_job
+from v1.scrape.protocol import make_job
 from src.worker import (
     Default,
     base64url_decode,

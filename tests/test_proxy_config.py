@@ -2,7 +2,7 @@ import os
 import unittest
 from unittest.mock import patch
 
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 
 class ProxyConfigTests(unittest.TestCase):
