@@ -50,6 +50,7 @@ class StartJudyRecordsBulkTests(unittest.TestCase):
         request = mocked.call_args.args[0]
         self.assertEqual(request.full_url, "https://v2.example/v2/runs")
         self.assertEqual(request.get_header("Authorization"), "Bearer secret-token")
+        self.assertEqual(request.get_header("User-agent"), "HarvyPlatform/2.0")
         self.assertEqual(json.loads(request.data.decode("utf-8"))["connector"], "judyrecords")
         self.assertEqual(status, 202)
         self.assertEqual(data["run_id"], "r1")

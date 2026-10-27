@@ -1,4 +1,4 @@
-// Typed client for the curated Query API (src/worker.py routes).
+// Typed client for the V2 query API; its supervisor routes are not implemented yet.
 // Requests carry only allowlisted metric ids and approved filter keys; all SQL
 // compilation and environment scoping happen server-side.
 
@@ -80,18 +80,18 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export function getCatalog(): Promise<Catalog> {
-  return request<Catalog>("/api/query/catalog");
+  return request<Catalog>("/api/v2/query/catalog");
 }
 
 export function executeQuery(spec: QuerySpec): Promise<ExecuteResponse> {
-  return request<ExecuteResponse>("/api/query/execute", {
+  return request<ExecuteResponse>("/api/v2/query/execute", {
     method: "POST",
     body: JSON.stringify(spec),
   });
 }
 
 export function listDashboards(): Promise<{ dashboards: DashboardRecord[] }> {
-  return request<{ dashboards: DashboardRecord[] }>("/api/dashboards");
+  return request<{ dashboards: DashboardRecord[] }>("/api/v2/dashboards");
 }
 
 export async function saveDashboard(
@@ -106,14 +106,14 @@ export async function saveDashboard(
     layout,
     queries: queries || [],
   };
-  return request<{ id: string }>(id ? `/api/dashboards/${id}` : "/api/dashboards", {
+  return request<{ id: string }>(id ? `/api/v2/dashboards/${id}` : "/api/v2/dashboards", {
     method: id ? "PUT" : "POST",
     body: JSON.stringify(payload),
   });
 }
 
 export function deleteDashboard(id: string): Promise<{ success: boolean }> {
-  return request<{ success: boolean }>(`/api/dashboards/${id}`, { method: "DELETE" });
+  return request<{ success: boolean }>(`/api/v2/dashboards/${id}`, { method: "DELETE" });
 }
 
 function parseJsonField<T>(value: unknown): T | null {

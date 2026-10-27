@@ -9,7 +9,8 @@ from v2.ontology.nodes_engine import get_object_provenance, query_scoped_graph
 class TestNodesEngine(unittest.TestCase):
     def setUp(self):
         self.db = sqlite3.connect(":memory:")
-        for migration in sorted(Path("migrations").glob("*.sql")):
+        migrations = Path(__file__).resolve().parents[1] / "v2" / "migrations"
+        for migration in sorted(migrations.glob("*.sql")):
             self.db.executescript(migration.read_text())
 
         now = 1700000000

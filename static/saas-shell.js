@@ -74,22 +74,10 @@
   const EXTRA_COMMANDS = [
     {
       title: 'Sign In / Account Settings',
-      url: '/auth/',
+      action: () => window.openHarvyAuthModal?.(),
       group: 'Account',
       icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
       keywords: 'auth login register profile password api session user'
-    },
-    {
-      title: 'Switch to Private Tenant Overlay',
-      action: () => {
-        const current = localStorage.getItem('harvy_environment') || 'shared';
-        const next = current === 'shared' ? 'env_private' : 'shared';
-        localStorage.setItem('harvy_environment', next);
-        window.location.reload();
-      },
-      group: 'Environment',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>',
-      keywords: 'switch environment tenant private shared toggle'
     },
     {
       title: 'Acceptable Use & Terms',
@@ -111,7 +99,7 @@
     sidebar.id = 'harvy-sidebar';
     sidebar.className = 'harvy-sidebar';
 
-    const envName = localStorage.getItem('harvy_environment') || 'shared';
+    const envName = 'Public view';
 
     let navHtml = '';
     NAV_ITEMS.forEach(grp => {
@@ -148,7 +136,7 @@
       </div>
 
       <div class="harvy-sidebar-footer">
-        <a href="/auth/" class="harvy-user-card" id="harvy-user-profile-link">
+        <a href="#auth" class="harvy-user-card" id="harvy-user-profile-link">
           <div class="harvy-user-info">
             <div class="harvy-user-avatar" id="harvy-avatar">H</div>
             <div class="harvy-user-meta">
@@ -199,6 +187,12 @@
     mainWrapper.insertBefore(mobileBar, mainWrapper.firstChild);
     document.body.appendChild(mainWrapper);
 
+    document.getElementById('harvy-user-profile-link')?.addEventListener('click', (event) => {
+      if (typeof window.openHarvyAuthModal !== 'function') return;
+      event.preventDefault();
+      window.openHarvyAuthModal();
+    });
+
     // Mobile events
     const toggleBtn = document.getElementById('harvy-mobile-toggle');
     const mobileCmd = document.getElementById('harvy-mobile-cmd');
@@ -220,19 +214,17 @@
   }
 
   function fetchSessionUser() {
-    fetch('/api/auth/me', { credentials: 'include' })
-      .then(res => res.ok ? res.json() : null)
-      .then(data => {
-        if (data && (data.user || data.username)) {
-          const user = data.user || data;
-          const name = user.displayName || user.username || 'Analyst';
-          const nameEl = document.getElementById('harvy-username');
-          const avatarEl = document.getElementById('harvy-avatar');
-          const roleEl = document.getElementById('harvy-userrole');
-          if (nameEl) nameEl.textContent = name;
-          if (avatarEl) avatarEl.textContent = name.charAt(0).toUpperCase();
-          if (roleEl && user.role) roleEl.textContent = user.role.toUpperCase();
-        }
+    window.harvyAuthClient?.getSession()
+      .then(result => {
+        const user = result?.data?.user;
+        if (!user) return;
+        const name = user.name || user.email || 'Analyst';
+        const nameEl = document.getElementById('harvy-username');
+        const avatarEl = document.getElementById('harvy-avatar');
+        const roleEl = document.getElementById('harvy-userrole');
+        if (nameEl) nameEl.textContent = name;
+        if (avatarEl) avatarEl.textContent = name.charAt(0).toUpperCase();
+        if (roleEl && user.role) roleEl.textContent = user.role.toUpperCase();
       })
       .catch(() => {});
   }

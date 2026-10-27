@@ -12,8 +12,9 @@ body:
     attributes:
       label: API surface
       options:
-        - V1 Worker public API
-        - Platform v2 supervisor API
+        - V2 supervisor API
+        - V2 connector service API
+        - V2 authentication API
         - Connector Worker service API
         - Data ingestion / data mining API
         - Data quality / cleansing API

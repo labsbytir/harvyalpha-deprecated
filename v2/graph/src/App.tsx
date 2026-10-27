@@ -332,7 +332,7 @@ export default function App() {
           },
         }}
       >
-        <CubeProvider apiOptions={{ apiUrl: "/cubejs-api/v1" }}>
+        <CubeProvider apiOptions={{ apiUrl: "/api/v2/cube" }}>
           <AnalyticsDashboard
             config={cubeConfig}
             editable={true}

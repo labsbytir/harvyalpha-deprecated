@@ -92,6 +92,8 @@ export interface JudyRecord {
 	source_url: string;
 	collected_at: string;
 	parser_version: "1.0.0";
+	source_html_path?: string;
+	source_html_sha256?: string;
 	complete: boolean;
 	limitations: string[];
 	provenance: {

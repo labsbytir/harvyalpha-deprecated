@@ -1,5 +1,4 @@
 {
-  // Keep disabled until the account plan's Spider Unlimited support for this domain is verified.
   "$schema": "../../../../node_modules/wrangler/config-schema.json",
   "name": "harvy-truthsocial",
   "main": "src/index.ts",

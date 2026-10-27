@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'guides/**'
+      - 'docs/**'
       - 'notebooks/**'
-      - 'health/BASIN.md'
-      - 'scripts/sync_docs_repo.py'
+      - 'v2/health/BASIN.md'
+      - 'v2/scripts/sync_docs_repo.py'
       - '.github/workflows/deploy-docs.yml'
   workflow_dispatch:
 
@@ -33,7 +33,7 @@ jobs:
 
       - name: Sync Markdown Documentation
         run: |
-          python3 harvy/scripts/sync_docs_repo.py --dest harvy-docs
+          python3 harvy/v2/scripts/sync_docs_repo.py --dest harvy-docs
 
       - name: Commit and Push Changes to Docs Repository
         working-directory: harvy-docs

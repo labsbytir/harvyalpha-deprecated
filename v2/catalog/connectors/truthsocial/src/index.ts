@@ -6,16 +6,13 @@ import {
 	type TruthSocialArtifact,
 	type TruthSocialPost,
 } from "../../../../shared/contracts.ts";
-import { consumeWorkItem, PermanentConnectorError } from "../../../../shared/queue.ts";
-import { publishWorkItemEvent, type K2Producer } from "../../../../shared/events.ts";
+import { PermanentConnectorError, processConnectorRequest } from "../../../../shared/queue.ts";
 
 interface Env {
-	V2_DB: D1Database;
 	V2_BUCKET: R2Bucket;
-	SPIDER_API_KEY: string;
-	WEBSHARE_PROXY_URL: string;
+	SPIDER_API_KEY: SecretsStoreSecret;
+	WEBSHARE_PROXY_URL: SecretsStoreSecret;
 	V2_CONNECTOR_TOKEN: string;
-	V2_EVENTS: K2Producer;
 }
 
 interface SpiderPage {
@@ -32,7 +29,9 @@ function json(body: unknown, status = 200): Response {
 
 function authorized(request: Request, env: Env): boolean {
 	const expected = env.V2_CONNECTOR_TOKEN ?? "";
-	const supplied = request.headers.get("Authorization") ?? "";
+	const authorization = request.headers.get("Authorization") ?? "";
+	if (!authorization.startsWith("Bearer ")) return false;
+	const supplied = authorization.slice(7);
 	let mismatch = expected.length ^ supplied.length;
 	for (let i = 0; i < Math.max(expected.length, supplied.length); i++) mismatch |= (expected.charCodeAt(i) || 0) ^ (supplied.charCodeAt(i) || 0);
 	return Boolean(expected) && mismatch === 0;
@@ -71,10 +70,11 @@ function pageObjects(pages: SpiderPage[]): Record<string, unknown>[] {
 }
 
 async function spider(url: string, env: Env): Promise<SpiderPage[]> {
-	if (!env.SPIDER_API_KEY || !env.WEBSHARE_PROXY_URL) throw new PermanentConnectorError("Spider and proxy secrets are required");
+	const [apiKey, proxyUrl] = await Promise.all([env.SPIDER_API_KEY.get(), env.WEBSHARE_PROXY_URL.get()]);
+	if (!apiKey || !proxyUrl) throw new PermanentConnectorError("Spider and proxy secrets are required");
 	const response = await fetch("https://api.spider.cloud/unlimited/scrape", {
 		method: "POST",
-		headers: { Authorization: `Bearer ${env.SPIDER_API_KEY}`, "Content-Type": "application/json" },
+		headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
 		body: JSON.stringify({
 			url,
 			return_format: "raw",
@@ -84,7 +84,7 @@ async function spider(url: string, env: Env): Promise<SpiderPage[]> {
 			cache: false,
 			session: false,
 			return_cookies: false,
-			remote_proxy: env.WEBSHARE_PROXY_URL,
+			remote_proxy: proxyUrl,
 		}),
 	});
 	if (!response.ok) {
@@ -234,15 +234,10 @@ export default {
 			if (!authorized(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
 			return discover(request);
 		}
+		if (url.pathname === "/v2/process" && request.method === "POST") {
+			if (!authorized(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
+			return processConnectorRequest(request, "truthsocial", (item) => fetchAndStoreProfile(item, env));
+		}
 		return json({ error: "not found" }, 404);
 	},
-	queue(batch: MessageBatch<ConnectorQueueMessage>, env: Env, ctx: ExecutionContext): void {
-		ctx.waitUntil(Promise.all(batch.messages.map((message) => consumeWorkItem(
-			message,
-			env.V2_DB,
-			"truthsocial",
-			(item) => fetchAndStoreProfile(item, env),
-			(type, item, payload) => publishWorkItemEvent(env.V2_EVENTS, type, item, payload),
-		))));
-	},
-} satisfies ExportedHandler<Env, ConnectorQueueMessage>;
+} satisfies ExportedHandler<Env>;

@@ -17,7 +17,8 @@ interface Env {
 	V2_CONFIG: KVNamespace;
 	V2_BUCKET: R2Bucket;
 	V2_WORK_QUEUE: Queue<ConnectorQueueMessage>;
-	V2_CONNECTORS: DispatchNamespace;
+	V2_JUDYRECORDS: Fetcher;
+	V2_TRUTHSOCIAL: Fetcher;
 	V2_RUN_WORKFLOW: Workflow<RunWorkflowParams>;
 	V2_SUPERVISOR_TOKEN: string;
 	V2_CONNECTOR_TOKEN: string;
@@ -65,9 +66,15 @@ async function connectorRegistration(db: D1Database, id: string): Promise<Connec
 		.bind(id).first<ConnectorRegistration>();
 }
 
+export function connectorService(env: Pick<Env, "V2_JUDYRECORDS" | "V2_TRUTHSOCIAL">, id: string): Fetcher {
+	if (id === "judyrecords") return env.V2_JUDYRECORDS;
+	if (id === "truthsocial") return env.V2_TRUTHSOCIAL;
+	throw new PermanentConnectorError("connector has no service binding");
+}
+
 async function processDispatchedItem(item: ConnectorQueueMessage, env: Env): Promise<WorkItemOutput> {
 	if (!await connectorRegistration(env.V2_DB, item.connector)) throw new PermanentConnectorError("connector is not registered");
-	const response = await env.V2_CONNECTORS.get(`harvy-${item.connector}`).fetch("https://connector/v2/process", {
+	const response = await connectorService(env, item.connector).fetch("https://connector/v2/process", {
 		method: "POST",
 		headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.V2_CONNECTOR_TOKEN}` },
 		body: JSON.stringify(item),
@@ -233,7 +240,7 @@ export class PlatformV2RunWorkflow extends WorkflowEntrypoint<Env, RunWorkflowPa
 				"discover-record-urls",
 				{ retries: { limit: 3, delay: "5 seconds", backoff: "exponential" }, timeout: "2 minutes" },
 				async () => {
-					const response = await this.env.V2_CONNECTORS.get(`harvy-${params.connector}`).fetch("https://connector/v2/discover", {
+					const response = await connectorService(this.env, params.connector).fetch("https://connector/v2/discover", {
 						method: "POST",
 						headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.env.V2_CONNECTOR_TOKEN}` },
 						body: JSON.stringify({ ...params.input, run_id: params.run_id, environment_id: params.environment_id }),
@@ -308,7 +315,7 @@ export class PlatformV2RunWorkflow extends WorkflowEntrypoint<Env, RunWorkflowPa
 				const event = await createPlatformV2Event("run.failed", params.connector, params.run_id, params.environment_id, params.run_id, { failure: "workflow_failed" });
 				await publishPlatformV2Event(this.env.V2_EVENTS, event);
 			} catch {
-				console.error("Platform v2 failure event could not be published", params.run_id);
+				console.error("V2 failure event could not be published", params.run_id);
 			}
 			throw error;
 		}
@@ -351,7 +358,7 @@ export default {
 			if (enabled && !capability_verified) return json({ error: "capability must be verified before enabling" }, 409);
 			if (enabled) {
 				try {
-					const health = await env.V2_CONNECTORS.get(`harvy-${connectorMatch[1]}`).fetch("https://connector/health");
+					const health = await connectorService(env, connectorMatch[1]).fetch("https://connector/health");
 					if (!health.ok || (await health.json() as { connector?: string }).connector !== connectorMatch[1]) return json({ error: "connector health identity mismatch" }, 409);
 				} catch { return json({ error: "connector is not deployed or healthy" }, 409); }
 			}
@@ -411,7 +418,7 @@ export default {
 					if (raced.input_json !== inputJson) return json({ error: "idempotency key was already used with different input" }, 409);
 					return json({ run_id: raced.id, status: raced.status, deduplicated: true }, 200);
 				}
-				console.error("Platform v2 run insert failed", error instanceof Error ? error.name : "unknown");
+				console.error("V2 run insert failed", error instanceof Error ? error.name : "unknown");
 				return json({ error: "could not create run" }, 503);
 			}
 
@@ -430,7 +437,7 @@ export default {
 			} catch (error) {
 				await env.V2_DB.prepare("UPDATE platform_v2_runs SET status = 'failed', error = ?, updated_at = ? WHERE id = ?")
 					.bind("workflow start failed", Date.now(), runId).run();
-				console.error("Platform v2 workflow start failed", error instanceof Error ? error.name : "unknown");
+				console.error("V2 workflow start failed", error instanceof Error ? error.name : "unknown");
 				return json({ error: "workflow could not be started", run_id: runId }, 503);
 			}
 		}

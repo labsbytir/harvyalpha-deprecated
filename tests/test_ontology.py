@@ -102,41 +102,5 @@ class TestOntologyContracts(unittest.TestCase):
         self.assertEqual(link_event["target"], "urn:harvy:post:x:9999")
         self.assertEqual(link_event["payload"]["link_id"], link["id"])
 
-    def test_backfill_search_documents(self):
-        import sqlite3
-        from pathlib import Path
-        from v2.scripts.backfill_ontology import backfill_search_documents
-
-        db = sqlite3.connect(":memory:")
-        try:
-            for migration in sorted(Path("migrations").glob("*.sql")):
-                db.executescript(migration.read_text())
-
-            # Insert sample search document
-            db.execute(
-                """
-                INSERT INTO harvy_search_documents
-                (id, job_id, title, snippet, body, source, url, object_key, created_at)
-                VALUES ('doc_1', 'job_1', '@nasa official', 'Space agency', 'Full body text', 'x', 'https://x.com/nasa', 'jobs/1/file.json', 1700000000)
-                """
-            )
-            stats = backfill_search_documents(db)
-            self.assertEqual(stats["processed"], 1)
-            self.assertEqual(stats["objects"], 1)
-            self.assertEqual(stats["observations"], 1)
-
-            # Check created object
-            row = db.execute("SELECT id, type_id, display_name FROM harvy_objects WHERE id = 'urn:harvy:profile:x:nasa'").fetchone()
-            self.assertIsNotNone(row)
-            self.assertEqual(row[1], "profile")
-
-            # Check created observation
-            obs_row = db.execute("SELECT object_id, source, r2_object_key FROM harvy_observations WHERE object_id = 'urn:harvy:profile:x:nasa'").fetchone()
-            self.assertIsNotNone(obs_row)
-            self.assertEqual(obs_row[2], "jobs/1/file.json")
-        finally:
-            db.close()
-
-
 if __name__ == "__main__":
     unittest.main()

@@ -47,7 +47,8 @@ class TestQueryEngine(unittest.TestCase):
     def test_execution_against_sqlite(self):
         db = sqlite3.connect(":memory:")
         try:
-            for migration in sorted(Path("migrations").glob("*.sql")):
+            migrations = Path(__file__).resolve().parents[1] / "v2" / "migrations"
+            for migration in sorted(migrations.glob("*.sql")):
                 db.executescript(migration.read_text())
 
             # Seed object, observation, and link

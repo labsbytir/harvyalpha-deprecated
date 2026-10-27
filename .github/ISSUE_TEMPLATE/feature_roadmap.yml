@@ -27,8 +27,9 @@ body:
     attributes:
       label: Target
       options:
-        - V1 production
-        - Platform v2 (not deployed)
+        - V2 connector
+        - V2 supervisor or API
+        - V2 analytics or storage
         - Shared data model
         - GitHub Pages / repository process
     validations:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Start a bounded Platform v2 JudyRecords bulk run without handling secrets."""
+"""Start a bounded V2 JudyRecords run without handling secrets."""
 import argparse
 import hashlib
 import json
@@ -71,6 +71,7 @@ def post_run(base_url, token, run, timeout=30):
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json",
             "Accept": "application/json",
+            "User-Agent": "HarvyPlatform/2.0",
         },
         method="POST",
     )

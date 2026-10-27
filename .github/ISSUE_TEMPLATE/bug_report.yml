@@ -12,9 +12,10 @@ body:
     attributes:
       label: Component
       options:
-        - V1 Worker
-        - V1 connector or scraper
-        - Platform v2
+        - V2 supervisor
+        - V2 connector
+        - V2 authentication or API
+        - Static UI or build
         - Data quality or storage
         - Query / analytics
         - GitHub Pages / documentation

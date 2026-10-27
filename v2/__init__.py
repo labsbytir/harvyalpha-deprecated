@@ -1,1 +1,1 @@
-"""Platform v2 application modules and connector services."""
+"""Harvy V2 application modules and connector services."""

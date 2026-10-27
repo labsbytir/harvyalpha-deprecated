@@ -200,7 +200,7 @@ export default {
 	scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext): void {
 		ctx.waitUntil(Promise.all(SUBSCRIPTIONS.map(async (name) => {
 			try { await pollSubscription(env, name); }
-			catch (error) { console.error(`Platform v2 ${name} projection failed`, error instanceof Error ? error.name : "unknown"); }
+			catch (error) { console.error(`V2 ${name} projection failed`, error instanceof Error ? error.name : "unknown"); }
 		})));
 	},
 	queue(batch: MessageBatch<unknown>, env: Env, ctx: ExecutionContext): void {

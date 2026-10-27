@@ -23,7 +23,7 @@
     }
   ],
   "kv_namespaces": [
-    { "binding": "V2_CONFIG", "id": "00000000000000000000000000000002" }
+    { "binding": "V2_CONFIG", "id": "f3603d17af834b84b9f573102a6407fb" }
   ],
   "r2_buckets": [
     { "binding": "V2_RAW_BUCKET", "bucket_name": "harvy-raw" },
@@ -41,8 +41,9 @@
       { "queue": "harvy-v2-work", "max_batch_size": 2, "max_batch_timeout": 5, "max_retries": 8, "dead_letter_queue": "harvy-v2-work-dlq" }
     ]
   },
-  "dispatch_namespaces": [
-    { "binding": "V2_CONNECTORS", "namespace": "harvy-v2-connectors" }
+  "services": [
+    { "binding": "V2_JUDYRECORDS", "service": "harvy-judyrecords" },
+    { "binding": "V2_TRUTHSOCIAL", "service": "harvy-truthsocial" }
   ],
   "workflows": [
     {

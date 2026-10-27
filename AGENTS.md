@@ -3,6 +3,10 @@
 ## Repository and documentation
 
 1. The active Git repository root is `/Users/pen/Documents/harvy`.
+
+## V2-only layout
+
+V2 Workers, connectors, shared contracts, migrations, and Wrangler configs live under root `v2/`. Cross-cutting tests may remain in root `tests/`, but must target V2. Never create or document a root `platform-v2/` path or compatibility alias. V1 runtime code is retired locally; keep existing remote resource identifiers stable unless a migration is reviewed.
 2. Keep CSS source in `styles/`; build generated web assets with `npm run build:templates`.
 3. Keep operator, developer, API, and support guides in `docs/`. Sync them to the Obsidian vault with `npm run sync:vault-guides`.
 4. Keep project plans in `docs/PLAN.md` and mirror planning documents into `/Users/pen/Documents/Notes/harvy/Planning/`.
@@ -28,7 +32,7 @@ You will document the code in less than two lines when needed
 3. Verify Webshare only when needed with `curl --proxy "$WEBSHARE_PROXY_URL" https://ipv4.webshare.io/`; never print or inline the credential value.
 4. Spider AI Studio is available when requested. Its current account limit is 1 request per second; queue/serialize AI requests accordingly and respect any changed plan limits.
 5. Do not accept logged-in social-account cookies. Preserve source URLs, timestamps, provenance, completeness/limitations, and the distinction between exposed counts and exposed member lists.
-6. Keep the existing per-network social adapters and court/arrest research collectors working during V2 migration. `scrape/v2/` is experimental, not a production replacement; migrate only with parity tests and explicit approval.
+6. V2 connectors live under `v2/catalog/connectors/` and require explicit, bounded verification before enablement. Do not restore V1 adapters or use V1 paths.
 
 ## Data, access, and caching
 

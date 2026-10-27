@@ -1,19 +1,16 @@
 import {
 	buildSamGovPageUrl,
 	isSamGovPageUrl,
-	parseRunRequest,
+	normalizeSamGovInput,
 	type ConnectorQueueMessage,
 	type SamGovInput,
 } from "../../../../shared/contracts.ts";
-import { consumeWorkItem, PermanentConnectorError, type WorkItemOutput } from "../../../../shared/queue.ts";
-import { publishWorkItemEvent, type K2Producer } from "../../../../shared/events.ts";
+import { PermanentConnectorError, processConnectorRequest, type WorkItemOutput } from "../../../../shared/queue.ts";
 
 interface Env {
-	V2_DB: D1Database;
 	V2_BUCKET: R2Bucket;
-	V2_EVENTS: K2Producer;
 	V2_CONNECTOR_TOKEN: string;
-	SAM_GOV_API_KEY: string;
+	SAM_GOV_API_KEY: SecretsStoreSecret;
 }
 
 function json(body: unknown, status = 200): Response {
@@ -55,10 +52,11 @@ function getTotal(page: unknown, rows: Record<string, unknown>[]): number {
 }
 
 async function fetchSamPage(urlString: string, env: Env): Promise<Record<string, unknown>> {
-	if (!env.SAM_GOV_API_KEY) throw new PermanentConnectorError("SAM_GOV_API_KEY is not configured");
+	const apiKey = await env.SAM_GOV_API_KEY.get();
+	if (!apiKey) throw new PermanentConnectorError("SAM_GOV_API_KEY is not configured");
 	if (!isSamGovPageUrl(urlString)) throw new PermanentConnectorError("SAM.gov page URL failed validation");
 	const url = new URL(urlString);
-	url.searchParams.set("api_key", env.SAM_GOV_API_KEY);
+	url.searchParams.set("api_key", apiKey);
 	const response = await fetch(url, {
 		headers: { Accept: "application/json", "User-Agent": "HarvyOpsAgent/1.0" },
 		signal: AbortSignal.timeout(30_000),
@@ -184,15 +182,8 @@ async function discover(request: Request, env: Env): Promise<Response> {
 	if (typeof runId !== "string" || !/^[0-9a-f-]{36}$/i.test(runId) || typeof environmentId !== "string") {
 		return json({ error: "run_id and environment_id required" }, 400);
 	}
-	const run = parseRunRequest({
-		connector: "sam-gov",
-		environment_id: environmentId,
-		idempotency_key: runId,
-		input: body,
-	});
-	if (!run || !("postedFrom" in run.input)) return json({ error: "invalid SAM.gov query" }, 400);
-	if (!env.SAM_GOV_API_KEY) return json({ error: "SAM.gov API key is not configured" }, 503);
-	const input = run.input;
+	const input = normalizeSamGovInput(body);
+	if (!input) return json({ error: "invalid SAM.gov query" }, 400);
 	const firstPageUrl = buildSamGovPageUrl(input, 0);
 	const firstPage = await fetchSamPage(firstPageUrl, env);
 	const firstRows = getRows(firstPage);
@@ -291,15 +282,10 @@ export default {
 			if (!authorized(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
 			return discover(request, env);
 		}
+		if (url.pathname === "/v2/process" && request.method === "POST") {
+			if (!authorized(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
+			return processConnectorRequest(request, "sam-gov", (item) => processSamGovPage(item, env));
+		}
 		return json({ error: "not found" }, 404);
 	},
-	queue(batch: MessageBatch<ConnectorQueueMessage>, env: Env, ctx: ExecutionContext): void {
-		ctx.waitUntil(Promise.all(batch.messages.map((message) => consumeWorkItem(
-			message,
-			env.V2_DB,
-			"sam-gov",
-			(item) => processSamGovPage(item, env),
-			(type, item, payload) => publishWorkItemEvent(env.V2_EVENTS, type, item, payload),
-		))));
-	},
-} satisfies ExportedHandler<Env, ConnectorQueueMessage>;
+} satisfies ExportedHandler<Env>;

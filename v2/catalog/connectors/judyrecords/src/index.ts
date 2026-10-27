@@ -6,16 +6,13 @@ import {
 	type JudyRecord,
 	type ConnectorQueueMessage,
 } from "../../../../shared/contracts.ts";
-import { consumeWorkItem, PermanentConnectorError } from "../../../../shared/queue.ts";
-import { publishWorkItemEvent, type K2Producer } from "../../../../shared/events.ts";
+import { PermanentConnectorError, processConnectorRequest } from "../../../../shared/queue.ts";
 
 interface Env {
-	V2_DB: D1Database;
 	V2_BUCKET: R2Bucket;
-	SPIDER_API_KEY: string;
-	WEBSHARE_PROXY_URL: string;
+	SPIDER_API_KEY: SecretsStoreSecret;
+	WEBSHARE_PROXY_URL: SecretsStoreSecret;
 	V2_CONNECTOR_TOKEN: string;
-	V2_EVENTS: K2Producer;
 }
 
 function json(body: unknown, status = 200): Response {
@@ -24,7 +21,9 @@ function json(body: unknown, status = 200): Response {
 
 function authorizedConnector(request: Request, env: Env): boolean {
 	const expected = env.V2_CONNECTOR_TOKEN ?? "";
-	const supplied = request.headers.get("Authorization") ?? "";
+	const authorization = request.headers.get("Authorization") ?? "";
+	if (!authorization.startsWith("Bearer ")) return false;
+	const supplied = authorization.slice(7);
 	let mismatch = expected.length ^ supplied.length;
 	for (let i = 0; i < Math.max(expected.length, supplied.length); i++) mismatch |= (expected.charCodeAt(i) || 0) ^ (supplied.charCodeAt(i) || 0);
 	return Boolean(expected) && mismatch === 0;
@@ -70,12 +69,16 @@ export function parseJudyRecord(html: string, recordUrl: string, proxyRequested:
 		.map((line) => line.trim().match(/^(.+?),\s*(Plaintiff|Defendant|Arresting Agency)\s*$/i))
 		.filter((match): match is RegExpMatchArray => Boolean(match))
 		.map((match) => ({ name: match[1].trim(), role: match[2].toLowerCase().replace(/\s+/g, "_") }));
-	const numberMatch = plain.match(/\bNo\.\s*([A-Za-z]{1,5}-\d{4}-\d+[A-Za-z0-9-]*)/i);
+	const numberMatch = plain.match(/\bNo\.\s*([A-Za-z]{1,5}-\d{4}-\d+[A-Za-z0-9-]*)/i)
+		?? plain.match(/\b(\d{1,3}[A-Z]{1,4}\d*-[0-9]{4}-[A-Z]{1,4}-\d+)\b/i);
 	const typeMatch = plain.match(/\bNo\.\s*[A-Za-z0-9-]+\s*\(([^)]+)\)/i);
 	const dateMatch = plain.match(/\bFiled:\s*(\d{1,2}\/\d{1,2}\/\d{4})/i);
 	const courtMatch = heading.match(/District Court in and for\s+([A-Za-z ]+?\s+County)\s*,\s*([A-Za-z ]+)$/i);
 	const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "";
 	const closed = /\bClosed:\s*\d{1,2}\/\d{1,2}\/\d{4}/i.test(plain);
+	const limitations: string[] = [];
+	if (!numberMatch) limitations.push("No case number extracted");
+	if (!typeMatch) limitations.push("No case type extracted");
 	const data = {
 		title: text(title),
 		case_number: numberMatch?.[1] ?? "",
@@ -84,7 +87,7 @@ export function parseJudyRecord(html: string, recordUrl: string, proxyRequested:
 		case_type: typeMatch?.[1].trim() ?? "",
 		case_status: closed ? "Closed" : "",
 		parties,
-		raw_text: plain.slice(0, 4000),
+		raw_text: plain,
 	};
 	return {
 		schema_version: 1,
@@ -93,19 +96,26 @@ export function parseJudyRecord(html: string, recordUrl: string, proxyRequested:
 		source_url: recordUrl,
 		collected_at: new Date().toISOString(),
 		parser_version: "1.0.0",
-		complete: Boolean(data.case_number && data.case_type),
-		limitations: data.case_number ? [] : ["No OSCN case number extracted"],
+		complete: limitations.length === 0,
+		limitations,
 		provenance: { method: "spider_unlimited_scrape", proxy_requested: proxyRequested },
 		data,
 	};
 }
 
+export async function resolveSpiderCredentials(env: Pick<Env, "SPIDER_API_KEY" | "WEBSHARE_PROXY_URL">): Promise<{ apiKey: string; proxyUrl: string }> {
+	const apiKey = await env.SPIDER_API_KEY.get();
+	const proxyUrl = await env.WEBSHARE_PROXY_URL.get();
+	if (!apiKey.trim() || !proxyUrl.trim()) throw new Error("Spider and proxy secrets are required");
+	return { apiKey, proxyUrl };
+}
+
 async function spider(endpoint: "scrape" | "links" | "crawl", payload: Record<string, unknown>, env: Env): Promise<unknown> {
-	if (!env.SPIDER_API_KEY || !env.WEBSHARE_PROXY_URL) throw new Error("Spider and proxy secrets are required");
+	const { apiKey, proxyUrl } = await resolveSpiderCredentials(env);
 	const response = await fetch(`https://api.spider.cloud/unlimited/${endpoint}`, {
 		method: "POST",
-		headers: { Authorization: `Bearer ${env.SPIDER_API_KEY}`, "Content-Type": "application/json" },
-		body: JSON.stringify({ ...payload, remote_proxy: env.WEBSHARE_PROXY_URL }),
+		headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+		body: JSON.stringify({ ...payload, remote_proxy: proxyUrl }),
 	});
 	if (!response.ok) {
 		const ErrorType = response.status === 429 || response.status >= 500 ? Error : PermanentConnectorError;
@@ -147,9 +157,15 @@ async function discover(request: Request, env: Env): Promise<Response> {
 	if (typeof body.run_id !== "string" || typeof body.environment_id !== "string") return json({ error: "run_id and environment_id required" }, 400);
 	const urls = new Map<string, string>();
 	for (const seed of seeds as string[]) {
+		const directRecordUrl = canonicalRecordUrl(seed);
+		if (directRecordUrl) {
+			urls.set(directRecordUrl, seed);
+			if (urls.size >= (limit as number)) break;
+			continue;
+		}
 		const result = await spider(mode, mode === "links"
 			? { url: seed, limit }
-			: { url: seed, limit, depth: 1, request: "http" }, env);
+			: { url: seed, limit, depth: 1, request: "smart", cache: false, return_page_links: true }, env);
 		for (const found of extractSpiderUrls(result)) {
 			const recordUrl = canonicalRecordUrl(found);
 			if (recordUrl && !urls.has(recordUrl)) urls.set(recordUrl, seed);
@@ -173,10 +189,18 @@ async function fetchAndStoreRecord(item: ConnectorQueueMessage, env: Env): Promi
 	}, env);
 	const html = pageHtml(result);
 	if (!html) throw new Error("Spider response did not contain record HTML");
-	const record = parseJudyRecord(html, item.url, true);
+	const parsedRecord = parseJudyRecord(html, item.url, true);
+	const key = `harvy-ql/raw/legal/judyrecords/${new Date().toISOString().slice(0, 10)}/${item.run_id}/${parsedRecord.record_id}.json`;
+	const sourceKey = key.replace(/\.json$/, ".source.html");
+	const sourceHash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(html));
+	const sourceDigest = [...new Uint8Array(sourceHash)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+	await env.V2_BUCKET.put(sourceKey, html, {
+		httpMetadata: { contentType: "text/html; charset=utf-8" },
+		customMetadata: { sha256: sourceDigest, connector: "judyrecords", record_id: parsedRecord.record_id },
+	});
+	const record = { ...parsedRecord, source_html_path: sourceKey, source_html_sha256: sourceDigest };
 	const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(record)));
 	const digest = [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
-	const key = `harvy-ql/raw/legal/judyrecords/${new Date().toISOString().slice(0, 10)}/${item.run_id}/${record.record_id}.json`;
 	await env.V2_BUCKET.put(key, JSON.stringify(record), {
 		httpMetadata: { contentType: "application/json" },
 		customMetadata: { sha256: digest, connector: "judyrecords", schema_version: "1" },
@@ -192,15 +216,10 @@ export default {
 			if (!authorizedConnector(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
 			return discover(request, env);
 		}
+		if (url.pathname === "/v2/process" && request.method === "POST") {
+			if (!authorizedConnector(request, env)) return json({ error: "unauthorized" }, env.V2_CONNECTOR_TOKEN ? 401 : 503);
+			return processConnectorRequest(request, "judyrecords", (item) => fetchAndStoreRecord(item, env));
+		}
 		return json({ error: "not found" }, 404);
 	},
-	queue(batch: MessageBatch<ConnectorQueueMessage>, env: Env, ctx: ExecutionContext): void {
-		ctx.waitUntil(Promise.all(batch.messages.map((message) => consumeWorkItem(
-			message,
-			env.V2_DB,
-			"judyrecords",
-			(item) => fetchAndStoreRecord(item, env),
-			(type, item, payload) => publishWorkItemEvent(env.V2_EVENTS, type, item, payload),
-		))));
-	},
-} satisfies ExportedHandler<Env, ConnectorQueueMessage>;
+} satisfies ExportedHandler<Env>;

@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "types": ["@cloudflare/workers-types"]
   },
-  "include": ["shared/**/*.ts", "*/src/**/*.ts"]
+  "include": ["shared/**/*.ts", "*/src/**/*.ts", "catalog/connectors/*/src/**/*.ts"]
 }

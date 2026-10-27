@@ -3,6 +3,9 @@
   "name": "harvy-auth",
   "main": "./worker.ts",
   "workers_dev": false,
+  "routes": [
+    { "pattern": "harvybot.com/api/better-auth/*", "zone_name": "harvybot.com" }
+  ],
   "compatibility_date": "2026-10-25",
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
@@ -15,8 +18,8 @@
   "d1_databases": [
     {
       "binding": "HARVY_D1",
-      "database_name": "harvy",
-      "database_id": "17fc049e-b8b6-42c2-8fdc-4cc4bf0834a9",
+      "database_name": "harvy-platform-v2",
+      "database_id": "2fb9f8e4-ca31-4cd0-95b4-b084429816f2",
       "migrations_dir": "../migrations"
     }
   ]

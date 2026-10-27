@@ -33,7 +33,6 @@ function renderSignIn(client: any, features: AuthFeatures, container: HTMLElemen
       <label class="auth-field-label" for="ba-name">DISPLAY NAME</label><input id="ba-name" class="auth-input" autocomplete="name" maxlength="80">
       <label class="auth-field-label" for="ba-email">EMAIL</label><input id="ba-email" class="auth-input" type="email" autocomplete="email" maxlength="254">
       <label class="auth-field-label" for="ba-password">PASSWORD</label><input id="ba-password" class="auth-input" type="password" autocomplete="new-password" minlength="12" maxlength="256">
-      <label class="auth-consent-row"><input id="ba-newsletter" type="checkbox"><span>Also subscribe me to Harvy email updates. Optional; confirm by email.</span></label>
       ${features.captcha ? `<div id="ba-turnstile" class="auth-turnstile"></div>` : ""}
       <div class="auth-actions"><button id="ba-email-signup" class="auth-btn-primary">CREATE ACCOUNT</button><button id="ba-email-login" class="auth-btn-secondary">SIGN IN</button></div>
     </section>` : `<section class="auth-section"><div class="auth-section-title">EMAIL SIGN-IN</div><p class="auth-help">Email/password sign-in will be enabled after transactional email is configured.</p></section>`}
@@ -92,13 +91,6 @@ function renderSignIn(client: any, features: AuthFeatures, container: HTMLElemen
     const captcha = await captchaOptions();
     const result = await client.signUp.email({ name, email, password, privacyAccepted: true, callbackURL: location.origin }, captcha);
     if (result.error) return message(result.error.message || "Account creation failed.", true);
-    if (container.querySelector<HTMLInputElement>("#ba-newsletter")?.checked) {
-      const subscribed = await fetch("/api/newsletter/subscribe", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, privacyAccepted: true, newsletterOptIn: true }),
-      });
-      if (!subscribed.ok) return message("Account created, but email updates could not be requested. Try the optional signup again later.", true);
-    }
     message("Account created. Check your inbox to verify your email address.");
   });
 

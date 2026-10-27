@@ -3,10 +3,10 @@ import unittest
 import json
 from pathlib import Path
 
-from v2.scripts.import_platform_v2_source_catalog import import_catalog
+from v2.scripts.import_v2_source_catalog import import_catalog
 
 
-class PlatformV2CatalogImportTests(unittest.TestCase):
+class V2CatalogImportTests(unittest.TestCase):
     def test_catalog_metadata_stays_disabled_and_references_are_not_connectors(self):
         with tempfile.TemporaryDirectory() as tmp:
             catalog = Path(tmp) / "Ingestion" / "Stream Catalog"

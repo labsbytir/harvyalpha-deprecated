@@ -19,8 +19,9 @@ body:
     attributes:
       label: Current state
       options:
-        - Current V1 adapter
-        - Platform v2 code (not deployed)
+        - Existing V2 connector
+        - V2 connector candidate / catalog entry
+        - V2 runtime or orchestration
         - Catalog-only candidate
         - New source proposal
     validations:

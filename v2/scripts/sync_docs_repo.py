@@ -10,10 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 def sync_docs(dest_dir: Path) -> int:
     docs_src = REPO_ROOT / "docs"
-    guides_src = REPO_ROOT / "guides" if (REPO_ROOT / "guides").is_dir() else docs_src
     basin_src = REPO_ROOT / "v2" / "health" / "BASIN.md"
-    if not basin_src.is_file():
-        basin_src = REPO_ROOT / "health" / "BASIN.md"
 
     if not dest_dir.is_dir():
         print(f"Error: destination directory {dest_dir} does not exist", file=sys.stderr)
@@ -28,11 +25,23 @@ def sync_docs(dest_dir: Path) -> int:
 
     # Sync guides / docs
     synced_count = 0
-    src_dir = guides_src if guides_src.is_dir() else docs_src
+    src_dir = docs_src
+    guide_names = {doc.name for doc in src_dir.glob("*.md")}
     for doc in src_dir.glob("*.md"):
         dest_file = content_guides / doc.name
         shutil.copy2(doc, dest_file)
         synced_count += 1
+    for stale_name in (
+        "PLATFORM_V2_CONNECTORS.md",
+        "platform-v2-first-five.md",
+        "V1_CONTRACTS.md",
+        "SCRAPING.md",
+        "RESEARCH.md",
+        "site-search-framework.md",
+    ):
+        stale = content_guides / stale_name
+        if stale_name not in guide_names and stale.is_file():
+            stale.unlink()
 
     # Sync Basin guide
     if basin_src.is_file():
@@ -43,9 +52,13 @@ def sync_docs(dest_dir: Path) -> int:
     notebooks_src = REPO_ROOT / "notebooks"
     if notebooks_src.is_dir():
         content_notebooks.mkdir(parents=True, exist_ok=True)
+        notebook_names = {notebook.name for notebook in notebooks_src.glob("*.md")}
         for notebook in notebooks_src.glob("*.md"):
             shutil.copy2(notebook, content_notebooks / notebook.name)
             synced_count += 1
+        stale_notebook = content_notebooks / "platform-v2-first-five.md"
+        if "platform-v2-first-five.md" not in notebook_names and stale_notebook.is_file():
+            stale_notebook.unlink()
 
     print(f"Synced {synced_count} documentation files to {dest_dir / 'content'}")
     return 0

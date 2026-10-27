@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildSamGovPageUrl, canonicalRecordUrl, extractSpiderUrls, isJudySeed, isSamGovPageUrl, parseRunRequest, truthSocialProfileUrl } from "../shared/contracts.ts";
-import { parseJudyRecord, resolveSpiderCredentials } from "../judyrecords/src/index.ts";
-import { extractAccount, extractTruthSocialPosts } from "../truthsocial/src/index.ts";
+import judyConnector, { parseJudyRecord, resolveSpiderCredentials } from "../catalog/connectors/judyrecords/src/index.ts";
+import truthConnector, { extractAccount, extractTruthSocialPosts } from "../catalog/connectors/truthsocial/src/index.ts";
 import { parseDatasetRelease } from "../shared/release-manifest.ts";
 import { createPlatformV2Event, publishPlatformV2Event } from "../shared/events.ts";
-import { normalizeSamOpportunity, redactSamGovApiKey } from "../sam-gov/src/index.ts";
+import { normalizeSamOpportunity, redactSamGovApiKey } from "../catalog/connectors/sam-gov/src/index.ts";
 import { consumeWorkItem, processConnectorRequest, PermanentConnectorError } from "../shared/queue.ts";
 
 test("run request validates explicit scope and bounded Judy seeds", () => {
@@ -34,9 +34,35 @@ test("Truth Social runs accept handles and enforce a public-timeline cap", () =>
 	assert.equal(parseRunRequest({ ...valid, input: { handles: ["alice"], max_posts: 41 } }), null);
 });
 
+test("connector discovery accepts the supervisor Bearer token", async () => {
+	for (const connector of [judyConnector, truthConnector]) {
+		const response = await connector.fetch(new Request("https://connector/v2/discover", {
+			method: "POST",
+			headers: { Authorization: "Bearer connector-secret" },
+			body: "{}",
+		}), { V2_CONNECTOR_TOKEN: "connector-secret" });
+		assert.equal(response.status, 400);
+	}
+});
+
+test("connector discovery rejects a missing or mismatched Bearer token", async () => {
+	for (const connector of [judyConnector, truthConnector]) {
+		for (const authorization of [undefined, "connector-secret", "Bearer wrong-secret"]) {
+			const headers = authorization ? { Authorization: authorization } : {};
+			const response = await connector.fetch(new Request("https://connector/v2/discover", {
+				method: "POST",
+				headers,
+				body: "{}",
+			}), { V2_CONNECTOR_TOKEN: "connector-secret" });
+			assert.equal(response.status, 401);
+		}
+	}
+});
+
 test("Judy URL canonicalization excludes non-record paths and other hosts", () => {
 	assert.equal(isJudySeed("https://www.judyrecords.com/record/abc123"), true);
 	assert.equal(canonicalRecordUrl("https://judyrecords.com/record/ABC123?x=1"), "https://www.judyrecords.com/record/abc123");
+	assert.equal(canonicalRecordUrl("https://www.judyrecords.com/record/nuz6nqiv9c4ff"), "https://www.judyrecords.com/record/nuz6nqiv9c4ff");
 	assert.equal(canonicalRecordUrl("https://www.judyrecords.com/search"), null);
 	assert.equal(canonicalRecordUrl("https://example.com/record/abc123"), null);
 });
@@ -59,11 +85,29 @@ test("OSCN record parser extracts stable fields and source provenance", () => {
 	assert.equal(record.data.court, "Garfield County, Oklahoma District Court");
 	assert.equal(record.data.case_type, "Criminal Misdemeanor");
 	assert.equal(record.data.case_status, "Closed");
+	assert.equal(record.complete, true);
+	assert.deepEqual(record.limitations, []);
 	assert.deepEqual(record.data.parties, [
 		{ name: "ANDY", role: "defendant" },
 		{ name: "STATE OF OKLAHOMA", role: "plaintiff" },
 	]);
 	assert.equal(record.provenance.proxy_requested, true);
+});
+
+test("Judy parser extracts a Tennessee docket number without an OSCN label", () => {
+	const html = `<article class="record page"><div id="oscn-content">State Of Tennessee vs A B 30GS1-2022-TR-5728 Filing Date: Dec 13 2022</div></article>`;
+	const record = parseJudyRecord(html, "https://www.judyrecords.com/record/nuz6nqiv9c4ff", true);
+	assert.equal(record.data.case_number, "30GS1-2022-TR-5728");
+	assert.equal(record.complete, false);
+	assert.deepEqual(record.limitations, ["No case type extracted"]);
+});
+
+test("Judy parser preserves source text beyond the old truncation limit", () => {
+	const sourceText = "record detail ".repeat(400).trim();
+	const html = `<article class="record page"><div id="oscn-content">${sourceText}</div></article>`;
+	const record = parseJudyRecord(html, "https://www.judyrecords.com/record/0dkk2dkd6452", true);
+	assert.equal(record.data.raw_text, sourceText);
+	assert.ok(record.data.raw_text.length > 4000);
 });
 
 test("Truth Social parser emits only posts owned by the requested public account", () => {

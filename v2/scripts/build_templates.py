@@ -61,6 +61,9 @@ for stylesheet in (ROOT / "styles").glob("*.css"):
     output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(stylesheet, output)
 
+portal_shell = ROOT / "v2" / "portal" / "saas-shell.js"
+shutil.copyfile(portal_shell, ROOT / "static" / "saas-shell.js")
+
 privacy_source = ROOT / "docs" / "PRIVACY.md"
 terms_source = ROOT / "docs" / "TERMS.md"
 acceptable_use_source = ROOT / "docs" / "ACCEPTABLE_USE.md"

@@ -1,6 +1,0 @@
-{
-  "url": "https://texas.arrests.org/search.php?fname=John&lname=Doe&fpartial=",
-  "status": 200,
-  "error": null,
-  "content": "<div class=\"results\"><div class=\"profile\"><div class=\"name\">DOE, JOHN</div><div class=\"charge\">Traffic Infraction</div></div></div>"
-}

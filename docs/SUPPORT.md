@@ -1,25 +1,27 @@
-# Harvy Support and Troubleshooting
+# V2 Support and Troubleshooting
 
-## Search has no results
+## Run did not start
 
-Universal search currently queries `harvy_search_documents` in D1. Empty results can mean the data has not been indexed; it does not mean the source has no records. Search is a bounded title/snippet/body substring lookup, not arbitrary SQL.
+1. Check the supervisor `/health` response and confirm it is JSON.
+2. Check the operator registration with `GET /v2/connectors`; a connector must be registered, enabled, and capability-verified before `POST /v2/runs` succeeds.
+3. Confirm the supervisor service binding matches the private connector Worker name. A connector health response must identify the expected connector.
+4. Review input validation and the idempotency key; a repeated key with different input is rejected.
 
-## A job cannot be opened
+## Run is incomplete or failed
 
-Job status, artifact, and download endpoints require the `X-Job-Token` returned by `POST /api/jobs`. It is different from an account session. If the token is lost, the current API does not provide token recovery.
+- Inspect `GET /v2/runs/{id}`, D1 work-item state, Queue retries/DLQ, K2 events, and the connector's R2 artifact path.
+- A health check, HTTP 200, or completed workflow is not proof that distinct source records were captured. Verify record IDs, parser coverage, source artifacts, and known pagination/access limitations.
+- A JudyRecords empty search result is not proof that no records exist. Term-based search discovery is unverified; test a concrete results page and direct record separately.
+- A one-profile Truth Social sample does not establish timeline pagination or historical completeness.
+- Never delete R2 artifacts or reset D1 to roll back. Pause new runs, inspect leases and queued work, then use the documented recovery procedure in [V2 connector operations](V2_CONNECTORS.md).
 
-## A job type returns 501
+## Access and local development
 
-Username and research jobs are not implemented in the Cloudflare Worker yet. The local Python service has separate job paths; do not assume they are available on `harvybot.com`.
+- `V2_SUPERVISOR_TOKEN` protects operator routes; `V2_CONNECTOR_TOKEN` protects private supervisor-to-connector calls. Do not paste either value into logs or chat.
+- Spider and Webshare values come from the connector's Secrets Store bindings. Binding/permission errors require checking the Worker binding and account permission—not putting the key in a request body.
+- Requests to a `workers.dev` endpoint may be blocked when sent with a generic Python client signature. The approved run helper uses a descriptive `HarvyPlatform/2.0` user-agent; do not impersonate a browser.
+- Wrangler remote development does not support the production Queue binding. A local preview is not an end-to-end Queue test.
 
-## UI changes do not appear
+## Reporting an issue
 
-CSS sources are in `styles/` and templates are in `pages/`. Run `npm run build:templates`; then hard-refresh the browser if an older asset is cached.
-
-## Basin data is missing
-
-The local Flask app has Basin upload helpers. The Cloudflare Worker profile path currently writes raw responses to R2 and search projections to D1; it does not yet ingest normalized object records into Basin. See [Basin operations](../v2/health/BASIN.md).
-
-## Support contact
-
-No public support portal or SLA is configured in the application documentation. For an internal issue, capture the route, status code, request/job ID, and sanitized logs. Never include API keys, proxy credentials, session cookies, or private raw records.
+Include the run ID, connector ID, UTC time, request path, response status, and sanitized error/trace identifier. Do not include tokens, provider secrets, private artifact contents, or logged-in account cookies.
