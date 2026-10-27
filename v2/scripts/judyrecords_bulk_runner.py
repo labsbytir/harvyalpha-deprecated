@@ -10,8 +10,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from proxy.config import get_proxy
-from scrape.judyrecords_bulk import DEFAULT_OUT, run_bulk
+from v2.proxy.config import get_proxy
+from v1.scrape.judyrecords_bulk import DEFAULT_OUT, run_bulk
 
 
 def load_queries(path):

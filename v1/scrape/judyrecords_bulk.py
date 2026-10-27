@@ -14,8 +14,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
 
-from scrape.client import ai as spider_ai, unlimited as spider_unlimited
-from scrape.judyrecords import parse_case_page
+from v1.scrape.client import ai as spider_ai, unlimited as spider_unlimited
+from v1.scrape.judyrecords import parse_case_page
 
 JUDY_HOSTS = {"judyrecords.com", "www.judyrecords.com"}
 RECORD_PATH = re.compile(r"^/record/([a-z0-9]+)/?$", re.I)

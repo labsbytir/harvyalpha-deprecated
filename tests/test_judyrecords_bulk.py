@@ -5,8 +5,8 @@ import urllib.request
 from pathlib import Path
 from unittest.mock import patch
 
-import scrape.client as spider_client
-from scrape import judyrecords_bulk as bulk
+import v1.scrape.client as spider_client
+from v1.scrape import judyrecords_bulk as bulk
 
 OSCN_HTML = """<article class="record page"><div id="oscn-content">
 <h2 class="styletop"><span class="styletop">In the District Court in and for Garfield County, Oklahoma</span></h2>
