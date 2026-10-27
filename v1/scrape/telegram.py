@@ -27,7 +27,7 @@ Data-loss rules:
 
 Chat attachments are metadata-only (type + message id). Sender profile
 photos are downloaded once per user/photo id, scanned locally with
-NudeNet when HARVY_NSFW_SCAN=true, retained when approved, deleted
+NudeNet unless HARVY_NSFW_SCAN=false, retained when approved, deleted
 when flagged or when scanning fails closed.
 """
 import argparse
@@ -43,7 +43,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -51,57 +51,7 @@ if str(PROJECT_ROOT) not in sys.path:
 OUT_ROOT = "data/telegram"
 RATE_LIMIT_DELAY = 1.05
 
-NSFW_CLASSES = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED",
-                "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
-
-_DETECTOR: Any = None
-
-
-def nsfw_enabled() -> bool:
-    return os.environ.get("HARVY_NSFW_SCAN", "").lower() in ("1", "true", "yes")
-
-
-def get_detector() -> Tuple[Any, Optional[str]]:
-    """Reuse one NudeNet detector across all scans. Returns (detector, error)."""
-    global _DETECTOR
-    if _DETECTOR is not None:
-        return _DETECTOR, None
-    try:
-        from nudenet import NudeDetector
-    except ImportError:
-        return None, "nudenet not installed"
-    try:
-        _DETECTOR = NudeDetector()
-        return _DETECTOR, None
-    except Exception as error:
-        return None, str(error)
-
-
-def scan_image_file(path: str) -> Optional[Dict[str, Any]]:
-    """Score one image with NudeNet v3 (local ONNX, no network).
-
-    Returns flags only — never image bytes. None when scanning disabled.
-    Top score is computed over NSFW classes only so unrelated detections
-    (faces, clothing) do not inflate the score.
-    """
-    if not nsfw_enabled():
-        return None
-    detector, error = get_detector()
-    if detector is None:
-        return {"enabled": True, "available": False, "error": error,
-                "flagged": True, "fail_closed": True}
-    try:
-        detections = detector.detect(path) or []
-        exposed = [d for d in detections if d.get("class") in NSFW_CLASSES]
-        top = max((float(d.get("score", 0.0)) for d in exposed), default=0.0)
-        return {"enabled": True, "available": True,
-                "nsfw_score": round(top, 3),
-                "flagged": bool(exposed),
-                "exposed_detections": len(exposed),
-                "total_detections": len(detections)}
-    except Exception as error:
-        return {"enabled": True, "available": False, "error": str(error),
-                "flagged": True, "fail_closed": True}
+from v2.media_safety import scan_image_file
 
 
 COMBOT_TOP_GROUPS_EN = "https://combot.org/top/telegram/groups/en"

@@ -51,20 +51,20 @@ npm run typecheck:v2
 npm run test:v2
 ```
 
-Template source lives in `templates/`, CSS source in `styles/`, scraper adapters in `v1/scrape/`, and generated Worker assets in `static/`.
+Template source lives in `pages/`, CSS source in `styles/`, scraper adapters in `v1/scrape/`, and generated Worker assets in `static/`.
 
 ## Deployment
 
-The production Worker is configured by `wrangler.jsonc`. Build generated assets with `npm run build:templates` before deploying. Provider credentials belong in Worker secrets, never in source or queue messages. See [Hosting](guides/HOSTING.md), [Scraping](guides/SCRAPING.md), [Research](guides/RESEARCH.md), and [Basin operations](health/BASIN.md).
+The production Worker is configured by `wrangler.jsonc`. Build generated assets with `npm run build:templates` before deploying. Provider credentials belong in Worker secrets, never in source or queue messages. See [Hosting](docs/HOSTING.md), [Scraping](docs/SCRAPING.md), [Research](docs/RESEARCH.md), and [Basin operations](v2/health/BASIN.md).
 
 Platform v2 has separate Wrangler configurations and resource placeholders. Do not deploy those configs until the v2 D1/KV/R2/Queue resources, K2 subscriptions, and secrets have been provisioned and reviewed.
 
 ## Privacy and provenance
 
-Collectors preserve source URLs, timestamps, provenance, and known limitations. Harvy does not accept logged-in social-account cookies. Local scrape data and consent state are excluded from Git. See [Privacy](guides/PRIVACY.md) and [Acceptable Use](guides/ACCEPTABLE_USE.md).
+Collectors preserve source URLs, timestamps, provenance, and known limitations. Harvy does not accept logged-in social-account cookies. Local scrape data and consent state are excluded from Git. See [Privacy](docs/PRIVACY.md) and [Acceptable Use](docs/ACCEPTABLE_USE.md).
 
-The bundled username-check dataset includes its own attribution and license terms in `data/whatsmyname-LICENSE.md`. No project-wide license is declared yet.
+The bundled username-check dataset includes its own attribution and license terms in `v2/data/whatsmyname-LICENSE.md`. No project-wide license is declared yet.
 
 ## Community and support
 
-Join the [Discord community](https://discord.gg/zcSM5Qy3tm), support development through [Buy Me a Coffee](https://buymeacoffee.com/tirlabs), or open an issue on [GitHub](https://github.com/labsbytir/harvy/issues). For safe troubleshooting details, see [Support](guides/SUPPORT.md).
+Join the [Discord community](https://discord.gg/zcSM5Qy3tm), support development through [Buy Me a Coffee](https://buymeacoffee.com/tirlabs), or open an issue on [GitHub](https://github.com/labsbytir/harvy/issues). For safe troubleshooting details, see [Support](docs/SUPPORT.md).

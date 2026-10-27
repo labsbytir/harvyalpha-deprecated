@@ -18,9 +18,9 @@ import zipfile
 from flask import Flask, abort, jsonify, render_template, request, send_file, url_for
 
 from archive_search import index_directory, index_files, search as search_archive
-from health.basin_storage import upload_directory
+from v2.health.basin_storage import upload_directory
 from v1.scrape.jobs import HERE, job_command, redact, research_job_command, username_job_command, validate_credentials
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 from search_documents import documents_for_job
 from email_shield import mask_email, mask_emails_in_text, extract_emails
 
@@ -153,7 +153,7 @@ class Jobs:
 
 
 def create_app(config=None):
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder="pages")
     app.config.update(
         SPIDER_API_KEY=os.environ.get("SPIDER_API_KEY", ""),
         WEBSHARE_PROXY_URL=get_proxy(),

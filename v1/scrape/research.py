@@ -10,7 +10,7 @@ from urllib.parse import urlencode
 from urllib.request import ProxyHandler, Request, build_opener, urlopen
 
 from v1.scrape.jobs import ARREST_STATE_SLUGS
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 HERE = Path(__file__).resolve().parent
 SPIDER_ENDPOINT = "https://api.spider.cloud/unlimited/scrape"

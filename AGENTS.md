@@ -4,8 +4,8 @@
 
 1. The active Git repository root is `/Users/pen/Documents/harvy`.
 2. Keep CSS source in `styles/`; build generated web assets with `npm run build:templates`.
-3. Keep operator, developer, API, and support guides in `guides/`. Sync them to the Obsidian vault with `npm run sync:vault-guides`.
-4. Keep project plans in `planning/` and mirror planning documents into `/Users/pen/Documents/Notes/harvy/Planning/`.
+3. Keep operator, developer, API, and support guides in `docs/`. Sync them to the Obsidian vault with `npm run sync:vault-guides`.
+4. Keep project plans in `docs/PLAN.md` and mirror planning documents into `/Users/pen/Documents/Notes/harvy/Planning/`.
 5. Use `ponytail` for coding tasks and `ponytail-review` for requested code reviews. Read callers, tests, and config before changing behavior.
 6. Preserve existing user work. Do not commit, push, deploy, run remote migrations, or alter provider account settings unless the user explicitly asks.
 7. Before broad changes, record Git status and review the diff; keep rollback possible and never use destructive reset/clean commands on unreviewed work.

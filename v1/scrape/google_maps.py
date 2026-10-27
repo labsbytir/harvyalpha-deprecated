@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 from v1.scrape.client import request as spider_request
 
 ALLOWED_HOSTS = {"google.com", "www.google.com", "maps.google.com"}

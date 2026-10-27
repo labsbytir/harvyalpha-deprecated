@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "types": ["@cloudflare/workers-types"]
   },
-  "include": ["shared/**/*.ts", "supervisor/src/**/*.ts", "judyrecords/src/**/*.ts", "truthsocial/src/**/*.ts", "sam-gov/src/**/*.ts", "projector/src/**/*.ts"]
+  "include": ["shared/**/*.ts", "supervisor/src/**/*.ts", "catalog/connectors/*/src/**/*.ts", "projector/src/**/*.ts"]
 }

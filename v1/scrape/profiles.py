@@ -14,7 +14,7 @@ from urllib.parse import parse_qs, quote, unquote, urljoin, urlparse
 
 from v1.scrape.client import request as spider_request
 from v1.scrape.facebook import walk
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 # These are Spider recipe references, not separate scraping services.
 RECIPES = {

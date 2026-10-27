@@ -16,7 +16,7 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 from v1.scrape.client import request as spider_request
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 SECTIONS = (
     "about", "about_overview", "about_work_and_education", "about_places",

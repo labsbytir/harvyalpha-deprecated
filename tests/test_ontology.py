@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from ontology.contracts import (
+from v2.ontology.contracts import (
     DEFAULT_ENVIRONMENT,
     build_scope_filter,
     make_link_id,
@@ -90,7 +90,7 @@ class TestOntologyContracts(unittest.TestCase):
         self.assertEqual(link["target_id"], "urn:harvy:post:x:9999")
         self.assertEqual(link["evidence_observation_id"], obs["id"])
 
-        from ontology.contracts import make_basin_observation_event, make_basin_link_event
+        from v2.ontology.contracts import make_basin_observation_event, make_basin_link_event
         obs_event = make_basin_observation_event(obs)
         self.assertEqual(obs_event["kind"], "ontology_observation")
         self.assertEqual(obs_event["target"], "urn:harvy:profile:x:nasa")
@@ -105,7 +105,7 @@ class TestOntologyContracts(unittest.TestCase):
     def test_backfill_search_documents(self):
         import sqlite3
         from pathlib import Path
-        from scripts.backfill_ontology import backfill_search_documents
+        from v2.scripts.backfill_ontology import backfill_search_documents
 
         db = sqlite3.connect(":memory:")
         try:

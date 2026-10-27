@@ -3,7 +3,7 @@ import unittest
 import json
 from pathlib import Path
 
-from scripts.import_platform_v2_source_catalog import import_catalog
+from v2.scripts.import_platform_v2_source_catalog import import_catalog
 
 
 class PlatformV2CatalogImportTests(unittest.TestCase):

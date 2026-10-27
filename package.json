@@ -1,21 +1,21 @@
 {
   "private": true,
   "scripts": {
-    "build:auth-client": "vite build --config auth/vite.config.mts",
+    "build:auth-client": "vite build --config v2/auth/vite.config.mts",
     "build:graph": "vite build --config v2/graph/vite.config.mts",
-    "typecheck:auth": "tsc -p auth/tsconfig.json",
-    "typecheck:auth-client": "tsc -p auth/tsconfig.client.json",
-    "test:auth-consent": "node --experimental-strip-types --test auth/privacy-consent.test.mjs",
+    "typecheck:auth": "tsc -p v2/auth/tsconfig.json",
+    "typecheck:auth-client": "tsc -p v2/auth/tsconfig.client.json",
+    "test:auth-consent": "node --experimental-strip-types --test v2/auth/privacy-consent.test.mjs",
     "test:v2": "node --experimental-strip-types --test v2/tests/contracts.test.mjs",
     "typecheck:v2": "tsc -p v2/tsconfig.json",
     "typecheck:graph": "tsc -p v2/graph/tsconfig.json",
-    "build:templates": "tsc -p tsconfig.json && npm run typecheck:auth && npm run typecheck:auth-client && npm run build:auth-client && npm run typecheck:graph && npm run build:graph && python3 scripts/sync_worker_modules.py && python3 scripts/build_templates.py",
-    "deploy:auth": "npx wrangler deploy --config auth/wrangler.jsonc",
+    "build:templates": "tsc -p tsconfig.json && npm run typecheck:auth && npm run typecheck:auth-client && npm run build:auth-client && npm run typecheck:graph && npm run build:graph && python3 v2/scripts/sync_worker_modules.py && python3 v2/scripts/build_templates.py",
+    "deploy:auth": "npx wrangler deploy --config v2/auth/wrangler.jsonc",
     "deploy": "npm run build:templates && npm run deploy:auth && npx wrangler deploy",
-    "sync:vault-guides": "python3 scripts/sync_vault_guides.py",
+    "sync:vault-guides": "python3 v2/scripts/sync_vault_guides.py",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -t v -p angular",
     "prepare": "husky",
-    "sync:worker-modules": "python3 scripts/sync_worker_modules.py"
+    "sync:worker-modules": "python3 v2/scripts/sync_worker_modules.py"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261025.1",

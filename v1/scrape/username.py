@@ -12,7 +12,7 @@ from urllib.parse import quote, urlsplit
 
 from v1.scrape.client import scrape_batch
 from v1.scrape.profiles import validate_public_destination
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "username_targets.json"

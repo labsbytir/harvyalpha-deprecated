@@ -2,8 +2,8 @@ import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// IIFE bundle in the style of auth/vite.config.mts; the page shell is
-// templates/query.html -> static/query/index.html via scripts/build_templates.py.
+// IIFE bundle in the style of v2/auth/vite.config.mts; the page shell is
+// pages/query.html -> static/query/index.html via v2/scripts/build_templates.py.
 export default defineConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   plugins: [react()],

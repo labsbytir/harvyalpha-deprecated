@@ -9,8 +9,8 @@ import urllib.request
 from collections import Counter
 from urllib.error import HTTPError, URLError
 
-from proxy.config import get_proxy
-from search.forms import SearchForm, discover_search_forms
+from v2.proxy.config import get_proxy
+from v2.catalog.connectors.adapters.search.forms import SearchForm, discover_search_forms
 
 JUDY_BASE = "https://www.judyrecords.com"
 DEFAULT_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

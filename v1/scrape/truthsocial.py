@@ -5,7 +5,7 @@ import os
 import re
 from pathlib import Path
 
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 from v1.scrape.client import request as spider_request
 from v1.scrape.profiles import profile_link, validate_public_destination
 

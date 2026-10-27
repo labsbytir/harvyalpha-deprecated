@@ -9,7 +9,7 @@ import time
 import urllib.request
 from datetime import datetime
 from pathlib import Path
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"

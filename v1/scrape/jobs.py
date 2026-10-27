@@ -6,7 +6,7 @@ import sys
 from urllib.parse import unquote, urlparse
 import uuid
 
-from proxy.config import get_proxy
+from v2.proxy.config import get_proxy
 from v1.scrape.profiles import profile_link
 
 HERE = Path(__file__).resolve().parent.parent

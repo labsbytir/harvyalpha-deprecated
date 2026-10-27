@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildSamGovPageUrl, canonicalRecordUrl, extractSpiderUrls, isJudySeed, isSamGovPageUrl, parseRunRequest, truthSocialProfileUrl } from "../shared/contracts.ts";
-import { parseJudyRecord } from "../judyrecords/src/index.ts";
-import { extractAccount, extractTruthSocialPosts } from "../truthsocial/src/index.ts";
+import { parseJudyRecord } from "../catalog/connectors/judyrecords/src/index.ts";
+import { extractAccount, extractTruthSocialPosts } from "../catalog/connectors/truthsocial/src/index.ts";
 import { parseDatasetRelease } from "../shared/release-manifest.ts";
 import { createPlatformV2Event, publishPlatformV2Event } from "../shared/events.ts";
-import { normalizeSamOpportunity, redactSamGovApiKey } from "../sam-gov/src/index.ts";
+import { normalizeSamOpportunity, redactSamGovApiKey } from "../catalog/connectors/sam-gov/src/index.ts";
 
 test("run request validates explicit scope and bounded Judy seeds", () => {
 	const valid = {
