@@ -6,11 +6,14 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 def sync_docs(dest_dir: Path) -> int:
-    guides_src = ROOT / "guides"
-    basin_src = ROOT / "health" / "BASIN.md"
+    docs_src = REPO_ROOT / "docs"
+    guides_src = REPO_ROOT / "guides" if (REPO_ROOT / "guides").is_dir() else docs_src
+    basin_src = REPO_ROOT / "v2" / "health" / "BASIN.md"
+    if not basin_src.is_file():
+        basin_src = REPO_ROOT / "health" / "BASIN.md"
 
     if not dest_dir.is_dir():
         print(f"Error: destination directory {dest_dir} does not exist", file=sys.stderr)
@@ -23,11 +26,12 @@ def sync_docs(dest_dir: Path) -> int:
     content_guides.mkdir(parents=True, exist_ok=True)
     content_health.mkdir(parents=True, exist_ok=True)
 
-    # Sync guides
+    # Sync guides / docs
     synced_count = 0
-    for guide in guides_src.glob("*.md"):
-        dest_file = content_guides / guide.name
-        shutil.copy2(guide, dest_file)
+    src_dir = guides_src if guides_src.is_dir() else docs_src
+    for doc in src_dir.glob("*.md"):
+        dest_file = content_guides / doc.name
+        shutil.copy2(doc, dest_file)
         synced_count += 1
 
     # Sync Basin guide
@@ -36,7 +40,7 @@ def sync_docs(dest_dir: Path) -> int:
         synced_count += 1
 
     # Sync notebooks (repo documentation)
-    notebooks_src = ROOT / "notebooks"
+    notebooks_src = REPO_ROOT / "notebooks"
     if notebooks_src.is_dir():
         content_notebooks.mkdir(parents=True, exist_ok=True)
         for notebook in notebooks_src.glob("*.md"):
