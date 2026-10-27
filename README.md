@@ -8,8 +8,14 @@
 
 <p align="center">
   <a href="https://github.com/labsbytir/harvy/actions/workflows/ci.yml"><img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/labsbytir/harvy/ci.yml?branch=main&style=for-the-badge&label=CI"></a>
+  <img alt="GitHub" src="https://img.shields.io/github/stars/labsbytir/harvy?style=for-the-badge&label=&logo=github&color=black">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.8%2B-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
   <img alt="Cloudflare Workers" src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white">
+</p>
+
+<p align="center">
+  <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank"><img alt="Discord" src="https://img.shields.io/badge/Discord-Join%20Us-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+  <a href="https://www.buymeacoffee.com/YOUR_BUYMEACOFFEE" target="_blank"><img alt="Buy Me a Coffee" src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"></a>
 </p>
 
 <p align="center"><a href="https://labsbytir.github.io/harvy/">Visit the project site ↗</a></p>
