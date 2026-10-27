@@ -13,18 +13,18 @@ This audit resolves conflicting proposals across earlier planning documents, ver
   - `telegram-continuous-mining.md` proposed creating a new Cloudflare Queue `harvy-telegram` with DLQ and crontab refresh.
   - `telegram-vps-wiring.md` proposed the VPS polling this queue via REST and writing directly to D1, R2, and K2.
   - BUT `harvy-workflow-orchestration.md` and Rule #497/#504 state that Cloudflare Workflows and K2 will handle orchestration, while existing `HARVY_QUEUE` remains intact.
-  - AND `telegram-history-scrape.md` explicitly bounded Telegram ingestion as a local authorized Telethon CLI tool (`data/telegram/@handle/`), ruling out cloud queue/ontology/R2 pipelines to avoid Telegram account bans and ToS violations.
+  - AND `telegram-history-v1.scrape.md` explicitly bounded Telegram ingestion as a local authorized Telethon CLI tool (`data/telegram/@handle/`), ruling out cloud queue/ontology/R2 pipelines to avoid Telegram account bans and ToS violations.
 - **Codebase Verification:**
   - `wrangler.jsonc` has no `harvy-telegram` queue.
-  - `scrape/telegram.py` exists as a local CLI. Neither Telethon nor VPS daemon scripts exist in `requirements.txt` or `pyproject.toml`.
+  - `v1/scrape/telegram.py` exists as a local CLI. Neither Telethon nor VPS daemon scripts exist in `requirements.txt` or `pyproject.toml`.
 - **Resolution:**
-  - Telegram history mining remains a **local authorized CLI** (`scrape/telegram.py`) dumping to local storage (`data/telegram/`). No dedicated Cloudflare queue or unvetted remote VPS poll daemon will be created until authorized.
+  - Telegram history mining remains a **local authorized CLI** (`v1/scrape/telegram.py`) dumping to local storage (`data/telegram/`). No dedicated Cloudflare queue or unvetted remote VPS poll daemon will be created until authorized.
 
 ### 2. VPS Scraper Connectivity vs Cloudflare Security Policy
 - **Contradiction:**
   - `judyrecords-continuous-mining.md` and `telegram-vps-wiring.md` proposed exposing HTTP scraper endpoints on VPS and having VPS communicate back to D1 REST and R2 S3 endpoints.
   - BUT Project Rule #507 explicitly mandates: *"Use Cloudflare service bindings for internal Worker-to-runner communication (never expose public endpoints)."*
-  - AND `scripts/judyrecords_scraper_service.py` runs an unauthenticated Flask server on `0.0.0.0:8787`.
+  - AND `v1/scripts/judyrecords_scraper_service.py` runs an unauthenticated Flask server on `0.0.0.0:8787`.
 - **Codebase Verification:**
   - Exposing plain HTTP endpoints on public IPs violates Rule #507.
 - **Resolution:**
@@ -35,7 +35,7 @@ This audit resolves conflicting proposals across earlier planning documents, ver
   - `telegram-mtproto-mining.md` cited legacy scripts falling back to Spider pay-as-you-go / Google search endpoints.
   - BUT Project Rule #435 and `AGENTS.md` Directive 1 explicitly state: *"Harvy uses Spider Unlimited endpoints (/unlimited/scrape, /unlimited/crawl, /unlimited/links) by default; never fall back to metered/PAYG without explicit approval."*
 - **Codebase Verification:**
-  - `scrape/client.py` correctly enforces `/unlimited/*` endpoints and blocks accidental PAYG usage.
+  - `v1/scrape/client.py` correctly enforces `/unlimited/*` endpoints and blocks accidental PAYG usage.
 - **Resolution:**
   - All collectors (social, legal, arrest) must exclusively use Spider Unlimited and Webshare residential proxy (`WEBSHARE_PROXY_URL`).
 
@@ -51,12 +51,12 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 
 ### 5. Scraping V2 (TypeScript Worker) vs Production Python Collectors
 - **Contradiction:**
-  - `scraping-v2-roadmap.md` suggested moving scrapers to a TypeScript Worker pipeline in `scrape/v2/`.
-  - BUT `AGENTS.md` and Memory #480 state: *"Keep the existing per-network social adapters and court/arrest research collectors working during V2 migration. `scrape/v2/` is experimental, not a production replacement."*
+  - `scraping-v2-roadmap.md` suggested moving scrapers to a TypeScript Worker pipeline in `v1/scrape/v2/`.
+  - BUT `AGENTS.md` and Memory #480 state: *"Keep the existing per-network social adapters and court/arrest research collectors working during V2 migration. `v1/scrape/v2/` is experimental, not a production replacement."*
 - **Codebase Verification:**
-  - The live, battle-tested scrapers are in `scrape/` (Python), tested via `tests/test_x_scraper.py`, `tests/test_scrape_protocol.py`, etc.
+  - The live, battle-tested scrapers are in `v1/scrape/` (Python), tested via `tests/test_x_scraper.py`, `tests/test_scrape_protocol.py`, etc.
 - **Resolution:**
-  - `scrape/v2/` removed from repo on 2026-10-26; it was experimental and never a production replacement. Production collection continues on Python modular adapters with Spider transport.
+  - `v1/scrape/v2/` removed from repo on 2026-10-26; it was experimental and never a production replacement. Production collection continues on Python modular adapters with Spider transport.
 
 ### 6. BI Dashboard Implementation: drizzle-cube vs Custom React MUI
 - **Contradiction:**
@@ -71,14 +71,14 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 - **Contradiction:**
   - Legacy `untruth/truth_social.py` fell back to Spider metered crawl (`SPIDER_METERED_CRAWL`) on 429, violating Rule #435/#522 (Spider Unlimited only).
   - Legacy script uploaded directly to Impossible Cloud S3 (`opentir-payloads`) instead of Harvy R2 and D1 ontology (violating Rule #527).
-  - `scrape/profiles.py` parsed Mastodon/Truth Social statuses, but lacked a registered adapter module.
-  - `scrape/protocol.py` returned raw `truthsocial.com` instead of normalized network `truthsocial`.
+  - `v1/scrape/profiles.py` parsed Mastodon/Truth Social statuses, but lacked a registered adapter module.
+  - `v1/scrape/protocol.py` returned raw `truthsocial.com` instead of normalized network `truthsocial`.
 - **Codebase Verification:**
-  - `untruth/truth_social.py` deleted; `scrape/profiles.py` had no `adapter_for("truthsocial")`.
+  - `untruth/truth_social.py` deleted; `v1/scrape/profiles.py` had no `adapter_for("truthsocial")`.
   - `tests/test_social_profiles.py` tests Mastodon/Truth Social node extraction, but no adapter or protocol envelope was wired.
 - **Resolution:**
-  - Implement modular adapter `scrape/truthsocial.py` using strict Spider Unlimited (`/unlimited/scrape`) and Webshare proxy (`WEBSHARE_PROXY_URL`).
-  - Wire into `adapter_for()` in `scrape/profiles.py` and normalize in `scrape/protocol.py`. Store raw payloads in R2 and index observations in D1.
+  - Implement modular adapter `v1/scrape/truthsocial.py` using strict Spider Unlimited (`/unlimited/scrape`) and Webshare proxy (`WEBSHARE_PROXY_URL`).
+  - Wire into `adapter_for()` in `v1/scrape/profiles.py` and normalize in `v1/scrape/protocol.py`. Store raw payloads in R2 and index observations in D1.
 
 ---
 
@@ -96,9 +96,9 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 
 ### Module 2: Data Collection & Continuous Ingestion
 - **Modular Adapters**: Dedicated extractors for Facebook, Instagram, Threads, X, Truth Social, and Web Discovery.
-- **Legal & Public Records**: CourtListener, Case.law, JudyRecords, Arrests.org, and Docket Alarm via `scrape/research.py`.
+- **Legal & Public Records**: CourtListener, Case.law, JudyRecords, Arrests.org, and Docket Alarm via `v1/scrape/research.py`.
 - **JudyRecords Workflow**: Cloudflare Workflow `harvy_schedules` triggers 14-day continuous mining, leasing jobs and streaming updates into R2 and D1.
-- **Telegram History Mining**: Local authorized Telethon CLI (`scrape/telegram.py`) checkpointing into `data/telegram/`.
+- **Telegram History Mining**: Local authorized Telethon CLI (`v1/scrape/telegram.py`) checkpointing into `data/telegram/`.
 - **Transport Constraints**: Strict usage of Spider Unlimited (`/unlimited/*`) and Webshare residential proxy (`WEBSHARE_PROXY_URL`). Never fall back to PAYG without authorization.
 
 ### Module 3: Authentication & Multi-Tenancy (Better Auth Staged)
@@ -120,7 +120,7 @@ This audit resolves conflicting proposals across earlier planning documents, ver
 - [x] Audit contradictions between plans and codebase implementation.
 - [x] Clean static asset redundancy and remove duplicate nested files.
 - [x] Reorganize test suite into `tests/` with 100% passing tests (135/135 green).
-- [ ] Implement Truth Social modular adapter in `scrape/truthsocial.py` with strict Spider Unlimited + Webshare proxy.
+- [ ] Implement Truth Social modular adapter in `v1/scrape/truthsocial.py` with strict Spider Unlimited + Webshare proxy.
 - [ ] Maintain cache hit rate monitoring (>75%) for public endpoints.
 - [ ] Await user authorization before remote D1 migrations or live Better Auth cutover.
 - [ ] Connect Telegram continuous mining only upon VPS credential provisioning.

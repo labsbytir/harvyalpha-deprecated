@@ -4,8 +4,8 @@ This document freezes the contracts, input parameters, output schemas, completen
 
 ## 1. Social Profile Collectors
 
-### 1.1 Facebook Collector (`scrape.facebook`)
-- **Entrypoint:** `python3 -m scrape.facebook <url> --out <dir> [--max-posts N] [--max-linked-profiles N]`
+### 1.1 Facebook Collector (`v1.scrape.facebook`)
+- **Entrypoint:** `python3 -m v1.scrape.facebook <url> --out <dir> [--max-posts N] [--max-linked-profiles N]`
 - **Inputs:**
   - `url`: Public HTTPS URL (`https://facebook.com/<handle>` or `https://www.facebook.com/<handle>`). No credentials, no nested query parameters.
   - `--out`: Destination directory path.
@@ -26,8 +26,8 @@ This document freezes the contracts, input parameters, output schemas, completen
   - Spider HTTP timeout: 120s.
   - Handles `HTTPError`, `URLError`, `TimeoutError`, returning structured failures in manifest without silent corruption.
 
-### 1.2 Social Profile Recipe Registry (`scrape.profiles`)
-- **Entrypoint:** `python3 -m scrape.profiles [--url <url> | --dir <dir>] --out <dir> [--max-profiles N]`
+### 1.2 Social Profile Recipe Registry (`v1.scrape.profiles`)
+- **Entrypoint:** `python3 -m v1.scrape.profiles [--url <url> | --dir <dir>] --out <dir> [--max-profiles N]`
 - **Supported Recipes (21 endpoints):**
   - Identity platforms: `x` (`x.com`, `twitter.com`), `bluesky` (`bsky.app/profile/*`), `instagram` (`instagram.com/*`), `threads` (`threads.net/*`, `threads.com/*`), `linkedin` (`linkedin.com/in/*`), `quora` (`quora.com/profile/*`), `mastodon` (`mastodon.social/*`, etc.), `tiktok` (`tiktok.com/*`), `substack` (`*.substack.com`), `medium` (`medium.com/*`), `twitch` (`twitch.tv/*`), `youtube` (`youtube.com/@*`, `youtube.com/channel/*`), `truthsocial` (`truthsocial.com/@*`), `steam` (`steamcommunity.com/id/*`, `steamcommunity.com/profiles/*`).
   - Communities & Utilities: `discord` (`discord.gg/*`, community invite), `europefreechat` (`europefreechat.com`), `sssinstagram` (`sssinstagram.com`, utility).
@@ -37,8 +37,8 @@ This document freezes the contracts, input parameters, output schemas, completen
 - **Outputs:** `profile-details.json`, `posts/*.json`, `raw/*.json`, `network.json`.
 - **Completeness Signals:** Best-effort anonymous extraction; author verification required for posts.
 
-### 1.3 Username Footprint Scanner (`scrape.username`)
-- **Entrypoint:** `python3 -m scrape.username --username=<name> --out=<dir> [--category=<cat> ...]`
+### 1.3 Username Footprint Scanner (`v1.scrape.username`)
+- **Entrypoint:** `python3 -m v1.scrape.username --username=<name> --out=<dir> [--category=<cat> ...]`
 - **Inputs:**
   - `username`: 1–64 characters matching `[\w.-]{1,64}`.
   - `categories`: One or more of 19 WhatsMyName categories (`archived`, `art`, `blog`, `business`, `dating`, `finance`, `gaming`, `health`, `hobby`, `images`, `misc`, `music`, `news`, `political`, `search`, `shopping`, `social`, `tech`, `video`, `xx NSFW xx`).
@@ -50,8 +50,8 @@ This document freezes the contracts, input parameters, output schemas, completen
 
 ## 2. Legal and Geospatial Research Collectors
 
-### 2.1 Research Runner (`scrape.research`)
-- **Entrypoint:** `python3 -m scrape.research --input <request.json> --out <dir>`
+### 2.1 Research Runner (`v1.scrape.research`)
+- **Entrypoint:** `python3 -m v1.scrape.research --input <request.json> --out <dir>`
 - **Modes:** `"legal"` and `"map"`.
 
 #### Legal Mode Inputs & Sources:
@@ -95,8 +95,8 @@ This document freezes the contracts, input parameters, output schemas, completen
 
 ## 3. Geospatial Places Collector
 
-### 3.1 Google Maps (`scrape.google_maps`)
-- **Entrypoint:** `python3 -m scrape.google_maps <url> --out <dir>`
+### 3.1 Google Maps (`v1.scrape.google_maps`)
+- **Entrypoint:** `python3 -m v1.scrape.google_maps <url> --out <dir>`
 - **Inputs:** `https://www.google.com/maps/place/...`
 - **Spider Endpoint:** `/unlimited/scrape`. Never metered `/fetch`.
 - **Outputs:** `raw/raw.json`, `place-details.json` (JSON-LD business facts), `reviews/*.json`.

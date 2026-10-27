@@ -5,12 +5,12 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scrape.profiles import RECIPES, extract_social, fetch, profile_link, scrape_linked_profiles, validate_public_destination
+from v1.scrape.profiles import RECIPES, extract_social, fetch, profile_link, scrape_linked_profiles, validate_public_destination
 
 
 class SocialProfileTests(unittest.TestCase):
     def test_instagram_adapter_uses_shared_transport_without_facebook_scripts(self):
-        with patch("scrape.profiles.spider_request", return_value=[{"status": 200}]) as request:
+        with patch("v1.scrape.profiles.spider_request", return_value=[{"status": 200}]) as request:
             self.assertEqual(fetch("https://www.instagram.com/alice/", "secret", "http://proxy"), [{"status": 200}])
         payload = request.call_args.args[0]
         self.assertEqual(payload["url"], "https://www.instagram.com/alice/")
@@ -107,7 +107,7 @@ class SocialProfileTests(unittest.TestCase):
         self.assertEqual(len(extract_social({"json_data": [post]}, bsky)["posts"]), 1)
 
     def test_private_destination_rejected(self):
-        with patch("scrape.profiles.socket.getaddrinfo", return_value=[(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("127.0.0.1", 443))]):
+        with patch("v1.scrape.profiles.socket.getaddrinfo", return_value=[(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("127.0.0.1", 443))]):
             with self.assertRaises(ValueError):
                 validate_public_destination("https://mastodon.social/@alice")
 
@@ -147,7 +147,7 @@ class SocialProfileTests(unittest.TestCase):
             else:
                 content = '<a rel="me" href="https://twitter.com/alice">X</a>'
             return [{"url": url, "status": 200, "content": content, "json_data": records}]
-        with tempfile.TemporaryDirectory() as tmp, patch("scrape.profiles.fetch", side_effect=fake_fetch) as request, patch("scrape.profiles.validate_public_destination"):
+        with tempfile.TemporaryDirectory() as tmp, patch("v1.scrape.profiles.fetch", side_effect=fake_fetch) as request, patch("v1.scrape.profiles.validate_public_destination"):
             result = scrape_linked_profiles("https://facebook.com/alice", ["https://twitter.com/alice", "https://x.com/alice"], Path(tmp), "key", "proxy", 10)
             self.assertEqual(request.call_count, 2)
             self.assertEqual(len(result["accounts"]), 2)
@@ -170,7 +170,7 @@ class SocialProfileTests(unittest.TestCase):
         def fake_fetch(url, key, proxy):
             link = "https://youtube.com/@alice" if "blogspot" in url else "https://x.com/community-user"
             return [{"url": url, "status": 200, "content": f'<a rel="me" href="{link}">Link</a>'}]
-        with tempfile.TemporaryDirectory() as tmp, patch("scrape.profiles.fetch", side_effect=fake_fetch), patch("scrape.profiles.validate_public_destination"):
+        with tempfile.TemporaryDirectory() as tmp, patch("v1.scrape.profiles.fetch", side_effect=fake_fetch), patch("v1.scrape.profiles.validate_public_destination"):
             result = scrape_linked_profiles("https://facebook.com/alice", ["https://europefreechat.com", "https://alice.blogspot.com"], Path(tmp), "key", "proxy", 3)
             urls = {a["url"] for a in result["accounts"]}
             self.assertIn("https://youtube.com/@alice", urls)
@@ -181,7 +181,7 @@ class SocialProfileTests(unittest.TestCase):
             self.assertEqual(kinds["https://alice.blogspot.com"], "publication")
 
     def test_facebook_post_link_is_not_a_bio_account_link(self):
-        from scrape.facebook import profile_details
+        from v1.scrape.facebook import profile_details
         url = "https://www.facebook.com/test/"
         page = {"url": url, "json_data": [
             {"__typename": "Story", "link": {"__typename": "ExternalUrl", "external_url": "https://x.com/stranger"}},

@@ -1,0 +1,44 @@
+{
+  // Bind to the already configured v2 resources; replace placeholder D1/KV IDs before deployment.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "harvy-v2-projector",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": true,
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "vars": {
+    "V2_K2_ENDPOINT": "https://e8073c59caed4ee193cd995aa457b21a.k2.cloudflarestorage.com"
+  },
+  "d1_databases": [
+    {
+      "binding": "V2_DB",
+      "database_name": "harvy-v2",
+      "database_id": "00000000-0000-0000-0000-000000000002",
+      "migrations_dir": "../migrations"
+    }
+  ],
+  "kv_namespaces": [
+    { "binding": "V2_CONFIG", "id": "00000000000000000000000000000002" }
+  ],
+  "r2_buckets": [
+    { "binding": "V2_BUCKET", "bucket_name": "harvy-v2" }
+  ],
+  "pipelines": [
+    { "binding": "V2_BASIN_STREAM", "stream": "e1e54007204f43768769ee613369c85f" }
+  ],
+  "analytics_engine_datasets": [
+    { "binding": "V2_ANALYTICS", "dataset": "harvy_v2_internal_events" },
+    { "binding": "V2_PUBLIC_ANALYTICS", "dataset": "harvy_v2_public_progress" }
+  ],
+  "queues": {
+    "consumers": [
+      {
+        "queue": "harvy-v2-build-events",
+        "max_batch_size": 50,
+        "max_batch_timeout": 10,
+        "max_retries": 5,
+        "dead_letter_queue": "harvy-v2-build-events-dlq"
+      }
+    ]
+  }
+}

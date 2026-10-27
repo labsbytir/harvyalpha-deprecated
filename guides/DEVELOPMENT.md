@@ -7,7 +7,7 @@ The active repository root is `/Users/pen/Documents/harvy`.
 - `templates/`: HTML and TypeScript dossier renderer source
 - `styles/`: canonical CSS source
 - `static/`: generated Worker assets and static example data
-- `scrape/`: network adapters, shared Spider transport, and internal job protocol
+- `v1/scrape/`: network adapters, shared Spider transport, and internal job protocol
 - `proxy/`: the shared `WEBSHARE_PROXY_URL` lookup/validation helper for local environment and Worker secret bindings
 - `health/`: Basin storage, schema, backfill, and operations docs
 - `migrations/`: D1 migrations

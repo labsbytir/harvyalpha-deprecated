@@ -8,7 +8,7 @@ value is an endpoint URL (`http://user:password@host:port`), not a Webshare API 
 Never commit credentials. Collected data is excluded by `.gitignore`.
 
 ```bash
-python3 -m scrape.facebook https://www.facebook.com/debra.holbrook1/ \
+python3 -m v1.scrape.facebook https://www.facebook.com/debra.holbrook1/ \
   --out data/debra.holbrook1
 python3 -m unittest discover -v
 ```
@@ -53,10 +53,10 @@ use `--max-linked-profiles N` (zero disables it). Only bio/profile fields and
 
 ## X / Twitter via Spider
 
-`scrape/x.py` is already the X adapter used by the shared profile pipeline. Its consent-gated CLI uses the Spider Unlimited `/unlimited/scrape` endpoint and `WEBSHARE_PROXY_URL`; it does not call a metered `/fetch` endpoint or the former Xquik client.
+`v1/scrape/x.py` is already the X adapter used by the shared profile pipeline. Its consent-gated CLI uses the Spider Unlimited `/unlimited/scrape` endpoint and `WEBSHARE_PROXY_URL`; it does not call a metered `/fetch` endpoint or the former Xquik client.
 
 ```bash
-python3 -m scrape.x NASA --consent data/x-consent.json \
+python3 -m v1.scrape.x NASA --consent data/x-consent.json \
   --out data/x/nasa.json --max-posts 25
 ```
 
@@ -65,15 +65,15 @@ The adapter uses plain HTTP mode, retains the raw Spider response, and normalize
 For an existing snapshot without repeating the Facebook scan:
 
 ```bash
-python3 -m scrape.profiles data/jason.n.moore.9 --max-profiles 20
+python3 -m v1.scrape.profiles data/jason.n.moore.9 --max-profiles 20
 ```
 
 ## Truth Social via Spider
 
-`scrape/truthsocial.py` adapts Truth Social public profile and timeline collection via Spider Unlimited (`/unlimited/scrape`) and `WEBSHARE_PROXY_URL`. It uses public Mastodon-compatible endpoints (`/api/v1/accounts/lookup` and `/api/v1/accounts/:id/statuses`), parses author-verified statuses and engagement metrics (favourites, reblogs, replies), and integrates with the shared `scrape/profiles.py` and `scrape/protocol.py` pipeline.
+`v1/scrape/truthsocial.py` adapts Truth Social public profile and timeline collection via Spider Unlimited (`/unlimited/scrape`) and `WEBSHARE_PROXY_URL`. It uses public Mastodon-compatible endpoints (`/api/v1/accounts/lookup` and `/api/v1/accounts/:id/statuses`), parses author-verified statuses and engagement metrics (favourites, reblogs, replies), and integrates with the shared `v1/scrape/profiles.py` and `v1/scrape/protocol.py` pipeline.
 
 ```bash
-python3 -m scrape.truthsocial realDonaldTrump --max-posts 25 --out data/truthsocial/trump.json
+python3 -m v1.scrape.truthsocial realDonaldTrump --max-posts 25 --out data/truthsocial/trump.json
 ```
 
 
@@ -81,8 +81,8 @@ The registry includes all 21 supplied Spider recipe pages: X, Bluesky, Instagram
 SSSInstagram, both Threads domain recipes, LinkedIn, Quora, Mastodon, Discord,
 TikTok, Substack, Medium, Twitch, YouTube, Truth Social, Blogspot, Steam Community,
 GitHub Blog, bsky.social and EuropeFreeChat. Both Threads domains use the same adapter.
-Network adapters live under `scrape/`; app jobs use the versioned envelope in
-`scrape/protocol.py`, and Spider requests go through `scrape/client.py`. Facebook,
+Network adapters live under `v1/scrape/`; app jobs use the versioned envelope in
+`v1/scrape/protocol.py`, and Spider requests go through `v1/scrape/client.py`. Facebook,
 Instagram, Threads, and X have named adapters; remaining supported profiles share
 the common public-profile adapter. No local browser is required by these scripts.
 

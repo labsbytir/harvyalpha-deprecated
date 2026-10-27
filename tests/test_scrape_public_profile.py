@@ -1,6 +1,6 @@
 import unittest
 
-from scrape.facebook import payload, post_records, profile_details, summarize
+from v1.scrape.facebook import payload, post_records, profile_details, summarize
 
 
 class ScrapeProfileTests(unittest.TestCase):

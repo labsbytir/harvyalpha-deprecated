@@ -35,7 +35,7 @@ class PlatformV2CatalogImportTests(unittest.TestCase):
         self.assertEqual(len(result["data_portals"]), 7)
 
     def test_checked_in_source_snapshot_is_catalog_only(self):
-        path = Path(__file__).resolve().parents[1] / "platform-v2" / "catalog" / "connector-scopes.json"
+        path = Path(__file__).resolve().parents[1] / "v2" / "catalog" / "connector-scopes.json"
         catalog = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(len(catalog["streams"]), 99)
         self.assertEqual(len(catalog["references"]), 11)

@@ -6,7 +6,7 @@
 - Cloudflare entry point: `src/worker.py` (Python Workers)
 - Local/hosted Python service: `web_app.py` (Flask)
 - Page source: `templates/`; CSS source: `styles/`; generated Worker assets: `static/`
-- Network collectors and shared scrape protocol: `scrape/`
+- Network collectors and shared scrape protocol: `v1/scrape/`
 - Basin storage/schema/docs: `health/`
 
 ## Current data flow

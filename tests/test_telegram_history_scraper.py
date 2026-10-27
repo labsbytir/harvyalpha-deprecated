@@ -1,5 +1,5 @@
 import unittest
-from scrape.telegram import parse_channel_posts
+from v1.scrape.telegram import parse_channel_posts
 
 
 class TestTelegramHistoryScraper(unittest.TestCase):

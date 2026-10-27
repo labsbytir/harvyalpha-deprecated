@@ -1,6 +1,6 @@
 import unittest
 
-from scrape.protocol import (
+from v1.scrape.protocol import (
     from_v1_job,
     from_v1_result,
     make_job,

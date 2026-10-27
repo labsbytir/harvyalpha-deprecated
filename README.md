@@ -32,7 +32,7 @@ Harvy brings public-source collection, source evidence, and research workflows i
 - Provides research, query, and dossier interfaces over collected data.
 - Includes Basin ingestion and historical analytics tooling.
 
-The current production Worker is Python at `src/worker.py`; its profile path stores raw captures in R2 and search documents in D1. **Platform v2 is in development** under `platform-v2/`; its isolated connectors, Basin projectors, and supervisor are not yet deployed.
+The current production Worker is Python at `src/worker.py`; its profile path stores raw captures in R2 and search documents in D1. **Platform v2 is in development** under `v2/`; its isolated connectors, Basin projectors, and supervisor are not yet deployed.
 
 ## Technology
 
@@ -47,11 +47,11 @@ npm ci
 python3 -m pip install -e . -r requirements.txt
 npm run build:templates
 python3 -m unittest discover tests
-npm run typecheck:platform-v2
-npm run test:platform-v2
+npm run typecheck:v2
+npm run test:v2
 ```
 
-Template source lives in `templates/`, CSS source in `styles/`, scraper adapters in `scrape/`, and generated Worker assets in `static/`.
+Template source lives in `templates/`, CSS source in `styles/`, scraper adapters in `v1/scrape/`, and generated Worker assets in `static/`.
 
 ## Deployment
 

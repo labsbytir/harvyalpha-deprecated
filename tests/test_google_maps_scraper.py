@@ -1,7 +1,7 @@
 import unittest
 
-from scrape.client import ENDPOINT
-from scrape.google_maps import extract, payload, validate_maps_url
+from v1.scrape.client import ENDPOINT
+from v1.scrape.google_maps import extract, payload, validate_maps_url
 
 
 class GoogleMapsScraperTests(unittest.TestCase):

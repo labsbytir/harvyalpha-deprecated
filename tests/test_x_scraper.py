@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-from scrape.client import ENDPOINT
-from scrape.x import fetch_handle, payload
+from v1.scrape.client import ENDPOINT
+from v1.scrape.x import fetch_handle, payload
 
 
 class XSpiderScraperTests(unittest.TestCase):
@@ -22,7 +22,7 @@ class XSpiderScraperTests(unittest.TestCase):
             "core": {"user_results": {"result": {"legacy": {"screen_name": "NASA"}}}},
         }
         page = {"status": 200, "url": "https://x.com/NASA", "content": "", "json_data": [tweet], "metadata": {}}
-        with patch("scrape.x.validate_public_destination"), patch("scrape.x.spider_request", return_value=[page]):
+        with patch("v1.scrape.x.validate_public_destination"), patch("v1.scrape.x.spider_request", return_value=[page]):
             account, raw = fetch_handle("NASA", "test-key", "http://proxy.invalid:8080", 10)
         self.assertEqual(len(account["posts"]), 1)
         self.assertEqual(account["posts"][0]["like_count"], 8)

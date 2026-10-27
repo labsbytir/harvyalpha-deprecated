@@ -19,7 +19,7 @@ from flask import Flask, abort, jsonify, render_template, request, send_file, ur
 
 from archive_search import index_directory, index_files, search as search_archive
 from health.basin_storage import upload_directory
-from scrape.jobs import HERE, job_command, redact, research_job_command, username_job_command, validate_credentials
+from v1.scrape.jobs import HERE, job_command, redact, research_job_command, username_job_command, validate_credentials
 from proxy.config import get_proxy
 from search_documents import documents_for_job
 from email_shield import mask_email, mask_emails_in_text, extract_emails

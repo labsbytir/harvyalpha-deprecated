@@ -1,0 +1,53 @@
+{
+  // Replace placeholder resource IDs and review the target Worker before any non-dry-run deploy.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "harvy-supervisor-datasourcename",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-26",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": { "V2_ACCOUNT_ID": "9061d93166998cf39e011a52b369b812" },
+  "cache": { "enabled": true },
+  "exports": {
+    "default": { "type": "worker", "cache": { "enabled": false } },
+    "PublicProgress": { "type": "worker", "cache": { "enabled": true } },
+    "PlatformV2RunWorkflow": { "type": "workflow", "name": "harvy-v2-runs" }
+  },
+  "d1_databases": [
+    {
+      "binding": "V2_DB",
+      "database_name": "harvy-v2",
+      "database_id": "00000000-0000-0000-0000-000000000002",
+      "migrations_dir": "../migrations"
+    }
+  ],
+  "kv_namespaces": [
+    { "binding": "V2_CONFIG", "id": "00000000000000000000000000000002" }
+  ],
+  "r2_buckets": [
+    { "binding": "V2_BUCKET", "bucket_name": "harvy-v2" }
+  ],
+  "k2": [
+    { "binding": "V2_EVENTS", "stream": "e8073c59caed4ee193cd995aa457b21a" }
+  ],
+  "queues": {
+    "producers": [
+      { "binding": "V2_RECORDS_QUEUE", "queue": "harvy-v2-records" },
+      { "binding": "V2_TRUTHSOCIAL_QUEUE", "queue": "harvy-v2-truthsocial" },
+      { "binding": "V2_SAM_GOV_QUEUE", "queue": "harvy-v2-sam-gov" }
+    ]
+  },
+  "services": [
+    { "binding": "JUDY_CONNECTOR", "service": "harvy-judyrecords" },
+    { "binding": "TRUTHSOCIAL_CONNECTOR", "service": "harvy-truthsocial" },
+    { "binding": "SAM_GOV_CONNECTOR", "service": "harvy-sam-gov" }
+  ],
+  "workflows": [
+    {
+      "name": "harvy-v2-runs",
+      "binding": "V2_RUN_WORKFLOW",
+      "class_name": "PlatformV2RunWorkflow",
+      "default_retention": { "success_retention": "3 days", "error_retention": "7 days" }
+    }
+  ]
+}

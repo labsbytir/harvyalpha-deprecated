@@ -1,10 +1,10 @@
 import unittest
 from unittest.mock import patch
 
-from scrape.client import ENDPOINT
-from scrape.profiles import adapter_for, profile_link
-from scrape.protocol import network_for_url
-from scrape.truthsocial import fetch_handle, payload, resolve_account_id
+from v1.scrape.client import ENDPOINT
+from v1.scrape.profiles import adapter_for, profile_link
+from v1.scrape.protocol import network_for_url
+from v1.scrape.truthsocial import fetch_handle, payload, resolve_account_id
 
 
 class TruthSocialScraperTests(unittest.TestCase):
@@ -19,11 +19,11 @@ class TruthSocialScraperTests(unittest.TestCase):
         self.assertEqual(network_for_url("https://truthsocial.com/@alice"), "truthsocial")
         adapter = adapter_for("truthsocial")
         self.assertIsNotNone(adapter)
-        self.assertEqual(adapter.__name__, "scrape.truthsocial")
+        self.assertEqual(adapter.__name__, "v1.scrape.truthsocial")
 
     def test_resolve_account_id_from_json(self):
         page = {"status": 200, "content": '{"id": "10823456", "username": "alice"}'}
-        with patch("scrape.truthsocial.spider_request", return_value=[page]):
+        with patch("v1.scrape.truthsocial.spider_request", return_value=[page]):
             account_id = resolve_account_id("alice", "test-key", "http://proxy.invalid:8080")
         self.assertEqual(account_id, "10823456")
 
@@ -50,7 +50,7 @@ class TruthSocialScraperTests(unittest.TestCase):
                 return [lookup_page]
             return [statuses_page]
 
-        with patch("scrape.truthsocial.validate_public_destination"), patch("scrape.truthsocial.spider_request", side_effect=mock_request):
+        with patch("v1.scrape.truthsocial.validate_public_destination"), patch("v1.scrape.truthsocial.spider_request", side_effect=mock_request):
             record, pages = fetch_handle("alice", "test-key", "http://proxy.invalid:8080", max_posts=10)
 
         self.assertEqual(record["platform"], "truthsocial")

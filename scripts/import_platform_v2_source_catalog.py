@@ -194,7 +194,7 @@ def import_catalog(catalog_root: Path, commit: str | None = None) -> dict[str, o
 def main() -> None:
 	parser = argparse.ArgumentParser(description=__doc__)
 	parser.add_argument("catalog_root", type=Path, help="Local Ingestion/Stream Catalog directory")
-	parser.add_argument("--output", type=Path, default=Path("platform-v2/catalog/connector-scopes.json"))
+	parser.add_argument("--output", type=Path, default=Path("v2/catalog/connector-scopes.json"))
 	args = parser.parse_args()
 	repo_root = args.catalog_root.parent.parent
 	try:

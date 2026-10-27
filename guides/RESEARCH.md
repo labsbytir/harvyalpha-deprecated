@@ -29,7 +29,7 @@ Do not put API keys in templates, job arguments, or browser requests. Restart th
 - **CourtRecord.net:** link-out only. Its posted terms restrict copying and commercial reuse of its materials.
 - **Google Scholar:** link-out only; no official public search API was verified.
 - **Mapillary:** image-radius API query (50 m, up to 10 results). Creator identifiers are not requested.
-- **Google Maps:** `python -m scrape.google_maps <https://www.google.com/maps/place/...> --out <folder>` uses Spider's `/unlimited/scrape` endpoint and the shared proxy secret helper. It preserves the raw response and normalizes only exposed JSON-LD business/review data. It does not call Spider's metered `/fetch` Maps extractor; review coverage remains partial and explicitly marked incomplete.
+- **Google Maps:** `python -m v1.scrape.google_maps <https://www.google.com/maps/place/...> --out <folder>` uses Spider's `/unlimited/scrape` endpoint and the shared proxy secret helper. It preserves the raw response and normalizes only exposed JSON-LD business/review data. It does not call Spider's metered `/fetch` Maps extractor; review coverage remains partial and explicitly marked incomplete.
 - **Zoom Earth and OpenSfM:** links only. Zoom Earth has no public API documented; OpenSfM is a local photogrammetry toolkit, not a hosted API.
 
 Search names can match different people; an arrest record is not proof of guilt. Court and legal data can be incomplete or stale. Restrict access to downloaded archives and Basin tables, and set appropriate retention before enabling persistent storage.

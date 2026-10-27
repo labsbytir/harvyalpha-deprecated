@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from scrape.username import classify, make_checks, save_report
+from v1.scrape.username import classify, make_checks, save_report
 
 
 class UsernameScanTests(unittest.TestCase):
@@ -25,7 +25,7 @@ class UsernameScanTests(unittest.TestCase):
             {"name": "post", "cat": "social", "uri_check": "https://example.com", "post_body": "x"},
             {"name": "http", "cat": "social", "uri_check": "http://example.com/{account}"},
         ]}
-        with patch("scrape.username.validate_public_destination"):
+        with patch("v1.scrape.username.validate_public_destination"):
             checks, skipped = make_checks("sample_name", {"social"}, data)
         self.assertEqual([site["name"] for site, _ in checks], ["valid"])
         self.assertEqual({row["reason"] for row in skipped}, {"unsupported_method", "unsafe_or_non_https_url"})

@@ -2,7 +2,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scrape.jobs import job_command, redact, research_job_command, username_job_command, validate_credentials
+from v1.scrape.jobs import job_command, redact, research_job_command, username_job_command, validate_credentials
 
 
 class JobCommandTests(unittest.TestCase):
@@ -17,13 +17,13 @@ class JobCommandTests(unittest.TestCase):
     def test_social_command_uses_cloud_adapter(self):
         command, _ = job_command("https://youtube.com/@alice", "/tmp/test-output", 100, 0)
         self.assertIn("--url", command)
-        self.assertIn("scrape.profiles", command)
+        self.assertIn("v1.scrape.profiles", command)
         self.assertEqual(command[-1], "1")
         self.assertNotIn("SPIDER_API_KEY", " ".join(command))
 
     def test_username_scan_command_is_python_and_validates_categories(self):
         command, output = username_job_command("sample_name", ["social", "gaming"], "/tmp/test-output")
-        self.assertIn("scrape.username", command)
+        self.assertIn("v1.scrape.username", command)
         self.assertIn("--category", command)
         self.assertIn("username-sample_name-", output.name)
         with self.assertRaises(ValueError):
@@ -33,7 +33,7 @@ class JobCommandTests(unittest.TestCase):
         command, output, payload = research_job_command({
             "mode": "legal", "query": "Miranda v Arizona", "sources": ["courtlistener"],
         }, "/tmp/research-output")
-        self.assertIn("scrape.research", command)
+        self.assertIn("v1.scrape.research", command)
         self.assertIn("research-legal-", output.name)
         self.assertEqual(payload["query"], "Miranda v Arizona")
         with self.assertRaises(ValueError):
