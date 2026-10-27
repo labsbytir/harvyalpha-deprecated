@@ -1,0 +1,748 @@
+{
+  "source_repository": "https://github.com/labsbytir/opentir",
+  "source_commit": "09bf508c3cbc57a0d2e5b363ee347d31e59f221f",
+  "license": "AGPL-3.0-only",
+  "connectors": [
+    {
+      "id": "acled_armed_conflict_location",
+      "source_spec": "docs/connectors/acled_armed_conflict_location.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "aemo_outages",
+      "source_spec": "docs/connectors/aemo_outages.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/aemo_outages.py"
+    },
+    {
+      "id": "africa_weather_sources_survey",
+      "source_spec": "docs/connectors/africa_weather_sources_survey.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "alienvault_otx_threat_intel",
+      "source_spec": "docs/connectors/alienvault_otx_threat_intel.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "amnesty",
+      "source_spec": "docs/connectors/amnesty.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/amnesty.py"
+    },
+    {
+      "id": "arcgis-hub",
+      "source_spec": "docs/connectors/arcgis-hub.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/arcgis_hub.py"
+    },
+    {
+      "id": "bea",
+      "source_spec": "docs/connectors/bea.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/bea.py"
+    },
+    {
+      "id": "blockchair",
+      "source_spec": "docs/connectors/blockchair.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/blockchair.py"
+    },
+    {
+      "id": "chirps_rainfall_via_digital",
+      "source_spec": "docs/connectors/chirps_rainfall_via_digital.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "civicus-monitor",
+      "source_spec": "docs/connectors/civicus-monitor.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/civicus_monitor.py"
+    },
+    {
+      "id": "ckan-generic",
+      "source_spec": "docs/connectors/ckan-generic.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/ckan_generic.py"
+    },
+    {
+      "id": "climate_trace",
+      "source_spec": "docs/connectors/climate_trace.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/climate_trace.py"
+    },
+    {
+      "id": "countlove",
+      "source_spec": "docs/connectors/countlove.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/countlove.py"
+    },
+    {
+      "id": "crt_sh_certificate_transparency",
+      "source_spec": "docs/connectors/crt_sh_certificate_transparency.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "data-gov-apis",
+      "source_spec": "docs/connectors/data-gov-apis.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/data_gov_apis.py"
+    },
+    {
+      "id": "dbpedia",
+      "source_spec": "docs/connectors/dbpedia.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/dbpedia.py"
+    },
+    {
+      "id": "deflock",
+      "source_spec": "docs/connectors/deflock.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/deflock.py"
+    },
+    {
+      "id": "doe_oe417",
+      "source_spec": "docs/connectors/doe_oe417.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/doe_oe417.py"
+    },
+    {
+      "id": "dpla-bulk",
+      "source_spec": "docs/connectors/dpla-bulk.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/dpla_bulk.py"
+    },
+    {
+      "id": "dronestream",
+      "source_spec": "docs/connectors/dronestream.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/dronestream.py"
+    },
+    {
+      "id": "eagle_i",
+      "source_spec": "docs/connectors/eagle_i.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/eagle_i.py"
+    },
+    {
+      "id": "effis",
+      "source_spec": "docs/connectors/effis.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/effis.py"
+    },
+    {
+      "id": "energydata_info_ckan_md",
+      "source_spec": "docs/connectors/energydata_info_ckan_md.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "entso_e_outages",
+      "source_spec": "docs/connectors/entso_e_outages.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/entso_e_outages.py"
+    },
+    {
+      "id": "etherscan",
+      "source_spec": "docs/connectors/etherscan.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/etherscan.py"
+    },
+    {
+      "id": "eumetsat_meteosat_metop_eumetview",
+      "source_spec": "docs/connectors/eumetsat_meteosat_metop_eumetview.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "facebook-graph",
+      "source_spec": "docs/connectors/facebook-graph.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/facebook_graph.py"
+    },
+    {
+      "id": "fema_openfema",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/fema_openfema.py"
+    },
+    {
+      "id": "fivethirtyeight",
+      "source_spec": "docs/connectors/fivethirtyeight.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/fivethirtyeight.py"
+    },
+    {
+      "id": "gadm",
+      "source_spec": "docs/connectors/gadm.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/gadm.py"
+    },
+    {
+      "id": "gdacs",
+      "source_spec": "docs/connectors/gdacs.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/gdacs.py"
+    },
+    {
+      "id": "gem_global_energy_monitor",
+      "source_spec": "docs/connectors/gem_global_energy_monitor.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/gem_global_energy_monitor.py"
+    },
+    {
+      "id": "geops",
+      "source_spec": "docs/connectors/geops.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/geops.py"
+    },
+    {
+      "id": "google-public-data",
+      "source_spec": "docs/connectors/google-public-data.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/google_public_data.py"
+    },
+    {
+      "id": "google-trends",
+      "source_spec": "docs/connectors/google-trends.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/google_trends.py"
+    },
+    {
+      "id": "gtfs-de",
+      "source_spec": "docs/connectors/gtfs-de.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/gtfs_de.py"
+    },
+    {
+      "id": "harvard-ccc",
+      "source_spec": "docs/connectors/harvard-ccc.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/harvard_ccc.py"
+    },
+    {
+      "id": "hrw",
+      "source_spec": "docs/connectors/hrw.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/hrw.py"
+    },
+    {
+      "id": "hydro_quebec_pannes",
+      "source_spec": "docs/connectors/hydro_quebec_pannes.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/hydro_quebec_pannes.py"
+    },
+    {
+      "id": "imf-datamapper",
+      "source_spec": "docs/connectors/imf-datamapper.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/imf_datamapper.py"
+    },
+    {
+      "id": "internet_archive_wayback_machine",
+      "source_spec": "docs/connectors/internet_archive_wayback_machine.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "iom_displacement_tracking_matrix",
+      "source_spec": "docs/connectors/iom_displacement_tracking_matrix.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "legistar",
+      "source_spec": "docs/connectors/legistar.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/legistar.py"
+    },
+    {
+      "id": "liveuamap",
+      "source_spec": "docs/connectors/liveuamap.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/liveuamap.py"
+    },
+    {
+      "id": "local-protest-map",
+      "source_spec": "docs/connectors/local-protest-map.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/local_protest_map.py"
+    },
+    {
+      "id": "maxmind-geolite2",
+      "source_spec": "docs/connectors/maxmind-geolite2.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/maxmind_geolite2.py"
+    },
+    {
+      "id": "mediacloud",
+      "source_spec": "docs/connectors/mediacloud.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/mediacloud.py"
+    },
+    {
+      "id": "mobility-database",
+      "source_spec": "docs/connectors/mobility-database.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/mobility_database.py"
+    },
+    {
+      "id": "nasa-earthdata",
+      "source_spec": "docs/connectors/nasa-earthdata.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nasa_earthdata.py"
+    },
+    {
+      "id": "nasa-firms",
+      "source_spec": "docs/connectors/nasa-firms.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nasa_firms.py"
+    },
+    {
+      "id": "national_grid_uk_connected_data",
+      "source_spec": "docs/connectors/national_grid_uk_connected_data.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/national_grid_uk_connected_data.py"
+    },
+    {
+      "id": "no-public-api",
+      "source_spec": "docs/connectors/no-public-api.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/no_public_api.py"
+    },
+    {
+      "id": "noaa-ncei",
+      "source_spec": "docs/connectors/noaa-ncei.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/noaa_ncei.py"
+    },
+    {
+      "id": "noaa-spc-tornadoes",
+      "source_spec": "docs/connectors/noaa-spc-tornadoes.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/noaa_spc_tornadoes.py"
+    },
+    {
+      "id": "nostr-nip52",
+      "source_spec": "docs/connectors/nostr-nip52.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nostr_nip52.py"
+    },
+    {
+      "id": "nyc-benefits-screening",
+      "source_spec": "docs/connectors/nyc-benefits-screening.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nyc_benefits_screening.py"
+    },
+    {
+      "id": "nypl-publicdomain-bulk",
+      "source_spec": "docs/connectors/nypl-publicdomain-bulk.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nypl_publicdomain_bulk.py"
+    },
+    {
+      "id": "nypl-repo-api",
+      "source_spec": "docs/connectors/nypl-repo-api.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/nypl_repo_api.py"
+    },
+    {
+      "id": "odin",
+      "source_spec": "docs/connectors/odin.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/odin.py"
+    },
+    {
+      "id": "ofac_specially_designated_nationals",
+      "source_spec": "docs/connectors/ofac_specially_designated_nationals.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "openaddresses",
+      "source_spec": "docs/connectors/openaddresses.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/openaddresses.py"
+    },
+    {
+      "id": "opencorporates",
+      "source_spec": "docs/connectors/opencorporates.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/opencorporates.py"
+    },
+    {
+      "id": "opendata-soft",
+      "source_spec": "docs/connectors/opendata-soft.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/opendata_soft.py"
+    },
+    {
+      "id": "openflights",
+      "source_spec": "docs/connectors/openflights.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/openflights.py"
+    },
+    {
+      "id": "openinframap",
+      "source_spec": "docs/connectors/openinframap.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/openinframap.py"
+    },
+    {
+      "id": "openrailwaymap",
+      "source_spec": "docs/connectors/openrailwaymap.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/openrailwaymap.py"
+    },
+    {
+      "id": "opensky",
+      "source_spec": "docs/connectors/opensky.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/opensky.py"
+    },
+    {
+      "id": "openstreetmap_alpr_cameras_deflock",
+      "source_spec": "docs/connectors/openstreetmap_alpr_cameras_deflock.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "ourworldindata",
+      "source_spec": "docs/connectors/ourworldindata.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/ourworldindata.py"
+    },
+    {
+      "id": "overpass-api",
+      "source_spec": "docs/connectors/overpass-api.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/overpass_api.py"
+    },
+    {
+      "id": "overture-maps",
+      "source_spec": "docs/connectors/overture-maps.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/overture_maps.py"
+    },
+    {
+      "id": "owid-browser-semantic-search",
+      "source_spec": "docs/connectors/owid-browser-semantic-search.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_browser_semantic_search.py"
+    },
+    {
+      "id": "owid-cartograms",
+      "source_spec": "docs/connectors/owid-cartograms.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_cartograms.py"
+    },
+    {
+      "id": "owid-chartbook",
+      "source_spec": "docs/connectors/owid-chartbook.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_chartbook.py"
+    },
+    {
+      "id": "owid-data-api",
+      "source_spec": "docs/connectors/owid-data-api.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_data_api.py"
+    },
+    {
+      "id": "owid-datasets",
+      "source_spec": "docs/connectors/owid-datasets.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_datasets.py"
+    },
+    {
+      "id": "owid-lc-reconcile",
+      "source_spec": "docs/connectors/owid-lc-reconcile.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_lc_reconcile.py"
+    },
+    {
+      "id": "owid-legal-use-summary",
+      "source_spec": "docs/connectors/owid-legal-use-summary.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_legal_use_summary.py"
+    },
+    {
+      "id": "owid-orae-major-conflicts",
+      "source_spec": "docs/connectors/owid-orae-major-conflicts.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_orae_major_conflicts.py"
+    },
+    {
+      "id": "owid-page2-migrated",
+      "source_spec": "docs/connectors/owid-page2-migrated.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_page2_migrated.py"
+    },
+    {
+      "id": "owid-tech-radar",
+      "source_spec": "docs/connectors/owid-tech-radar.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/owid_tech_radar.py"
+    },
+    {
+      "id": "per_utility_outage_maps",
+      "source_spec": "docs/connectors/per_utility_outage_maps.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/per_utility_outage_maps.py"
+    },
+    {
+      "id": "poweroutage_us",
+      "source_spec": "docs/connectors/poweroutage_us.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/poweroutage_us.py"
+    },
+    {
+      "id": "realtime-osint-roadmap",
+      "source_spec": "docs/connectors/realtime-osint-roadmap.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/realtime_osint_roadmap.py"
+    },
+    {
+      "id": "reddit",
+      "source_spec": "docs/connectors/reddit.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/reddit.py"
+    },
+    {
+      "id": "saws_daily_rainfall_via",
+      "source_spec": "docs/connectors/saws_daily_rainfall_via.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "situation-watch",
+      "source_spec": "docs/connectors/situation-watch.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/situation_watch.py"
+    },
+    {
+      "id": "smithsonian-gvp",
+      "source_spec": "docs/connectors/smithsonian-gvp.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/smithsonian_gvp.py"
+    },
+    {
+      "id": "social-mention",
+      "source_spec": "docs/connectors/social-mention.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/social_mention.py"
+    },
+    {
+      "id": "socrata",
+      "source_spec": "docs/connectors/socrata.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/socrata.py"
+    },
+    {
+      "id": "sources-registry",
+      "source_spec": "docs/connectors/sources-registry.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/sources_registry.py"
+    },
+    {
+      "id": "tepco_outage",
+      "source_spec": "docs/connectors/tepco_outage.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/tepco_outage.py"
+    },
+    {
+      "id": "traintrackr",
+      "source_spec": "docs/connectors/traintrackr.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/traintrackr.py"
+    },
+    {
+      "id": "transitland",
+      "source_spec": "docs/connectors/transitland.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/transitland.py"
+    },
+    {
+      "id": "transitwiki",
+      "source_spec": "docs/connectors/transitwiki.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/transitwiki.py"
+    },
+    {
+      "id": "travic",
+      "source_spec": "docs/connectors/travic.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/travic.py"
+    },
+    {
+      "id": "un-comtrade",
+      "source_spec": "docs/connectors/un-comtrade.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/un_comtrade.py"
+    },
+    {
+      "id": "unhcr_refugee_population_statistics",
+      "source_spec": "docs/connectors/unhcr_refugee_population_statistics.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "unodc-dataportal",
+      "source_spec": "docs/connectors/unodc-dataportal.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/unodc_dataportal.py"
+    },
+    {
+      "id": "usgs-earthquakes",
+      "source_spec": "docs/connectors/usgs-earthquakes.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/usgs_earthquakes.py"
+    },
+    {
+      "id": "usoutage_com",
+      "source_spec": "docs/connectors/usoutage_com.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/usoutage_com.py"
+    },
+    {
+      "id": "who-gho",
+      "source_spec": "docs/connectors/who-gho.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/who_gho.py"
+    },
+    {
+      "id": "wigle",
+      "source_spec": "docs/connectors/wigle.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/wigle.py"
+    },
+    {
+      "id": "wikidata_power_plants",
+      "source_spec": "docs/connectors/wikidata_power_plants.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/wikidata_power_plants.py"
+    },
+    {
+      "id": "wmo_wis2_global_broker",
+      "source_spec": "docs/connectors/wmo_wis2_global_broker.md",
+      "status": "spec_only",
+      "enabled": false
+    },
+    {
+      "id": "worldbank-open",
+      "source_spec": "docs/connectors/worldbank-open.md",
+      "status": "unintegrated_source",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/worldbank_open.py"
+    },
+    {
+      "id": "worldmonitor",
+      "source_spec": "docs/connectors/worldmonitor.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/worldmonitor.py"
+    },
+    {
+      "id": "wri_gppd",
+      "source_spec": "docs/connectors/wri_gppd.md",
+      "status": "upstream_placeholder",
+      "enabled": false,
+      "source_code": "src/_connectors_archive/wri_gppd.py"
+    }
+  ]
+}
