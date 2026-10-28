@@ -8,7 +8,7 @@
 - `docs/`: operator, developer, API, support, and planning documentation.
 - `notebooks/`: operational notes mirrored to the documentation repository.
 
-Do not add a root legacy Worker, compatibility symlink, or alternate V2 directory.
+Keep Workers, connectors, and Wrangler configs under `v2/`. Do not add a second platform root.
 
 ## Local checks
 

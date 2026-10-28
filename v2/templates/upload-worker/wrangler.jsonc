@@ -1,0 +1,23 @@
+{
+  "name": "harvy-upload-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "r2_buckets": [
+    {
+      "binding": "HARVY_UPLOAD_BUCKET",
+      "bucket_name": "harvy-upload"
+    },
+    {
+      "binding": "HARVY_ARTIFACTS_BUCKET",
+      "bucket_name": "harvy-artifacts"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,390 @@
+{
+  "name": "OpenStates JSON Ingest",
+  "nodes": [
+    {
+      "parameters": {
+        "functionCode": "// Input: array of URLs from Link Gopher
+const urls = items.map(item => item.json.url);
+return urls.map(url => ({ json: { url, original_url: url, attempt: 1 } }));"
+      },
+      "name": "Prepare URLs",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "encoding": null,
+          "timeout": 30000,
+          "batching": {
+            "batch": {
+              "enabled": false
+            }
+          }
+        }
+      },
+      "name": "Download JSON",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300],
+      "executeOnce": false,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.response.statusCode }}",
+              "operation": "notEqual",
+              "value2": 200
+            }
+          ]
+        }
+      },
+      "name": "Check HTTP Status",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.response.headers['content-type'] || '' }}",
+              "operation": "contains",
+              "value2": "application/json"
+            }
+          ]
+        }
+      },
+      "name": "Check JSON Content",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Handle failed download
+const errorMsg = $json.error ? $json.error.message : 'Unknown error';
+return [
+  {
+    json: {
+      ...$json,
+      status: 'download_failed',
+      error: errorMsg,
+      error_type: 'download',
+      timestamp: new Date().toISOString(),
+      retryable: $json.attempt < 3
+    }
+  }
+];"
+      },
+      "name": "Handle Download Failure",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 100]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract state and session from filename
+const filename = $json.url.split('/').pop();
+const match = filename.match(/^([A-Z]{2})_(\\d+[A-Za-z0-9-]*)_json_/);
+const state = match ? match[1] : 'unknown';
+const session = match ? match[2] : 'unknown';
+
+return {
+  ...$json,
+  state,
+  session,
+  filename,
+  timestamp: new Date().toISOString()
+};"
+      },
+      "name": "Extract Metadata",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Route to appropriate storage
+const state = $json.state.toLowerCase();
+const session = $json.session;
+const filename = $json.filename;
+
+// Store in harvy-artifacts bucket
+const r2Path = `openstates/${state}/${session}/${filename}`;
+
+return [
+  {
+    json: {
+      ...$json,
+      storage_type: 'r2',
+      r2_bucket: 'harvy-artifacts',
+      r2_path: r2Path,
+      content_type: 'application/json'
+    }
+  },
+  {
+    json: {
+      ...$json,
+      storage_type: 'basin',
+      basin_path: 'harvyql_stream',
+      data: $json.json
+    }
+  }
+];"
+      },
+      "name": "Route to Storage",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1050, 200]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "bucket": "={{ $json.r2_bucket }}",
+        "path": "={{ $json.r2_path }}",
+        "dataProperty": "json",
+        "options": {}
+      },
+      "name": "Upload to R2 Artifacts",
+      "type": "n8n-nodes-base.r2",
+      "typeVersion": 1,
+      "position": [1250, 100],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://harvybasin.com/api/v1/ingest/harvyql_stream",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "headers": {
+          "Content-Type": "application/json",
+          "User-Agent": "HarvyPlatform/2.0"
+        },
+        "body": "={{ JSON.stringify($json.data) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "name": "Send to Basin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1250, 300],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "functionCode": "// Handle R2 upload failure
+const errorMsg = $json.error ? $json.error.message : 'Unknown R2 error';
+return [
+  {
+    json: {
+      ...$json,
+      status: 'r2_upload_failed',
+      error: errorMsg,
+      error_type: 'r2_upload',
+      timestamp: new Date().toISOString()
+    }
+  }
+];"
+      },
+      "name": "Handle R2 Failure",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1450, 50]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Handle Basin send failure
+const errorMsg = $json.error ? $json.error.message : 'Unknown Basin error';
+return [
+  {
+    json: {
+      ...$json,
+      status: 'basin_ingest_failed',
+      error: errorMsg,
+      error_type: 'basin_ingest',
+      timestamp: new Date().toISOString()
+    }
+  }
+];"
+      },
+      "name": "Handle Basin Failure",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1450, 350]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Success tracking
+const results = [];
+
+if ($json.status === 'success' || $json.status === 'r2_upload_success' || $json.status === 'basin_ingest_success') {
+  if ($json.storage_type === 'r2') {
+    results.push({
+      json: {
+        ...$json,
+        status: 'r2_upload_success',
+        message: `Uploaded to harvy-artifacts/openstates/${$json.state}/${$json.session}/${$json.filename}`
+      }
+    });
+  }
+  
+  if ($json.storage_type === 'basin') {
+    results.push({
+      json: {
+        ...$json,
+        status: 'basin_ingest_success',
+        message: `Sent to Basin harvyql_stream`
+      }
+    });
+  }
+}
+
+return results;"
+      },
+      "name": "Success Tracking",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1650, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Aggregate all failures
+const failures = items.filter(item => item.json.status && item.json.status.includes('_failed'));
+
+if (failures.length === 0) {
+  return [{ json: { message: 'No failures detected', success_count: items.length } }];
+}
+
+const errorTypes = {};
+failures.forEach(item => {
+  const errorType = item.json.error_type || 'unknown';
+  if (!errorTypes[errorType]) {
+    errorTypes[errorType] = [];
+  }
+  errorTypes[errorType].push(item.json);
+});
+
+return [{ json: { failures, errorTypes, total_failures: failures.length, total_processed: items.length } }];"
+      },
+      "name": "Aggregate Failures",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1850, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Manual retry logic
+if ($json.retryable && $json.error_type === 'download') {
+  const newUrl = $json.url;
+  return [
+    {
+      json: {
+        ...$json,
+        url: newUrl,
+        attempt: $json.attempt + 1,
+        status: 'queued_for_retry'
+      }
+    }
+  ];
+}
+
+return [];"
+      },
+      "name": "Manual Retry Queue",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Log to console for debugging
+console.log(`[OpenStates Ingest] Status: ${$json.status || 'unknown'}`);
+if ($json.error) {
+  console.error(`[OpenStates Ingest] Error: ${$json.error}`);
+}
+return [items[0]];"
+      },
+      "name": "Debug Logging",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [2050, 200]
+    }
+  ],
+  "connections": {
+    "Prepare URLs": {
+      "main": [[{"node": "Download JSON", "type": "main", "index": 0}]]
+    },
+    "Download JSON": {
+      "main": [
+        [{"node": "Check HTTP Status", "type": "main", "index": 0}],
+        [{"node": "Handle Download Failure", "type": "main", "index": 0}]
+      ]
+    },
+    "Check HTTP Status": {
+      "main": [
+        [{"node": "Check JSON Content", "type": "main", "index": 0}],
+        [{"node": "Handle Download Failure", "type": "main", "index": 0}]
+      ]
+    },
+    "Check JSON Content": {
+      "main": [[{"node": "Extract Metadata", "type": "main", "index": 0}]]
+    },
+    "Extract Metadata": {
+      "main": [[{"node": "Route to Storage", "type": "main", "index": 0}]]
+    },
+    "Route to Storage": {
+      "main": [[
+        {"node": "Upload to R2 Artifacts", "type": "main", "index": 0},
+        {"node": "Send to Basin", "type": "main", "index": 0}
+      ]]
+    },
+    "Upload to R2 Artifacts": {
+      "main": [
+        [{"node": "Success Tracking", "type": "main", "index": 0}],
+        [{"node": "Handle R2 Failure", "type": "main", "index": 0}]
+      ]
+    },
+    "Send to Basin": {
+      "main": [
+        [{"node": "Success Tracking", "type": "main", "index": 1}],
+        [{"node": "Handle Basin Failure", "type": "main", "index": 0}]
+      ]
+    },
+    "Handle Download Failure": {
+      "main": [[{"node": "Manual Retry Queue", "type": "main", "index": 0}]]
+    },
+    "Handle R2 Failure": {
+      "main": [[{"node": "Aggregate Failures", "type": "main", "index": 0}]]
+    },
+    "Handle Basin Failure": {
+      "main": [[{"node": "Aggregate Failures", "type": "main", "index": 0}]]
+    },
+    "Success Tracking": {
+      "main": [[{"node": "Debug Logging", "type": "main", "index": 0}]]
+    },
+    "Manual Retry Queue": {
+      "main": [[{"node": "Download JSON", "type": "main", "index": 0}]]
+    },
+    "Aggregate Failures": {
+      "main": [[{"node": "Debug Logging", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": {
+      "enabled": true,
+      "workflowId": "error-handler-workflow-id"
+    }
+  },
+  "versionId": "2.0.0"
+}

@@ -50,3 +50,11 @@ You will document the code in less than two lines when needed
 
 
 # STOP MAKING NEW PLANING DOCUMENTS. COMBINE ALL PLANNING DOCUMENTS. AUDIT PLANNING DOCUMENTS ON EACH PLAN. LOOK FOR CONTRADICTIONS. VERIFY CONTRADICTIONS IN CODEBASE. CITE THE CONTRADICTIONS. USE THE BUILT IN TASKS WITHIN OPENCHAMBER TO KEEP TRACK OF TASKS. UPDATE THE TASKS NOTE INSIDE OBSIDIAN AS WELL. 
+
+# WORKFLOW & AUTOMATION EXECUTION DIRECTIVES:
+1. NEVER CREATE NEW WORKFLOWS WHEN AN EXISTING ONE CAN BE FIXED OR EXECUTED. Work exclusively within the user's existing workflows unless explicitly instructed to build a new one.
+2. DO NOT OVERCOMPLICATE OR REDESIGN ON THE FLY. If an automation or ingestion task is requested, make the smallest surgical fix to make it run. Never divert into creating scratch workflows, separate test workflows, or parallel architectures without explicit directive.
+3. RESPECT PRE-CONFIGURED RANGES AND PARAMS. Never overwrite or truncate configured start dates, backfill parameters, or hazard types with arbitrary test windows (e.g., "last 2 days").
+4. CLEAN UP SCRATCH ARTIFACTS IMMEDIATELY. If a temporary test is created, clean it up and never leave abandoned duplicate workflows or executions lingering.
+5. EXECUTE FIRST, DO NOT STALL. When the goal is data ingestion, start the ingestion job immediately rather than stalling on secondary telemetry, side validations, or speculative optimizations.
+

@@ -25,7 +25,7 @@ Required values are supplied through the existing Cloudflare Secrets Store or Wo
 
 ## Public site and routes
 
-The retired root Worker implementation is removed from the repository. The V2 supervisor is an API Worker and does not serve the static site. `pages/`, `styles/`, and `v2/portal/` build assets into `static/`, but a V2 site Worker and query API routes are not implemented yet. Do not switch the public catch-all route or claim the public site is on V2 until that replacement is built and verified.
+The V2 supervisor is an API Worker and does not serve the static site. `pages/`, `styles/`, and `v2/portal/` build assets into `static/`, but a V2 site Worker and query API routes are not implemented yet. Do not switch the public catch-all route or claim the public site is on V2 until that replacement is built and verified.
 
 The V2 auth config defines the `/api/better-auth/*` custom-domain route and targets the V2 D1 database. Its migration has not been applied remotely; existing account data was not migrated. Review route precedence, schema, backup, and account recovery before any auth deployment or migration.
 

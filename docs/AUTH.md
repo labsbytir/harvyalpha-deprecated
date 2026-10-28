@@ -4,9 +4,9 @@
 
 Better Auth 1.7.13 source lives in `v2/auth/`. Its Worker uses the shared V2 D1 database (`harvy-platform-v2`, a Cloudflare resource name) and has a locally configured route at `https://harvybot.com/api/better-auth/*`. The auth Worker and route were not deployed as part of this refactor.
 
-The V2 migrations are `v2/migrations/0004_better_auth.sql` and `v2/migrations/0005_auth_privacy_consents.sql`. They have not been applied remotely. The old local account Worker and compatibility routes were removed. Existing accounts in the separate legacy database have not been imported; do not promise login continuity until a reviewed migration/re-enrollment path exists.
+The V2 migrations are `v2/migrations/0004_better_auth.sql` and `v2/migrations/0005_auth_privacy_consents.sql`. They have not been applied remotely. Do not promise login continuity until a reviewed import or re-enrollment path exists.
 
-The browser client and UI are `v2/auth/client.ts` and `v2/auth/ui.ts`. The modal controller is `v2/auth/public/auth-modal.js`; Vite copies generated assets into `static/`. The UI must use the Better Auth client only—do not add fallback calls to removed legacy auth or newsletter routes.
+The browser client and UI are `v2/auth/client.ts` and `v2/auth/ui.ts`. The modal controller is `v2/auth/public/auth-modal.js`; Vite copies generated assets into `static/`. The UI must use the Better Auth client only.
 
 ## Plugins and gates
 
@@ -22,7 +22,7 @@ Before any live migration or auth deployment:
 
 1. Back up the target V2 D1 database and review the two auth migrations.
 2. Test migration and rollback/recovery locally.
-3. Decide how existing users and passkeys will be re-enrolled or imported; no compatibility path is present in the V2-only codebase.
+3. Decide how existing users and passkeys will be re-enrolled or imported.
 4. Verify the custom-domain route does not conflict with the existing public route.
 5. Obtain explicit approval before applying remote migrations or deploying.
 

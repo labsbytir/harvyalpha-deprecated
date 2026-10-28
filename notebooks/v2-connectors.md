@@ -22,6 +22,8 @@ JudyRecords and Truth Social receive `SPIDER_API_KEY` and `WEBSHARE_PROXY_URL` t
 - `harvy-artifacts`: normalized records and release manifests.
 - Basin: historical analytics, separate from the R2 buckets.
 
+The separate n8n **GDACS One Event Test** workflow (`zRZkSNCbFA3hJJQe`) fetched earthquake EQ 1574196 / episode 1743078, scraped its report, uploaded `gdacs/test/EQ-1574196-1743078.json` to `harvy-artifacts`, and received Basin HTTP `committed: 1` in execution 14. A remote R2 read-back confirmed the event ID, report URL, and 2,845 characters of page text. A dashboard Basin SQL query of `default.graph` showed `gdacs_EQ_1574196_1743078` in the latest row at `2026-10-27T22:44:06.244000Z`; the table exposes `__ingest_ts` and `value`, and the event appears nested under `value.value`, not as a top-level `event_id` column. The older **GDACS Backfill to R2 and D1** workflow remains inactive and still has the incorrect D1/R2 bulk path; do not run it until that path is repaired.
+
 Do not combine raw/normalized object storage with Basin-managed data. Keep source URLs, timestamps, provenance, completeness, and access limitations with each artifact. A name match is not a verified identity.
 
 ## Catalog reconciliation
